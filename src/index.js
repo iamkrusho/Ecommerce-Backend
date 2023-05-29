@@ -1,8 +1,9 @@
 import express from "express";
 
 import productsRouter from "./routes/productsRouter.js";
-import sessionRouter from "./routes/sessionRouter.js"
 import cartRouter from "./routes/cartsRouter.js"
+import usersRouter from "./routes/usersRouter.js"
+import sessionRouter from "./routes/sessionRouter.js"
 
 import errorHandler from "./middlewares/errorHandler.js";
 import { connectDB } from "./config/db.config.js";
@@ -17,6 +18,7 @@ void (async () => {
 
     app.use("/api/products", productsRouter);
     app.use("/api/carts", cartRouter);
+    app.use("/api/users", usersRouter);
     app.use("/api/session/", sessionRouter);
     app.use(errorHandler);
 

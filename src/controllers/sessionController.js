@@ -1,7 +1,7 @@
 import SessionManager from "../managers/SessionManager.js";
 
-import loginSchema from "../validations/users/loginValidation..js";
-import registerSchema from "../validations/users/registerValidation.js";
+import loginSchema from "../validations/session/loginValidation..js";
+import registerSchema from "../validations/session/registerValidation.js";
 
 import { generateToken } from "../shared/index.js";
 
