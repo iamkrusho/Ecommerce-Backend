@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const productAddSchema = z.object({
+const productCreateSchema = z.object({
     title: z.string().max(40).trim(),
     description: z.string().max(200).trim(),
     price: z.number(),
@@ -10,4 +10,4 @@ const productAddSchema = z.object({
     stock: z.number()
 });
 
-export default productAddSchema;
+export default productCreateSchema;

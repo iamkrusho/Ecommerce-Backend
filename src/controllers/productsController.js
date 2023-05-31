@@ -1,16 +1,10 @@
 import ProductManager from "../managers/ProductManager.js";
 
-import productAddSchema from "../validations/products/productAddValidation.js";
-import productIdSchema from "../validations/products/productIdValidation.js";
-import productQueriesSchema from "../validations/products/productQueriesValidation.js";
-import productUpdateSchema from "../validations/products/productUpdateValidation.js";
-
 class ProductsController {
     static get = async (req, res, next) => {
         try {
-            const queries = await productQueriesSchema.parseAsync(req.query);
             const manager = new ProductManager(); 
-            const result = await manager.getAll(queries);
+            const result = await manager.getAll(req.query);
             res.status(200).send({status: "success", data: result});
         } catch (err) {
             next(err);
@@ -19,7 +13,7 @@ class ProductsController {
 
     static getOne = async (req, res, next) => {
         try {
-            const { pid } = await productIdSchema.parseAsync(req.params);
+            const { pid } = req.params;
             const manager = new ProductManager();
             const result = await manager.getOne(pid);
             res.status(200).send({data: result});
@@ -30,9 +24,8 @@ class ProductsController {
 
     static post = async (req, res, next) => {
         try {
-            const product = await productAddSchema.parseAsync(req.body);
             const manager = new ProductManager();
-            await manager.addOne(product);
+            await manager.addOne(req.body);
             res.status(200).send({status: 'success', message: 'Product has been created successfully'})
         } catch(err) {
             next(err);
@@ -41,9 +34,8 @@ class ProductsController {
 
     static put = async (req, res, next) => {
         try {
-            const { pid, ...update} = await productUpdateSchema.parseAsync({ ...req.params, ...req.body });
             const manager = new ProductManager();
-            const result = await manager.updateOne(pid, update);
+            const result = await manager.updateOne({ ...req.params, ...req.body });
             res.status(200).send({status: "success", message: "Product has been updated successfully", data: result});
         } catch (err) {
             next(err);
@@ -52,7 +44,7 @@ class ProductsController {
 
     static delete = async (req, res, next) => {
         try {
-            const { pid } = await productIdSchema.parseAsync(req.params);
+            const { pid } = req.params;
             const manager = new ProductManager();
             await manager.deleteOne(pid);
             res.status(200).send({status: "success", message: "Product has been deleted successfully"});

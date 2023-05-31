@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-const loginSchema = z.object({
+const userLoginSchema = z.object({
     email: z.string().email().toLowerCase().trim(),
     password: z.string().trim()
 });
 
-export default loginSchema;
+export default userLoginSchema;
