@@ -10,7 +10,7 @@ class SessionManager {
 
         if (userExists) throw new Error("User already exits");
 
-        return await this.#dao.insertOne({...user, password: createHash(user.password)});
+        return await this.#dao.insertOne({...user, password: await createHash(user.password)});
     }
 
     async validate(data) {
@@ -18,7 +18,7 @@ class SessionManager {
 
         const user = await this.#dao.findByEmail(email);
         
-        if(!isValidPassword(user, password)) {
+        if(! await isValidPassword(user, password)) {
             throw("Incorrect password");
         } 
 
