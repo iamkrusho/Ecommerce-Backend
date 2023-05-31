@@ -6,14 +6,6 @@ import registerSchema from "../validations/session/registerValidation.js";
 import { generateToken } from "../shared/index.js";
 
 class SessionController {
-    static logout = (req, res, next) => {
-        req.session.destroy((err) => {
-            if (err) next(err);
-        });
-
-        res.status(200).send({status: "success", message: "You have successfully logged out"});
-    }
-
     static login = async (req, res, next) => {
         try {
             const user = await loginSchema.parseAsync(req.body);
