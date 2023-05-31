@@ -17,7 +17,6 @@ const CartSchema = new Schema({
             },
         }],
         default: [],
-        required: [true, "The cart must have products"]
     }
 });
 

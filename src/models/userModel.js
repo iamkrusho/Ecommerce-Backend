@@ -20,6 +20,16 @@ const UserSchema = new Schema({
         type: Schema.Types.Number,
         default: 18
     },
+    role: {
+        type: Schema.Types.ObjectId,
+        ref: "roles",
+        required: [true, "Role ID is required"],
+        index: true,
+    },
+    isAdmin: {
+        type: Schema.Types.Boolean,
+        default: false
+    },
     password: {
         type: Schema.Types.String,
         required: [true, "Password is required"]
