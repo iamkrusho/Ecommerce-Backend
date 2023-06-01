@@ -2,16 +2,19 @@ import { Router } from "express";
 
 import ProductsController from "../controllers/productsController.js";
 
+import auth from "../middlewares/auth.js";
+import authorization from "../middlewares/authorization.js";
+
 const productsRouter = Router();
 
 productsRouter.get("/", ProductsController.get);
 
 productsRouter.get("/:pid", ProductsController.getOne);
 
-productsRouter.post("/", ProductsController.post);
+productsRouter.post("/", auth, authorization("product:create"), ProductsController.post);
 
-productsRouter.put("/:pid", ProductsController.put);
+productsRouter.put("/:pid", auth, authorization("product:update"), ProductsController.put);
 
-productsRouter.delete("/:pid", ProductsController.delete);
+productsRouter.delete("/:pid", auth, authorization("product:delete"), ProductsController.delete);
 
 export default productsRouter;
