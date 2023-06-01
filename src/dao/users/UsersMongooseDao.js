@@ -14,6 +14,8 @@ class UsersMongooseDao {
             lastName: doc.lastName,
             email: doc.price,
             age: doc.age,
+            role: doc.role,
+            isAdmin: doc.isAdmin,
             password: doc.password,
         }));
     }
@@ -29,6 +31,8 @@ class UsersMongooseDao {
             lastName: userDocument.lastName,
             email: userDocument.email,
             age: userDocument.age,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin,
             password: userDocument.password,
         };
     }
@@ -44,6 +48,8 @@ class UsersMongooseDao {
             lastName: userDocument.lastName,
             email: userDocument.email,
             age: userDocument.age,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin,
             password: userDocument.password,
         };
     }
@@ -66,6 +72,8 @@ class UsersMongooseDao {
             lastName: userDocument.lastName,
             email: userDocument.email,
             age: userDocument.age,
+            role: userDocument.role,
+            isAdmin: userDocument.isAdmin,
             password: userDocument.password,
         };
     }

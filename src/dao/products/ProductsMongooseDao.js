@@ -70,7 +70,7 @@ class ProductsMongooseDao {
     }
 
     async delete(id) {
-        await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
+        const productDoc = await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
 
         if (!(productDoc?._id)) throw new Error("Product not found");
 

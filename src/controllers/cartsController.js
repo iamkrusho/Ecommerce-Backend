@@ -25,6 +25,7 @@ class CartsController {
 
     static postOne = async (req, res, next) => {
         try {
+            const { pid } = req.params;
             const cartManager = new CartManager();
             const productManager = new ProductManager();
             await productManager.getOne(pid);

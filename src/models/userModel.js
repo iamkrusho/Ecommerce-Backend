@@ -36,4 +36,12 @@ const UserSchema = new Schema({
     }
 });
 
+UserSchema.pre("find", function () {
+    this.populate("role");
+});
+  
+UserSchema.pre("findOne", function () {
+    this.populate("role");
+});
+
 export const UserModel = model(usersCollection, UserSchema);
