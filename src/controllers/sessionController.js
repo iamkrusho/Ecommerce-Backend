@@ -18,7 +18,10 @@ class SessionController {
             const manager = new SessionManager();
             const user = await manager.validate(req.body);
             const token = generateToken(user);
-            res.status(200).send({status: "success", message: "You have successfully logged in", token});
+            res.cookie('accessToken', token, {
+                maxAge: 60*60*1000,
+                httpOnly: true
+            }).send({status: "success", message: "You have successfully logged in", token});
         } catch(err) {
             next(err);
         }
