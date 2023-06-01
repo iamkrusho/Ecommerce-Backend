@@ -2,7 +2,7 @@ import { CartModel } from "../../models/cartModel.js";
 
 class CartsMongooseDao {
     async findOne(id) {
-        const cartDoc = await CartModel.findById(id).populate("products.product");
+        const cartDoc = await CartModel.findById(id);
 
         if (!(cartDoc?._id)) throw new Error("Cart not found");
 
