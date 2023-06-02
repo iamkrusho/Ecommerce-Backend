@@ -4,9 +4,7 @@ class RolesMongooseDao {
     async find() {
         const rolesDocs = await RoleModel.find();
 
-        if (!rolesDocs > 0) {
-            throw new Error("Roles not found");
-        }
+        if (!rolesDocs > 0) return null;
 
         return rolesDocs.map((doc) => ({
             id: doc._id,
@@ -18,7 +16,7 @@ class RolesMongooseDao {
     async findOne(id) {
         const roleDoc = await RoleModel.findById(id);
 
-        if (!(roleDoc?._id)) throw new Error("Role not found");
+        if (!roleDoc) return null;
 
         return {
             id: roleDoc._id,
@@ -37,7 +35,7 @@ class RolesMongooseDao {
     async delete(id) {
         const roleDoc = await RoleModel.findByIdAndDelete(id);
 
-        if (!(roleDoc?._id)) throw new Error("Role not found");
+        if (!roleDoc) return null;
 
         return true;
     }

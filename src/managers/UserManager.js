@@ -1,4 +1,4 @@
-import UsersMongooseDao from "../dao/UsersMongooseDao.js";
+import UsersMongooseDao from "../daos/UsersMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import userCreateSchema from "../validations/users/userCreateValidation.js";
@@ -8,34 +8,34 @@ class UserManager {
     #dao = new UsersMongooseDao();
 
     async getAll() {
-        const users = await this.#dao.find();
+        const result = await this.#dao.find();
 
-        if (!users) throw new Error("Users not found");
+        if (!result) throw new Error("Users not found");
 
-        return users;
+        return result;
     }
 
     async getOne(id) {
         const { uid } = await idSchema.parseAsync(id);
 
-        const user = await this.#dao.findOne(uid);
+        const result = await this.#dao.findOne(uid);
 
-        if (!user) throw new Error("User not found");
+        if (!result) throw new Error("User not found");
 
-        return user;
+        return result;
     }
 
     async getOneByEmail(email) {
-        const user = await this.#dao.findByEmail(email);
+        const result = await this.#dao.findByEmail(email);
 
-        if (!user) throw new Error("User not found");
+        if (!result) throw new Error("User not found");
 
-        return user;
+        return result;
     }
 
     async addOne(data) {
         const user = await userCreateSchema.parseAsync(data);
-
+        
         return await this.#dao.insertOne(user);
     }
     
@@ -48,11 +48,11 @@ class UserManager {
     async deleteOne(id) {
         const { uid } = await idSchema.parseAsync(id);
 
-        const user = await this.#dao.delete(uid);
+        const result = await this.#dao.delete(uid);
 
-        if (!user) throw new Error("User not found");
+        if (!result) throw new Error("User not found");
 
-        return user;
+        return result;
     }
 }
 

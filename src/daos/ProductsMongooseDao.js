@@ -8,7 +8,7 @@ class ProductsMongooseDao {
 
         const { docs, ...rest } = productsDocs;
 
-        if (!docs.length > 0) throw new Error("Products not found");
+        if (!docs.length > 0) return null;
 
         return {
             payload: docs.map((doc) => ({
@@ -29,7 +29,7 @@ class ProductsMongooseDao {
     async findOne(id) {
         const productDoc = await ProductModel.findById(id);
 
-        if (!(productDoc?._id)) throw new Error("Product not found");
+        if (!productDoc) return null;
 
         return {
             id: productDoc._id,
@@ -54,7 +54,7 @@ class ProductsMongooseDao {
     async update(id, update) {
         const productDoc = await ProductModel.findByIdAndUpdate(id, update, {new: true});
 
-        if (!(productDoc?._id)) throw new Error("Product not found");
+        if (!productDoc) return null;
 
         return {
             id: productDoc._id,
@@ -72,7 +72,7 @@ class ProductsMongooseDao {
     async delete(id) {
         const productDoc = await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
 
-        if (!(productDoc?._id)) throw new Error("Product not found");
+        if (!productDoc) return null;
 
         return true;
     }

@@ -1,4 +1,4 @@
-import RolesMongooseDao from "../dao/RolesMongooseDao.js";
+import RolesMongooseDao from "../daos/RolesMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import roleCreateSchema from "../validations/roles/roleCreateValidation.js";
@@ -7,13 +7,21 @@ class UserManager {
     #dao = new RolesMongooseDao();
 
     async getAll() {
-        return await this.#dao.find();
+        const result = await this.#dao.find();
+
+        if (!result) throw new Error("Roles not found");
+
+        return result;
     }
 
     async getOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        return await this.#dao.findOne(rid);
+        const result = await this.#dao.findOne(rid);
+
+        if (!result) throw new Error("Role not found");
+
+        return result;
     }
 
     async addOne(data) {
@@ -25,7 +33,11 @@ class UserManager {
     async deleteOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        return await this.#dao.delete(rid);
+        const result = await this.#dao.delete(rid);
+
+        if (!result) throw new Error("Role not found");
+
+        return result;
     }
 }
 

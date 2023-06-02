@@ -4,7 +4,7 @@ class CartsMongooseDao {
     async findOne(id) {
         const cartDoc = await CartModel.findById(id);
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         return {
             id: cartDoc._id,
@@ -25,7 +25,7 @@ class CartsMongooseDao {
     async insertOne(cid, pid) {
         const cartDoc = await CartModel.findById(cid);
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         const productInCart = cartDoc.products.find(item => item.product.toString() === pid);
 
@@ -42,7 +42,7 @@ class CartsMongooseDao {
     async update(cid, update) {
         const cartDoc = await CartModel.findByIdAndUpdate(cid, {products: update}, {new: true});
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         return {
             id: cartDoc._id,
@@ -53,7 +53,7 @@ class CartsMongooseDao {
     async updateOne(cid, pid, update) {
         const cartDoc = await CartModel.findById(cid);
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         const productInCart = cartDoc.products.find(item => item.product.toString() === pid);
         productInCart.quantity = update;
@@ -69,7 +69,7 @@ class CartsMongooseDao {
     async remove(cid) {
         const cartDoc = await CartModel.findByIdAndRemove(cid);
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         return true;
     }
@@ -77,7 +77,7 @@ class CartsMongooseDao {
     async removeOne(cid, pid) {
         const cartDoc = await CartModel.findById(cid);
 
-        if (!(cartDoc?._id)) throw new Error("Cart not found");
+        if (!cartDoc) return null;
 
         const filter = cartDoc.products.filter(item => item.product.toString() !== pid);
         cartDoc.products = filter;

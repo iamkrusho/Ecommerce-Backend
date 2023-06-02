@@ -1,4 +1,4 @@
-import ProductsMongooseDao from "../dao/ProductsMongooseDao.js";
+import ProductsMongooseDao from "../daos/ProductsMongooseDao.js";
 
 import { nanoid } from "nanoid";
 
@@ -13,13 +13,21 @@ class ProductManager {
     async getAll(data) {
         const queries = await productQueriesSchema.parseAsync(data);
 
-        return await this.#dao.find(queries); 
+        const result = await this.#dao.find(queries);
+
+        if (!result) throw new Error("Products not found");
+
+        return result; 
     }
 
     async getOne(id) {
-        const pid = await idSchema.parseAsync(id)
+        const pid = await idSchema.parseAsync(id);
 
-        return await this.#dao.findOne(pid);
+        const result = await this.#dao.findOne(pid);
+
+        if (!result) throw new Error("Product not found");
+
+        return result;
     }
 
     async addOne(data) {
@@ -31,13 +39,21 @@ class ProductManager {
     async updateOne(data) {
         const { pid, ...update} = await productUpdateSchema.parseAsync(data);
 
-        return await this.#dao.update(pid, update);
+        const result = await this.#dao.update(pid, update);
+
+        if (!result) throw new Error("Product not found");
+
+        return result;
     }
 
     async deleteOne(id) {
         const pid = await idSchema.parseAsync(id);
 
-        return await this.#dao.delete(pid);
+        const result = await this.#dao.delete(pid);
+
+        if (!result) throw new Error("Product not found");
+
+        return result;
     }
 }
 

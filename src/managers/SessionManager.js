@@ -1,4 +1,4 @@
-import UsersMongooseDao from "../dao/UsersMongooseDao.js";
+import UsersMongooseDao from "../daos/UsersMongooseDao.js";
 
 import { createHash, isValidPassword } from "../shared/index.js";
 
@@ -11,9 +11,9 @@ class SessionManager {
     async create(data) {
         const user = await userCreateSchema.parseAsync(data);
 
-        const userExists = await this.#dao.findByEmail(user.email);
+        const exits = await this.#dao.findByEmail(user.email);
 
-        if (userExists) throw new Error("User already exits");
+        if (exits) throw new Error("User already exits");
 
         return await this.#dao.insertOne({...user, password: await createHash(user.password)});
     }
@@ -24,10 +24,10 @@ class SessionManager {
         const user = await this.#dao.findByEmail(email);
 
         if (!user) throw new Error("User not found");
+
+        const validation = await isValidPassword(user, password);
         
-        if (!(await isValidPassword(user, password))) {
-            throw new Error("Incorrect password");
-        } 
+        if (!validation) throw new Error("Incorrect password"); 
 
         return user;
     }

@@ -1,4 +1,4 @@
-import CartsMongooseDao from "../dao/CartsMongooseDao.js";
+import CartsMongooseDao from "../daos/CartsMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import cartAddOneSchema from "../validations/carts/cartAddOneValidation.js";
@@ -11,7 +11,11 @@ class CartManager {
     async getOne(id) {
         const cid = await idSchema.parseAsync(id);
 
-        return await this.#dao.findOne(cid);
+        const result = await this.#dao.findOne(cid)
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 
     async addOne() {
@@ -21,31 +25,51 @@ class CartManager {
     async addProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        return await this.#dao.insertOne(cid, pid);
+        const result = await this.#dao.insertOne(cid, pid);
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 
     async updateOne(data) {
         const { cid, products: update} = await cartUpdateSchema.parseAsync(data);
 
-        return await this.#dao.update(cid, update);
+        const result = await this.#dao.update(cid, update);
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 
     async updateProduct(data) {
         const { cid, pid, quantity: update } = await cartUpdateOneSchema.parseAsync(data);
 
-        return await this.#dao.updateOne(cid, pid, update);
+        const result = await this.#dao.updateOne(cid, pid, update);
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 
     async deleteOne(id) {
         const cid = await idSchema.parseAsync(id);
 
-        return await this.#dao.remove(cid);
+        const result = await this.#dao.remove(cid);
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 
     async deleteProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        return await this.#dao.removeOne(cid, pid);
+        const result = await this.#dao.removeOne(cid, pid);
+
+        if (!result) throw new Error("Cart not found");
+
+        return result;
     }
 }
 
