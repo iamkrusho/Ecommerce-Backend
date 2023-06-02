@@ -4,15 +4,13 @@ class UsersMongooseDao {
     async find() {
         const userDocs = await UserModel.find();
 
-        if (!userDocs > 0) {
-            throw new Error("Users not found");
-        }
+        if (!userDocs > 0) return null;
 
         return userDocs.map((doc) => ({
             id: doc._id,
             firstName: doc.firstName,
             lastName: doc.lastName,
-            email: doc.price,
+            email: doc.email,
             age: doc.age,
             role: doc.role,
             isAdmin: doc.isAdmin,
@@ -21,42 +19,42 @@ class UsersMongooseDao {
     }
 
     async findOne(id) {
-        const userDocument = await UserModel.findById(id);
+        const userDoc = await UserModel.findById(id);
 
-        if (!userDocument?._id) throw new Error("User not found");
+        if (!userDoc) return null;
 
         return {
-            id: userDocument._id,
-            firstName: userDocument.firstName,
-            lastName: userDocument.lastName,
-            email: userDocument.email,
-            age: userDocument.age,
-            role: userDocument.role,
-            isAdmin: userDocument.isAdmin,
-            password: userDocument.password,
+            id: userDoc._id,
+            firstName: userDoc.firstName,
+            lastName: userDoc.lastName,
+            email: userDoc.email,
+            age: userDoc.age,
+            role: userDoc.role,
+            isAdmin: userDoc.isAdmin,
+            password: userDoc.password,
         };
     }
 
     async findByEmail(email) {
-        const userDocument = await UserModel.findOne({ email });
+        const userDoc = await UserModel.findOne({ email });
 
-        if (!userDocument?._id) throw new Error("User not found");
+        if (!userDoc) return null;
 
         return {
-            id: userDocument._id,
-            firstName: userDocument.firstName,
-            lastName: userDocument.lastName,
-            email: userDocument.email,
-            age: userDocument.age,
-            role: userDocument.role,
-            isAdmin: userDocument.isAdmin,
-            password: userDocument.password,
+            id: userDoc._id,
+            firstName: userDoc.firstName,
+            lastName: userDoc.lastName,
+            email: userDoc.email,
+            age: userDoc.age,
+            role: userDoc.role,
+            isAdmin: userDoc.isAdmin,
+            password: userDoc.password,
         };
     }
 
     async insertOne(user) {
-        const newUserDocument = new UserModel(user);
-        newUserDocument.save();
+        const newUserDoc = new UserModel(user);
+        newUserDoc.save();
 
         return true;
     }
@@ -64,24 +62,24 @@ class UsersMongooseDao {
     async update(id, update) {
         const userDoc = await UserModel.findByIdAndUpdate(id, update, {new: true});
         
-        if (!(userDoc?._id)) throw new Error("User not found");
+        if (!userDoc) return null;
 
         return {
-            id: userDocument._id,
-            firstName: userDocument.firstName,
-            lastName: userDocument.lastName,
-            email: userDocument.email,
-            age: userDocument.age,
-            role: userDocument.role,
-            isAdmin: userDocument.isAdmin,
-            password: userDocument.password,
+            id: userDoc._id,
+            firstName: userDoc.firstName,
+            lastName: userDoc.lastName,
+            email: userDoc.email,
+            age: userDoc.age,
+            role: userDoc.role,
+            isAdmin: userDoc.isAdmin,
+            password: userDoc.password,
         };
     }
 
     async delete(id) {
         const userDoc = await UserModel.findByIdAndDelete(id);
 
-        if (!(userDoc?._id)) throw new Error("User not found");
+        if (!userDoc) return null;
 
         return true;
     }

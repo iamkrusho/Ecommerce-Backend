@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import productsRouter from "./routes/productsRouter.js";
 import cartRouter from "./routes/cartsRouter.js"
@@ -8,23 +9,21 @@ import sessionRouter from "./routes/sessionRouter.js"
 
 import errorHandler from "./middlewares/errorHandler.js";
 import { connectDB } from "./config/db.config.js";
-import cookieParser from "cookie-parser";
 
 void (async () => {
     const app = express();
+    
+    await connectDB();
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-
-    app.use(cookieParser);
-
-    await connectDB();
-
+    app.use(cookieParser());
+    
     app.use("/api/products", productsRouter);
     app.use("/api/carts", cartRouter);
     app.use("/api/users", usersRouter);
     app.use("/api/roles", rolesRouter);
-    app.use("/api/session/", sessionRouter);
+    app.use("/api/session", sessionRouter);
     app.use(errorHandler);
 
     app.listen(8080, () => {

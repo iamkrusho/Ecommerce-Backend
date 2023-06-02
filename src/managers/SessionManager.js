@@ -22,9 +22,11 @@ class SessionManager {
         const { email, password } = await userLoginSchema.parseAsync(data);
 
         const user = await this.#dao.findByEmail(email);
+
+        if (!user) throw new Error("User not found");
         
         if (!(await isValidPassword(user, password))) {
-            throw("Incorrect password");
+            throw new Error("Incorrect password");
         } 
 
         return user;

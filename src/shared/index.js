@@ -10,5 +10,5 @@ export const isValidPassword = async (user, password) => {
 }
 
 export const generateToken = (user) => {
-    return jwt.sign({ user: { ...user, password: undefined } }, "ClaveTest", { expiresIn: '30s' });
+    return jwt.sign({ user: { ...user, password: undefined } }, "ClaveTest", { expiresIn: '1m' });
 }

@@ -8,17 +8,29 @@ class UserManager {
     #dao = new UsersMongooseDao();
 
     async getAll() {
-        return await this.#dao.find();
+        const users = await this.#dao.find();
+
+        if (!users) throw new Error("Users not found");
+
+        return users;
     }
 
     async getOne(id) {
         const { uid } = await idSchema.parseAsync(id);
 
-        return await this.#dao.findOne(uid);
+        const user = await this.#dao.findOne(uid);
+
+        if (!user) throw new Error("User not found");
+
+        return user;
     }
 
     async getOneByEmail(email) {
-        return await this.#dao.findByEmail(email);
+        const user = await this.#dao.findByEmail(email);
+
+        if (!user) throw new Error("User not found");
+
+        return user;
     }
 
     async addOne(data) {
@@ -36,7 +48,11 @@ class UserManager {
     async deleteOne(id) {
         const { uid } = await idSchema.parseAsync(id);
 
-        return await this.#dao.delete(uid);
+        const user = await this.#dao.delete(uid);
+
+        if (!user) throw new Error("User not found");
+
+        return user;
     }
 }
 
