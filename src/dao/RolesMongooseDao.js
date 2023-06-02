@@ -1,4 +1,4 @@
-import { RoleModel } from "../../models/roleModel.js";
+import { RoleModel } from "../models/roleModel.js";
 
 class RolesMongooseDao {
     async find() {

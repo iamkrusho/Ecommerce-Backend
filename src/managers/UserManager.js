@@ -1,4 +1,4 @@
-import UsersMongooseDao from "../dao/users/UsersMongooseDao.js";
+import UsersMongooseDao from "../dao/UsersMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import userCreateSchema from "../validations/users/userCreateValidation.js";

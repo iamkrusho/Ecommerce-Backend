@@ -1,4 +1,4 @@
-import { CartModel } from "../../models/cartModel.js";
+import { CartModel } from "../models/cartModel.js";
 
 class CartsMongooseDao {
     async findOne(id) {
