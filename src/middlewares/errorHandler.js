@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
 
-    if (err?.message.toLowerCase().includes("not found")) {
+    if (err?.message.includes("not found")) {
         return res.status(404).send({status: "error", error: err.message });
     } 
     

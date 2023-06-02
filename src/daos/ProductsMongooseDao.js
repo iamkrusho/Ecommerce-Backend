@@ -1,4 +1,4 @@
-import { ProductModel } from "../../models/productModel.js";
+import { ProductModel } from "../models/productModel.js";
 
 class ProductsMongooseDao {
     async find(queries) {

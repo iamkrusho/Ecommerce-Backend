@@ -26,6 +26,14 @@ class SessionController {
             next(err);
         }
     }
+
+    static current = async (req, res, next) => {
+        try {
+            res.status(200).send({status: "success", data: req.user});
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export default SessionController;
