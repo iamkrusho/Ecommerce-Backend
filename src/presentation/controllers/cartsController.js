@@ -1,5 +1,5 @@
-import CartManager from "../managers/CartManager.js";
-import ProductManager from "../managers/ProductManager.js";
+import CartManager from "../../domain/managers/CartManager.js";
+import ProductManager from "../../domain/managers/ProductManager.js";
 
 class CartsController {
     static getOne = async (req, res, next) => {

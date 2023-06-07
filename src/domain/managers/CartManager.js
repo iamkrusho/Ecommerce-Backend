@@ -1,4 +1,4 @@
-import CartsMongooseDao from "../daos/CartsMongooseDao.js";
+import CartsMongooseDao from "../../data/daos/CartsMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import cartAddOneSchema from "../validations/carts/cartAddOneValidation.js";

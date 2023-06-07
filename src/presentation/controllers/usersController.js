@@ -1,4 +1,4 @@
-import UserManager from "../managers/UserManager.js";
+import UserManager from "../../domain/managers/UserManager.js";
 
 class UsersController {
     static get = async (req, res, next) => {

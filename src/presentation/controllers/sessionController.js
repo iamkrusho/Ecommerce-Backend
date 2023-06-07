@@ -1,6 +1,6 @@
-import SessionManager from "../managers/SessionManager.js";
+import SessionManager from "../../domain/managers/SessionManager.js";
 
-import { generateToken } from "../shared/index.js";
+import { generateToken } from "../../shared/index.js";
 
 class SessionController {
     static signup = async (req, res, next) => {

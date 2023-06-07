@@ -1,13 +1,13 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import productsRouter from "./routes/productsRouter.js";
-import cartRouter from "./routes/cartsRouter.js"
-import usersRouter from "./routes/usersRouter.js"
-import rolesRouter from "./routes/rolesRouter.js";
-import sessionRouter from "./routes/sessionRouter.js"
+import productsRouter from "./presentation/routes/productsRouter.js";
+import cartRouter from "./presentation/routes/cartsRouter.js"
+import usersRouter from "./presentation/routes/usersRouter.js"
+import rolesRouter from "./presentation/routes/rolesRouter.js";
+import sessionRouter from "./presentation/routes/sessionRouter.js"
 
-import errorHandler from "./middlewares/errorHandler.js";
+import errorHandler from "./presentation/middlewares/errorHandler.js";
 import { connectDB } from "./config/db.config.js";
 
 void (async () => {

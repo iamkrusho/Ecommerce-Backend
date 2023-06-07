@@ -1,4 +1,4 @@
-import RolesMongooseDao from "../daos/RolesMongooseDao.js";
+import RolesMongooseDao from "../../data/daos/RolesMongooseDao.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import roleCreateSchema from "../validations/roles/roleCreateValidation.js";
