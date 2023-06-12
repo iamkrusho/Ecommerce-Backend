@@ -1,4 +1,4 @@
-import ProductManager from "../../domain/managers/ProductManager.js";
+import ProductManager from "../../domain/managers/productManager.js";
 
 class ProductsController {
     static get = async (req, res, next) => {

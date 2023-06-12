@@ -1,4 +1,4 @@
-import SessionManager from "../../domain/managers/SessionManager.js";
+import SessionManager from "../../domain/managers/sessionManager.js";
 
 import { generateToken } from "../../shared/index.js";
 

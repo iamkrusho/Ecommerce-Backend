@@ -1,4 +1,4 @@
-import RoleManager from "../../domain/managers/RoleManager.js";
+import RoleManager from "../../domain/managers/roleManager.js";
 
 class RolesController {
     static get = async (req, res, next) => {
