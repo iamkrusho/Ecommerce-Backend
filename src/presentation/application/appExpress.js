@@ -27,8 +27,10 @@ class AppExpress {
     }
 
     listen() {
-        return this.app.listen(8080, () => {
-            console.log("Listening on port 8080");
+        const PORT = process.env.NODE_PORT;
+
+        return this.app.listen(PORT, () => {
+            console.log(`Server listening on port ${PORT}`);
         });
     }
 }
