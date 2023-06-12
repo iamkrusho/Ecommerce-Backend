@@ -1,4 +1,4 @@
-import UsersMongooseDao from "../../data/daos/UsersMongooseDao.js";
+import UsersMongooseDao from "../../data/daos/usersMongooseDao.js";
 
 import { createHash, isValidPassword } from "../../shared/index.js";
 

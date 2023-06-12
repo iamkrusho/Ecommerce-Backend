@@ -1,4 +1,4 @@
-import ProductsMongooseDao from "../../data/daos/ProductsMongooseDao.js";
+import ProductsMongooseDao from "../../data/daos/productsMongooseDao.js";
 
 import { nanoid } from "nanoid";
 
