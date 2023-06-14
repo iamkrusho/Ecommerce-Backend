@@ -1,6 +1,6 @@
 import { CartModel } from "../models/cartModel.js";
 
-class CartsMongooseDao {
+class CartMongooseRepository {
     async findOne(id) {
         const cartDoc = await CartModel.findById(id);
 
@@ -91,4 +91,4 @@ class CartsMongooseDao {
     }
 }
 
-export default CartsMongooseDao;
+export default CartMongooseRepository;

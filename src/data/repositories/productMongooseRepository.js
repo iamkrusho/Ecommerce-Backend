@@ -1,6 +1,6 @@
 import { ProductModel } from "../models/productModel.js";
 
-class ProductsMongooseDao {
+class ProductMongooseRepository {
     async find(queries) {
         const {query, page, limit, sort} = queries;
 
@@ -78,4 +78,4 @@ class ProductsMongooseDao {
     }
 }
 
-export default ProductsMongooseDao;
+export default ProductMongooseRepository;

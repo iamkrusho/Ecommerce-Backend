@@ -1,6 +1,6 @@
 import { RoleModel } from "../models/roleModel.js";
 
-class RolesMongooseDao {
+class RoleMongooseRepository {
     async find() {
         const rolesDocs = await RoleModel.find();
 
@@ -41,4 +41,4 @@ class RolesMongooseDao {
     }
 }
 
-export default RolesMongooseDao;
+export default RoleMongooseRepository;

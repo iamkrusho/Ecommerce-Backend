@@ -1,13 +1,13 @@
-import RolesMongooseDao from "../../data/daos/rolesMongooseDao.js";
+import container from "../../container.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import roleCreateSchema from "../validations/roles/roleCreateValidation.js";
 
-class UserManager {
-    #dao = new RolesMongooseDao();
+class RoleManager {
+    #repository = container.resolve("RoleRepository");
 
     async getAll() {
-        const result = await this.#dao.find();
+        const result = await this.#repository.find();
 
         if (!result) throw new Error("Roles not found");
 
@@ -17,7 +17,7 @@ class UserManager {
     async getOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        const result = await this.#dao.findOne(rid);
+        const result = await this.#repository.findOne(rid);
 
         if (!result) throw new Error("Role not found");
 
@@ -27,13 +27,13 @@ class UserManager {
     async addOne(data) {
         const role = await roleCreateSchema.parseAsync(data);
 
-        return await this.#dao.insertOne(role);
+        return await this.#repository.insertOne(role);
     }
 
     async deleteOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        const result = await this.#dao.delete(rid);
+        const result = await this.#repository.delete(rid);
 
         if (!result) throw new Error("Role not found");
 
@@ -41,4 +41,4 @@ class UserManager {
     }
 }
 
-export default UserManager;
+export default RoleManager;

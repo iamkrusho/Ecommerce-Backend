@@ -1,6 +1,6 @@
 import { UserModel } from "../models/userModel.js";
 
-class UsersMongooseDao {
+class UserMongooseRepository {
     async find() {
         const userDocs = await UserModel.find();
 
@@ -85,4 +85,4 @@ class UsersMongooseDao {
     }
 }
 
-export default UsersMongooseDao;
+export default UserMongooseRepository;
