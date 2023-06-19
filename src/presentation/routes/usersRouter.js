@@ -7,14 +7,16 @@ import authorization from "../middlewares/authorization.js";
 
 const usersRouter = Router();
 
-usersRouter.get("/", auth, authorization("user:list"), UserController.get);
+usersRouter.use(auth);
 
-usersRouter.get("/:uid", auth, authorization("user:get"), UserController.getOne);
+usersRouter.get("/", authorization("user:list"), UserController.get);
 
-usersRouter.post("/", auth, authorization("user:create"), UserController.post);
+usersRouter.get("/:uid", authorization("user:get"), UserController.getOne);
 
-usersRouter.put("/:uid", auth, authorization("user:update"), UserController.put);
+usersRouter.post("/", authorization("user:create"), UserController.post);
 
-usersRouter.delete("/:uid", auth, authorization("user:delete"), UserController.delete);
+usersRouter.put("/:uid", authorization("user:update"), UserController.put);
+
+usersRouter.delete("/:uid", authorization("user:delete"), UserController.delete);
 
 export default usersRouter;

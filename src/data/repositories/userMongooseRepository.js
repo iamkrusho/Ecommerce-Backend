@@ -1,4 +1,6 @@
 import { UserModel } from "../models/userModel.js";
+import User from "../../domain/entities/user.js";
+import Role from "../../domain/entities/role.js";
 
 class UserMongooseRepository {
     async find() {
@@ -6,13 +8,13 @@ class UserMongooseRepository {
 
         if (!userDocs > 0) return null;
 
-        return userDocs.map((doc) => ({
+        return userDocs.map((doc) => new User({
             id: doc._id,
             firstName: doc.firstName,
             lastName: doc.lastName,
             email: doc.email,
             age: doc.age,
-            role: doc.role,
+            role: new Role(doc.role),
             isAdmin: doc.isAdmin,
             password: doc.password,
         }));
@@ -23,16 +25,16 @@ class UserMongooseRepository {
 
         if (!userDoc) return null;
 
-        return {
+        return new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: userDoc.role,
+            role: new Role(userDoc.role),
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        };
+        });
     }
 
     async findByEmail(email) {
@@ -40,16 +42,16 @@ class UserMongooseRepository {
 
         if (!userDoc) return null;
 
-        return {
+        return new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: userDoc.role,
+            role: new Role(userDoc.role),
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        };
+        });
     }
 
     async insertOne(user) {
@@ -64,16 +66,16 @@ class UserMongooseRepository {
         
         if (!userDoc) return null;
 
-        return {
+        return new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: userDoc.role,
+            role: new Role(userDoc.role),
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        };
+        });
     }
 
     async delete(id) {

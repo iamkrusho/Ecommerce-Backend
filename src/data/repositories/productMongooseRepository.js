@@ -1,4 +1,5 @@
 import { ProductModel } from "../models/productModel.js";
+import Product from "../../domain/entities/product.js";
 
 class ProductMongooseRepository {
     async find(queries) {
@@ -11,7 +12,7 @@ class ProductMongooseRepository {
         if (!docs.length > 0) return null;
 
         return {
-            payload: docs.map((doc) => ({
+            payload: docs.map((doc) => new Product({
                 id: doc._id,
                 title: doc.title,
                 description: doc.description,
@@ -31,7 +32,7 @@ class ProductMongooseRepository {
 
         if (!productDoc) return null;
 
-        return {
+        return new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -41,7 +42,7 @@ class ProductMongooseRepository {
             code: productDoc.code,
             status: productDoc.status,
             stock: productDoc.stock
-        };
+        });
     }
 
     async insertOne(product) {
@@ -56,7 +57,7 @@ class ProductMongooseRepository {
 
         if (!productDoc) return null;
 
-        return {
+        return new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -66,7 +67,7 @@ class ProductMongooseRepository {
             code: productDoc.code,
             status: productDoc.status,
             stock: productDoc.stock
-        };
+        });
     }
 
     async delete(id) {

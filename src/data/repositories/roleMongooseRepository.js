@@ -1,4 +1,5 @@
 import { RoleModel } from "../models/roleModel.js";
+import Role from "../../domain/entities/role.js";
 
 class RoleMongooseRepository {
     async find() {
@@ -6,7 +7,7 @@ class RoleMongooseRepository {
 
         if (!rolesDocs > 0) return null;
 
-        return rolesDocs.map((doc) => ({
+        return rolesDocs.map((doc) => new Role({
             id: doc._id,
             name: doc.name,
             permissions: doc.permissions,
@@ -18,11 +19,11 @@ class RoleMongooseRepository {
 
         if (!roleDoc) return null;
 
-        return {
+        return new Role({
             id: roleDoc._id,
             name: roleDoc.name,
             permissions: roleDoc.permissions,
-        };
+        });
     }
 
     async insertOne(role) {

@@ -11,7 +11,12 @@ class MongooseAdapter {
     }
 
     async close() {
-        await this.connection.disconnect();
+        try {
+            await this.connection.disconnect();
+            console.log('Database disconnected');
+        } catch (err) {
+            console.log("Error disconnecting to database: ", err);
+        }
     }
 }
 

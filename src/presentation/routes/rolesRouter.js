@@ -7,12 +7,14 @@ import authorization from "../middlewares/authorization.js";
 
 const rolesRouter = Router();
 
-rolesRouter.get("/", auth, authorization("role:list"), RolesController.get);
+rolesRouter.use(auth);
 
-rolesRouter.get("/:rid", auth, authorization("role:get"), RolesController.getOne);
+rolesRouter.get("/", authorization("role:list"), RolesController.get);
 
-rolesRouter.post("/", auth, authorization("role:create"), RolesController.post);
+rolesRouter.get("/:rid", authorization("role:get"), RolesController.getOne);
 
-rolesRouter.delete("/:rid", auth, authorization("role:delete"), RolesController.delete);
+rolesRouter.post("/", authorization("role:create"), RolesController.post);
+
+rolesRouter.delete("/:rid", authorization("role:delete"), RolesController.delete);
 
 export default rolesRouter;
