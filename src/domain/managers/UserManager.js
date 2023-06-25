@@ -46,7 +46,7 @@ class UserManager {
     }
 
     async deleteOne(id) {
-        const { uid } = await idSchema.parseAsync(id);
+        const uid = await idSchema.parseAsync(id);
 
         const result = await this.#repository.delete(uid);
 

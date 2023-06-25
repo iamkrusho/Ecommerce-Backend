@@ -9,9 +9,7 @@ class ProductMongooseRepository {
 
         const { docs, ...rest } = productsDocs;
 
-        if (!docs.length > 0) return null;
-
-        return {
+        return (!docs.length > 0) ? null : {
             payload: docs.map((doc) => new Product({
                 id: doc._id,
                 title: doc.title,
@@ -30,9 +28,7 @@ class ProductMongooseRepository {
     async findOne(id) {
         const productDoc = await ProductModel.findById(id);
 
-        if (!productDoc) return null;
-
-        return new Product({
+        return (!productDoc) ? null : new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -55,9 +51,7 @@ class ProductMongooseRepository {
     async update(id, update) {
         const productDoc = await ProductModel.findByIdAndUpdate(id, update, {new: true});
 
-        if (!productDoc) return null;
-
-        return new Product({
+        return (!productDoc) ? null : new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -73,9 +67,7 @@ class ProductMongooseRepository {
     async delete(id) {
         const productDoc = await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
 
-        if (!productDoc) return null;
-
-        return true;
+        return (!productDoc) ? null : true;
     }
 }
 

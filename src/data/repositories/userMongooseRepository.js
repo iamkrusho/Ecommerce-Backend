@@ -6,9 +6,7 @@ class UserMongooseRepository {
     async find() {
         const userDocs = await UserModel.find();
 
-        if (!userDocs > 0) return null;
-
-        return userDocs.map((doc) => new User({
+        return !(userDocs) ? null : userDocs.map((doc) => new User({
             id: doc._id,
             firstName: doc.firstName,
             lastName: doc.lastName,
@@ -23,9 +21,7 @@ class UserMongooseRepository {
     async findOne(id) {
         const userDoc = await UserModel.findById(id);
 
-        if (!userDoc) return null;
-
-        return new User({
+        return (!userDoc) ? null : new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
@@ -40,9 +36,7 @@ class UserMongooseRepository {
     async findByEmail(email) {
         const userDoc = await UserModel.findOne({ email });
 
-        if (!userDoc) return null;
-
-        return new User({
+        return (!userDoc) ? null :new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
@@ -63,10 +57,8 @@ class UserMongooseRepository {
 
     async update(id, update) {
         const userDoc = await UserModel.findByIdAndUpdate(id, update, {new: true});
-        
-        if (!userDoc) return null;
 
-        return new User({
+        return (!userDoc) ? null : new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
@@ -79,11 +71,9 @@ class UserMongooseRepository {
     }
 
     async delete(id) {
-        const userDoc = await UserModel.findByIdAndDelete(id);
+        const userDoc = await UserModel.findByIdAndRemove(id);
 
-        if (!userDoc) return null;
-
-        return true;
+        return (!userDoc) ? null : true;
     }
 }
 

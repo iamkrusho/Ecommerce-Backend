@@ -5,9 +5,7 @@ class RoleMongooseRepository {
     async find() {
         const rolesDocs = await RoleModel.find();
 
-        if (!rolesDocs > 0) return null;
-
-        return rolesDocs.map((doc) => new Role({
+        return (!rolesDocs > 0) ? null : rolesDocs.map((doc) => new Role({
             id: doc._id,
             name: doc.name,
             permissions: doc.permissions,
@@ -17,9 +15,7 @@ class RoleMongooseRepository {
     async findOne(id) {
         const roleDoc = await RoleModel.findById(id);
 
-        if (!roleDoc) return null;
-
-        return new Role({
+        return (!roleDoc) ? null : new Role({
             id: roleDoc._id,
             name: roleDoc.name,
             permissions: roleDoc.permissions,
@@ -36,9 +32,7 @@ class RoleMongooseRepository {
     async delete(id) {
         const roleDoc = await RoleModel.findByIdAndDelete(id);
 
-        if (!roleDoc) return null;
-
-        return true;
+        return (!roleDoc) ? null : true;
     }
 }
 
