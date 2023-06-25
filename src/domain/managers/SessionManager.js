@@ -13,7 +13,7 @@ class SessionManager {
 
         const exits = await this.#UserRepository.findByEmail(user.email);
 
-        if (exits) throw new Error("User already exits");
+        if (exits) throw new Error("User already exist");
 
         return await this.#UserRepository.insertOne({...user, password: await createHash(user.password)});
     }
@@ -23,7 +23,7 @@ class SessionManager {
 
         const user = await this.#UserRepository.findByEmail(email);
 
-        if (!user) throw new Error("User not found");
+        if (!user) throw new Error("Incorrect user");
 
         const validation = await isValidPassword(user, password);
         

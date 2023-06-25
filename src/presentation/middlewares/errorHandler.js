@@ -4,6 +4,14 @@ const errorHandler = (err, req, res, next) => {
         return res.status(404).send({status: "error", error: err.message });
     } 
     
+    else if (err?.name.includes("Incorrect")) {
+        return res.status(401).send({status: "error", error: err.message });
+    } 
+
+    else if (err?.name.includes("already exist")) {
+        return res.status(409).send({status: "error", error: err.message });
+    }
+
     else if (err?.name.includes("ZodError")) {
         return res.status(400).send({status: "error", error: err.issues });
     }
