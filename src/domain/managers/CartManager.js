@@ -6,7 +6,8 @@ import cartUpdateSchema from "../validations/carts/cartUpdateValidation.js";
 import cartUpdateOneSchema from "../validations/carts/cartUpdateOneValidation.js";
 
 class CartManager {
-    #repository = container.resolve("CartRepository");
+    #CartRepository = container.resolve("CartRepository");
+    #ProductRepository = container.resolve("ProductRepository");
 
     async getOne(id) {
         const cid = await idSchema.parseAsync(id);
@@ -25,7 +26,11 @@ class CartManager {
     async addProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        const result = await this.#repository.insertOne(cid, pid);
+        const productExist = await this.#ProductRepository.findOne(pid);
+
+        if (!productExist) throw new Error("Product not found");
+
+        const result = await this.#CartRepository.insertOne(cid, pid);
 
         if (!result) throw new Error("Cart not found");
 
@@ -35,7 +40,7 @@ class CartManager {
     async updateOne(data) {
         const { cid, products: update} = await cartUpdateSchema.parseAsync(data);
 
-        const result = await this.#repository.update(cid, update);
+        const result = await this.#CartRepository.update(cid, update);
 
         if (!result) throw new Error("Cart not found");
 
@@ -45,7 +50,11 @@ class CartManager {
     async updateProduct(data) {
         const { cid, pid, quantity: update } = await cartUpdateOneSchema.parseAsync(data);
 
-        const result = await this.#repository.updateOne(cid, pid, update);
+        const productExist = await this.#ProductRepository.findOne(pid);
+
+        if (!productExist) throw new Error("Product not found");
+
+        const result = await this.#CartRepository.updateOne(cid, pid, update);
 
         if (!result) throw new Error("Cart not found");
 
@@ -55,7 +64,7 @@ class CartManager {
     async deleteOne(id) {
         const cid = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.remove(cid);
+        const result = await this.#CartRepository.remove(cid);
 
         if (!result) throw new Error("Cart not found");
 
@@ -65,7 +74,11 @@ class CartManager {
     async deleteProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        const result = await this.#repository.removeOne(cid, pid);
+        const productExist = await this.#ProductRepository.findOne(pid);
+
+        if (!productExist) throw new Error("Product not found");
+
+        const result = await this.#CartRepository.removeOne(cid, pid);
 
         if (!result) throw new Error("Cart not found");
 

@@ -1,5 +1,4 @@
 import CartManager from "../../domain/managers/cartManager.js";
-import ProductManager from "../../domain/managers/productManager.js";
 
 class CartsController {
     static getOne = async (req, res, next) => {
@@ -25,10 +24,7 @@ class CartsController {
 
     static postOne = async (req, res, next) => {
         try {
-            const { pid } = req.params;
             const cartManager = new CartManager();
-            const productManager = new ProductManager();
-            await productManager.getOne(pid);
             const result = await cartManager.addProduct(req.params);
             res.status(200).send({status: "success", message: "Product has been added to the cart successfully", data: result});
         } catch (err) {
@@ -48,10 +44,7 @@ class CartsController {
 
     static putOne = async (req, res, next) => {
         try {
-            const { pid } = req.params;
             const cartManager = new CartManager();
-            const productManager = new ProductManager();
-            await productManager.getOne(pid);
             const result = await cartManager.updateProduct({...req.params, ...req.body});
             res.status(200).send({status: "success", message: "Product inside the cart has been updated successfully", data: result});
         } catch (err) {
@@ -72,10 +65,7 @@ class CartsController {
 
     static deleteOne = async (req, res, next) => {
         try {
-            const { pid } = req.params;
             const cartManager = new CartManager();
-            const productManager = new ProductManager();
-            await productManager.getOne(pid);
             const result = await cartManager.deleteProduct(req.params);
             res.status(200).send({status: "success", message: "Product inside the cart has been deleted successfully", data: result});
         } catch (err) {
