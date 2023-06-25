@@ -5,10 +5,10 @@ import userCreateSchema from "../validations/users/userCreateValidation.js";
 import userUpdateSchema from "../validations/users/userUpdateValidation.js";
 
 class UserManager {
-    #repository = container.resolve("UserRepository");
+    #UserRepository = container.resolve("UserRepository");
 
     async getAll() {
-        const result = await this.#repository.find();
+        const result = await this.#UserRepository.find();
 
         if (!result) throw new Error("Users not found");
 
@@ -18,7 +18,7 @@ class UserManager {
     async getOne(id) {
         const { uid } = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.findOne(uid);
+        const result = await this.#UserRepository.findOne(uid);
 
         if (!result) throw new Error("User not found");
 
@@ -26,7 +26,7 @@ class UserManager {
     }
 
     async getOneByEmail(email) {
-        const result = await this.#repository.findByEmail(email);
+        const result = await this.#UserRepository.findByEmail(email);
 
         if (!result) throw new Error("User not found");
 
@@ -36,19 +36,19 @@ class UserManager {
     async addOne(data) {
         const user = await userCreateSchema.parseAsync(data);
         
-        return await this.#repository.insertOne(user);
+        return await this.#UserRepository.insertOne(user);
     }
     
     async updateOne(data) {
         const { uid, ...update} = await userUpdateSchema.parseAsync(data);
 
-        return await this.#repository.update(uid, update);
+        return await this.#UserRepository.update(uid, update);
     }
 
     async deleteOne(id) {
         const uid = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.delete(uid);
+        const result = await this.#UserRepository.delete(uid);
 
         if (!result) throw new Error("User not found");
 

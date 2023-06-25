@@ -4,10 +4,10 @@ import idSchema from "../validations/shared/idValidation.js";
 import roleCreateSchema from "../validations/roles/roleCreateValidation.js";
 
 class RoleManager {
-    #repository = container.resolve("RoleRepository");
+    #RoleRepository = container.resolve("RoleRepository");
 
     async getAll() {
-        const result = await this.#repository.find();
+        const result = await this.#RoleRepository.find();
 
         if (!result) throw new Error("Roles not found");
 
@@ -17,7 +17,7 @@ class RoleManager {
     async getOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.findOne(rid);
+        const result = await this.#RoleRepository.findOne(rid);
 
         if (!result) throw new Error("Role not found");
 
@@ -27,13 +27,13 @@ class RoleManager {
     async addOne(data) {
         const role = await roleCreateSchema.parseAsync(data);
 
-        return await this.#repository.insertOne(role);
+        return await this.#RoleRepository.insertOne(role);
     }
 
     async deleteOne(id) {
         const { rid } = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.delete(rid);
+        const result = await this.#RoleRepository.delete(rid);
 
         if (!result) throw new Error("Role not found");
 
