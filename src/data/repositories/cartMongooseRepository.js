@@ -1,4 +1,4 @@
-import { CartModel } from "../models/cartModel.js";
+import CartModel from "../models/cartModel.js";
 
 import Cart from "../../domain/entities/cart.js";
 import ProductCart from "../../domain/entities/productCart.js";
@@ -20,7 +20,7 @@ class CartMongooseRepository {
 
     async save() {
         const newCartDoc = new CartModel();
-        newCartDoc.save();
+        await newCartDoc.save();
 
         return new Cart({
             id: newCartDoc._id,

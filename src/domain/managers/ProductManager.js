@@ -1,6 +1,6 @@
-import container from "../../container.js";
-
 import { nanoid } from "nanoid";
+
+import container from "../../container.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import productQueriesSchema from "../validations/products/productQueriesValidation.js";

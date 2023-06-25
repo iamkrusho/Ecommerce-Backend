@@ -1,4 +1,4 @@
-import { RoleModel } from "../models/roleModel.js";
+import RoleModel from "../models/roleModel.js";
 import Role from "../../domain/entities/role.js";
 
 class RoleMongooseRepository {

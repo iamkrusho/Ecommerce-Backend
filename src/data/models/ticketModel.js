@@ -22,4 +22,6 @@ const TicketSchema = new Schema({
     },
 });
 
-export const TicketModel = model(ticketCollection, TicketSchema);
+const TicketModel = model(ticketCollection, TicketSchema);
+
+export default TicketModel;

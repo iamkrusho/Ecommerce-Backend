@@ -1,4 +1,4 @@
-import { UserModel } from "../models/userModel.js";
+import UserModel from "../models/userModel.js";
 import User from "../../domain/entities/user.js";
 import Role from "../../domain/entities/role.js";
 
@@ -50,7 +50,7 @@ class UserMongooseRepository {
 
     async insertOne(user) {
         const newUserDoc = new UserModel(user);
-        newUserDoc.save();
+        await newUserDoc.save();
 
         return true;
     }

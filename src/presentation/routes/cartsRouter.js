@@ -10,6 +10,8 @@ cartRouter.post("/", CartsController.post);
 
 cartRouter.post("/:cid/product/:pid", CartsController.postOne);
 
+cartRouter.post("/:cid/purchase", )
+
 cartRouter.put("/:cid", CartsController.put);
 
 cartRouter.put("/:cid/product/:pid", CartsController.putOne);
