@@ -32,6 +32,17 @@ class CartsController {
         }
     }
 
+    static checkout = async (req, res, next) => {
+        try {
+            const { cid } = req.params;
+            const manager = new CartManager();
+            const result = await manager.createCheckout(cid);
+            res.status(200).send({status: "success", data: result});
+        } catch (err) {
+            next(err);
+        }
+    }
+
     static put = async (req, res, next) => {
         try {
             const manager = new CartManager();

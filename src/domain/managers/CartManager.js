@@ -8,11 +8,12 @@ import cartUpdateOneSchema from "../validations/carts/cartUpdateOneValidation.js
 class CartManager {
     #CartRepository = container.resolve("CartRepository");
     #ProductRepository = container.resolve("ProductRepository");
+    #TicketRepository = container.resolve("TicketRepository");
 
     async getOne(id) {
         const cid = await idSchema.parseAsync(id);
 
-        const result = await this.#repository.findOne(cid)
+        const result = await this.#CartRepository.findOne(cid)
 
         if (!result) throw new Error("Cart not found");
 
@@ -20,7 +21,7 @@ class CartManager {
     }
 
     async addOne() {
-        return await this.#repository.save();
+        return await this.#CartRepository.save();
     }
 
     async addProduct(data) {
@@ -35,6 +36,28 @@ class CartManager {
         if (!result) throw new Error("Cart not found");
 
         return result;
+    }
+
+    async createCheckout(id) {
+        const cid = await idSchema.parseAsync(id);
+
+        const cart = await this.#CartRepository.findOne(cid);
+
+        if (!cart) throw new Error("Cart not found");
+
+        if (!(cart.products.length > 0)) throw new Error("Cart is empty");
+
+        let total = 0;
+
+        for (const productInCart of cart.products) {
+            if ((productInCart.product.stock - productInCart.quantity) < 0) {
+                throw new Error("Insuficient stock");
+            }
+
+            total += productInCart.product.price * productInCart.quantity;
+        }
+
+        console.log(total);
     }
 
     async updateOne(data) {
