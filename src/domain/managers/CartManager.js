@@ -54,11 +54,13 @@ class CartManager {
         let total = 0;
 
         for (const productInCart of cart.products) {
-            if ((productInCart.product.stock - productInCart.quantity) < 0) {
-                throw new Error("Insuficient stock");
-            }
+            const newStock = productInCart.product.stock - productInCart.quantity;
+
+            if (newStock < 0) throw new Error("Insuficient stock");
 
             total += productInCart.product.price * productInCart.quantity;
+            
+            await this.#ProductRepository.update(productInCart.product.id, { stock: newStock, status: newStock > 0 ? true : false });
         }
 
         return await this.#TicketRepository.save({
