@@ -2,6 +2,8 @@ import { Router } from "express";
 
 import CartsController from "../controllers/cartsController.js";
 
+import auth from "../middlewares/auth.js";
+
 const cartRouter = Router();
 
 cartRouter.get("/:cid", CartsController.getOne);
@@ -10,7 +12,7 @@ cartRouter.post("/", CartsController.post);
 
 cartRouter.post("/:cid/product/:pid", CartsController.postOne);
 
-cartRouter.post("/:cid/checkout", CartsController.checkout);
+cartRouter.post("/:cid/checkout", auth, CartsController.checkout);
 
 cartRouter.put("/:cid", CartsController.put);
 

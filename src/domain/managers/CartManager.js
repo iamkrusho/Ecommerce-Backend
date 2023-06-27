@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 import container from "../../container.js";
 
 import idSchema from "../validations/shared/idValidation.js";
@@ -38,7 +40,9 @@ class CartManager {
         return result;
     }
 
-    async createCheckout(id) {
+    async createCheckout(data) {
+        const { id , user} = data;
+
         const cid = await idSchema.parseAsync(id);
 
         const cart = await this.#CartRepository.findOne(cid);
@@ -57,7 +61,12 @@ class CartManager {
             total += productInCart.product.price * productInCart.quantity;
         }
 
-        console.log(total);
+        return await this.#TicketRepository.save({
+            code: nanoid(13),
+            purchase_datetime: new Date(),
+            amount: total,
+            purchaser: user
+        })
     }
 
     async updateOne(data) {

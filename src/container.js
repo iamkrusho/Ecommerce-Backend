@@ -12,6 +12,6 @@ container.register("CartRepository", asClass(CartMongooseRepository), { lifetame
 container.register("ProductRepository", asClass(ProductMongooseRepository), { lifetame: Lifetime.SINGLETON });
 container.register("RoleRepository", asClass(RoleMongooseRepository), { lifetame: Lifetime.SINGLETON });
 container.register("UserRepository", asClass(UserMongooseRepository), { lifetame: Lifetime.SINGLETON });
-container.register("TicketRepository", asClass(UserMongooseRepository), { lifetame: Lifetime.SINGLETON });
+container.register("TicketRepository", asClass(TicketMongooseRepository), { lifetame: Lifetime.SINGLETON });
 
 export default container;

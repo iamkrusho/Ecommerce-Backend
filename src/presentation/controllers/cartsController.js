@@ -35,8 +35,9 @@ class CartsController {
     static checkout = async (req, res, next) => {
         try {
             const { cid } = req.params;
+            const { email } = req.user;
             const manager = new CartManager();
-            const result = await manager.createCheckout(cid);
+            const result = await manager.createCheckout({id: cid, user: email});
             res.status(200).send({status: "success", data: result});
         } catch (err) {
             next(err);

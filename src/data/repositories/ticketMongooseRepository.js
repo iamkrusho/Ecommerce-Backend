@@ -8,6 +8,7 @@ class TicketMongooseRepository {
 
         return new Ticket({
             id: newTicketDoc._id,
+            code: newTicketDoc.code,
             purchase_datetime: newTicketDoc.purchase_datetime,
             amount: newTicketDoc.amount,
             purchaser: newTicketDoc.purchaser
