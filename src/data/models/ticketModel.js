@@ -8,15 +8,15 @@ const TicketSchema = new Schema({
         required: [true, 'Ticket code is required'],
         unique: true,
     },
-    purchase_datetime: {
+    date: {
         type: Schema.Types.Date,
         required: [true, "Ticket date is required"],
     },
-    amount: {
+    total: {
         type: Schema.Types.Number,
         required: [true, "Ticket amount is required"],
     },
-    purchaser: {
+    user: {
         type: Schema.Types.String,
         required: [true, "Ticket purchaser is required"],
     },

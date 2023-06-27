@@ -63,10 +63,10 @@ class CartManager {
 
         return await this.#TicketRepository.save({
             code: nanoid(13),
-            purchase_datetime: new Date(),
-            amount: total,
-            purchaser: user
-        })
+            date: new Date(),
+            total,
+            user
+        });
     }
 
     async updateOne(data) {
