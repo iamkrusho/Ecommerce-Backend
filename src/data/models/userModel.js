@@ -44,6 +44,4 @@ UserSchema.pre("findOne", function () {
     this.populate("role");
 });
 
-const UserModel = model(usersCollection, UserSchema);
-
-export default UserModel;
+export default model(usersCollection, UserSchema);
