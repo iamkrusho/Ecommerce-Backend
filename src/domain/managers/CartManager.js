@@ -56,7 +56,7 @@ class CartManager {
         for (const productInCart of cart.products) {
             const newStock = productInCart.product.stock - productInCart.quantity;
 
-            if (newStock < 0) throw new Error("Insuficient stock");
+            if (newStock < 0) throw new Error(`The product ${productInCart.product.title} - ${productInCart.product.code} doesn't have stock`);
 
             total += productInCart.product.price * productInCart.quantity;
             

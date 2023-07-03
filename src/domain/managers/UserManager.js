@@ -16,7 +16,7 @@ class UserManager {
     }
 
     async getOne(id) {
-        const { uid } = await idSchema.parseAsync(id);
+        const uid = await idSchema.parseAsync(id);
 
         const result = await this.#UserRepository.findOne(uid);
 
