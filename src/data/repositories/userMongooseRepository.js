@@ -34,7 +34,7 @@ class UserMongooseRepository {
     }
 
     async findByEmail(data) {
-        const userDoc = await UserModel.findOne({ data });
+        const userDoc = await UserModel.findOne({ email: data });
 
         return (!userDoc) ? null :new User({
             id: userDoc._id,

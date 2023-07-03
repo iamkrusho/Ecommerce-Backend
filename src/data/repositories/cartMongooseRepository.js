@@ -11,7 +11,7 @@ class CartMongooseRepository {
         return (!cartDoc) ? null : new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map(doc => new ProductCart({
-                id: doc.id,
+                id: doc._id,
                 product: new Product(doc.product),
                 quantity: doc.quantity                
             }))
