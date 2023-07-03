@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 
 import container from "../../container.js";
+import { transport } from "../../shared/index.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import cartAddOneSchema from "../validations/carts/cartAddOneValidation.js";
@@ -52,19 +53,37 @@ class CartManager {
         if (!(cart.products.length > 0)) throw new Error("Cart is empty");
 
         let total = 0;
-
+        
         for (const productInCart of cart.products) {
             const newStock = productInCart.product.stock - productInCart.quantity;
-
+            
             if (newStock < 0) throw new Error(`The product ${productInCart.product.title} - ${productInCart.product.code} doesn't have stock`);
-
+            
             total += productInCart.product.price * productInCart.quantity;
             
             await this.#ProductRepository.update(productInCart.product.id, { stock: newStock, status: newStock > 0 ? true : false });
         }
 
+        const code = nanoid(13);
+        
+        await transport.sendMail({
+            from: process.env.SMTP_EMAIL,
+            to: user,
+            subject: "Ticket de compra",
+            html: 
+            `<div>
+                <h1>¡Gracias por su compra!</h1>
+                <br>
+                <h3>Ticket:</h3>
+                <div>
+                    <p>code: ${code}</p>
+                    <p>total: $${total}</p>
+                </div>
+            </div>`
+        });
+
         return await this.#TicketRepository.save({
-            code: nanoid(13),
+            code,
             date: new Date(),
             total,
             user
