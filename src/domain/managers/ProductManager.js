@@ -39,7 +39,7 @@ class ProductManager {
     async updateOne(data) {
         const { pid, ...update} = await productUpdateSchema.parseAsync(data);
 
-        const result = await this.#ProductRepository.update(pid, update);
+        const result = await this.#ProductRepository.update({ pid, update });
 
         if (!result) throw new Error("Product not found");
 

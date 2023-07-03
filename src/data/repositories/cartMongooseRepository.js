@@ -32,7 +32,9 @@ class CartMongooseRepository {
         });
     }
 
-    async insertOne(cid, pid) {
+    async insertOne(data) {
+        const { cid, pid } = data;
+
         const cartDoc = await CartModel.findById(cid);
 
         if (!cartDoc) return null;
@@ -52,7 +54,9 @@ class CartMongooseRepository {
         });
     }
 
-    async update(cid, update) {
+    async update(data) {
+        const { cid, update} = data;
+
         const cartDoc = await CartModel.findByIdAndUpdate(cid, {products: update}, {new: true});
 
         return (!cartDoc) ? null : new Cart({
@@ -61,7 +65,9 @@ class CartMongooseRepository {
         });
     }
 
-    async updateOne(cid, pid, update) {
+    async updateOne(data) {
+        const { cid, pid, update } = data;
+
         const cartDoc = await CartModel.findById(cid);
 
         const productInCart = cartDoc.products.find(item => item.product.id === pid);
@@ -76,13 +82,15 @@ class CartMongooseRepository {
         });
     }
 
-    async remove(cid) {
-        const cartDoc = await CartModel.findByIdAndRemove(cid);
+    async remove(id) {
+        const cartDoc = await CartModel.findByIdAndRemove(id);
 
         return (!cartDoc) ? null : true;
     }
 
-    async removeOne(cid, pid) {
+    async removeOne(data) {
+        const { cid, pid } = data;
+
         const cartDoc = await CartModel.findById(cid);
 
         if (!cartDoc) return null;

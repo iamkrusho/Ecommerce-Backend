@@ -33,7 +33,7 @@ class CartManager {
 
         if (!productExist) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.insertOne(cid, pid);
+        const result = await this.#CartRepository.insertOne({ cid, pid });
 
         if (!result) throw new Error("Cart not found");
 
@@ -74,7 +74,7 @@ class CartManager {
     async updateOne(data) {
         const { cid, products: update} = await cartUpdateSchema.parseAsync(data);
 
-        const result = await this.#CartRepository.update(cid, update);
+        const result = await this.#CartRepository.update({ cid, update });
 
         if (!result) throw new Error("Cart not found");
 
@@ -88,7 +88,7 @@ class CartManager {
 
         if (!productExist) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.updateOne(cid, pid, update);
+        const result = await this.#CartRepository.updateOne({ cid, pid, update });
 
         if (!result) throw new Error("Cart not found");
 
@@ -112,7 +112,7 @@ class CartManager {
 
         if (!productExist) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.removeOne(cid, pid);
+        const result = await this.#CartRepository.removeOne({ cid, pid });
 
         if (!result) throw new Error("Cart not found");
 

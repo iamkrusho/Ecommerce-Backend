@@ -15,7 +15,7 @@ class RoleManager {
     }
 
     async getOne(id) {
-        const { rid } = await idSchema.parseAsync(id);
+        const rid = await idSchema.parseAsync(id);
 
         const result = await this.#RoleRepository.findOne(rid);
 
@@ -31,7 +31,7 @@ class RoleManager {
     }
 
     async deleteOne(id) {
-        const { rid } = await idSchema.parseAsync(id);
+        const rid = await idSchema.parseAsync(id);
 
         const result = await this.#RoleRepository.delete(rid);
 

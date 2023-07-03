@@ -25,8 +25,8 @@ class UserManager {
         return result;
     }
 
-    async getOneByEmail(email) {
-        const result = await this.#UserRepository.findByEmail(email);
+    async getOneByEmail(data) {
+        const result = await this.#UserRepository.findByEmail(data);
 
         if (!result) throw new Error("User not found");
 
@@ -42,7 +42,7 @@ class UserManager {
     async updateOne(data) {
         const { uid, ...update} = await userUpdateSchema.parseAsync(data);
 
-        return await this.#UserRepository.update(uid, update);
+        return await this.#UserRepository.update({ uid, update });
     }
 
     async deleteOne(id) {

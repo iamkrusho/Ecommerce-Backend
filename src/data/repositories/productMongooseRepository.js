@@ -2,8 +2,8 @@ import ProductModel from "../models/productModel.js";
 import Product from "../../domain/entities/product.js";
 
 class ProductMongooseRepository {
-    async find(queries) {
-        const {query, page, limit, sort} = queries;
+    async find(data) {
+        const {query, page, limit, sort} = data;
 
         const productsDocs = await ProductModel.paginate({$and: [{status: true}, query]}, {page, sort: {price: sort}, limit});
 
@@ -41,15 +41,17 @@ class ProductMongooseRepository {
         });
     }
 
-    async insertOne(product) {
-        const newProductDoc = new ProductModel(product);
+    async insertOne(data) {
+        const newProductDoc = new ProductModel(data);
         await newProductDoc.save();
 
         return true;
     }
 
-    async update(id, update) {
-        const productDoc = await ProductModel.findByIdAndUpdate(id, update, {new: true});
+    async update(data) {
+        const { pid, update } = data;
+
+        const productDoc = await ProductModel.findByIdAndUpdate(pid, update, {new: true});
 
         return (!productDoc) ? null : new Product({
             id: productDoc._id,

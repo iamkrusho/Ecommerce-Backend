@@ -22,8 +22,8 @@ class RoleMongooseRepository {
         });
     }
 
-    async insertOne(role) {
-        const newRoleDoc = new RoleModel(role);
+    async insertOne(data) {
+        const newRoleDoc = new RoleModel(data);
         await newRoleDoc.save();
 
         return true;

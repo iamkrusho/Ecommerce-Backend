@@ -33,8 +33,8 @@ class UserMongooseRepository {
         });
     }
 
-    async findByEmail(email) {
-        const userDoc = await UserModel.findOne({ email });
+    async findByEmail(data) {
+        const userDoc = await UserModel.findOne({ data });
 
         return (!userDoc) ? null :new User({
             id: userDoc._id,
@@ -48,15 +48,17 @@ class UserMongooseRepository {
         });
     }
 
-    async insertOne(user) {
-        const newUserDoc = new UserModel(user);
+    async insertOne(data) {
+        const newUserDoc = new UserModel(data);
         await newUserDoc.save();
 
         return true;
     }
 
-    async update(id, update) {
-        const userDoc = await UserModel.findByIdAndUpdate(id, update, {new: true});
+    async update(data) {
+        const { uid, update } = data;
+
+        const userDoc = await UserModel.findByIdAndUpdate(uid, update, {new: true});
 
         return (!userDoc) ? null : new User({
             id: userDoc._id,
