@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import AppFactory from "./presentation/factories/appFactory.js";
-import DbFactory from "./data/factories/DBFactory.js";
+import DbFactory from "./data/factories/dbFactory.js";
 
 void (async () => {
     const db = DbFactory.create(process.env.DB_ADAPTER);
