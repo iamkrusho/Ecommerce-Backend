@@ -26,12 +26,20 @@ class AppExpress {
         this.app.use(errorHandler);
     }
 
-    listen() {
-        const PORT = process.env.NODE_PORT;
+    callback() {
+        return this.app;
+    }
 
-        return this.app.listen(PORT, () => {
-            console.log(`Server listening on port ${PORT}`);
+    listen() {
+        this.server = this.app.listen(process.env.NODE_PORT, () => {
+            console.log(`Server listening on port ${process.env.NODE_PORT}`);
         });
+
+        return this.server;
+    }
+
+    close() {
+        this.server.close();
     }
 }
 
