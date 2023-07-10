@@ -8,28 +8,28 @@ class CartMongooseRepository {
     async findOne(id) {
         const cartDoc = await CartModel.findById(id);
 
-        return (!cartDoc) ? null : new Cart({
+        return cartDoc ? new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map(doc => new ProductCart({
                 id: doc._id,
-                product: new Product(doc.product),
+                product: doc.product ? new Product(doc.product) : null,
                 quantity: doc.quantity                
             }))
-        });
+        }) : null;
     }
 
     async save() {
         const newCartDoc = new CartModel();
-        await newCartDoc.save();
+        const cartDoc = await newCartDoc.save();
 
-        return new Cart({
-            id: newCartDoc._id,
-            products: newCartDoc.products.map(doc => new ProductCart({
-                id: doc.id,
-                product: new Product(doc.product),
+        return cartDoc ? new Cart({
+            id: cartDoc._id,
+            products: cartDoc.products.map(doc => new ProductCart({
+                id: doc._id,
+                product: doc.product ? new Product(doc.product) : null,
                 quantity: doc.quantity                
             }))
-        });
+        }) : null;
     }
 
     async insertOne(data) {
@@ -43,15 +43,16 @@ class CartMongooseRepository {
 
         productInCart ? productInCart.quantity += 1 : cartDoc.products = [...cartDoc.products , {product: pid, quantity: 1}];
 
-        await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
+        const newCartDoc = await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
 
-        return new Cart({
+        return newCartDoc ? new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map(doc => new ProductCart({
-                id: doc.id,
+                id: doc._id,
+                product: doc.product ? new Product(doc.product) : null,
                 quantity: doc.quantity                
             }))
-        });
+        }) : null;
     }
 
     async update(data) {
@@ -59,10 +60,10 @@ class CartMongooseRepository {
 
         const cartDoc = await CartModel.findByIdAndUpdate(cid, {products: update}, {new: true});
 
-        return (!cartDoc) ? null : new Cart({
+        return cartDoc ? new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map(doc => new ProductCart(doc))
-        });
+        }) : null;
     }
 
     async updateOne(data) {
@@ -75,17 +76,17 @@ class CartMongooseRepository {
 
         await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
 
-        return (!cartDoc) ? null : new ProductCart({
+        return cartDoc ? new ProductCart({
             id: productInCart._id,
-            product: new Product(productInCart.product),
+            product: doc.product ? new Product(doc.product) : null,
             quantity: productInCart.quantity
-        });
+        }) : null;
     }
 
     async remove(id) {
         const cartDoc = await CartModel.findByIdAndRemove(id);
 
-        return (!cartDoc) ? null : true;
+        return cartDoc ? true : null;
     }
 
     async removeOne(data) {
@@ -98,16 +99,16 @@ class CartMongooseRepository {
         const filter = cartDoc.products.filter(item => item.product.id !== pid);
         cartDoc.products = filter;
         
-        await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
+        const newCartDoc = await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
 
-        return new Cart({
+        return newCartDoc ? new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map(doc => new ProductCart({
-                id: doc.id,
-                product: new Product(doc.product),
+                id: doc._id,
+                product: doc.product ? new Product(doc.product) : null,
                 quantity: doc.quantity                
             }))
-        });
+        }) : null;
     }
 }
 

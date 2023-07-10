@@ -9,7 +9,7 @@ class ProductMongooseRepository {
 
         const { docs, ...rest } = productsDocs;
 
-        return (!docs.length > 0) ? null : {
+        return docs.length > 0 ? {
             payload: docs.map((doc) => new Product({
                 id: doc._id,
                 title: doc.title,
@@ -22,13 +22,13 @@ class ProductMongooseRepository {
                 stock: doc.stock
             })),
             ...rest
-        };
+        } : null;
     }
 
     async findOne(id) {
         const productDoc = await ProductModel.findById(id);
 
-        return (!productDoc) ? null : new Product({
+        return productDoc ? new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -38,14 +38,24 @@ class ProductMongooseRepository {
             code: productDoc.code,
             status: productDoc.status,
             stock: productDoc.stock
-        });
+        }): null;
     }
 
     async insertOne(data) {
         const newProductDoc = new ProductModel(data);
-        await newProductDoc.save();
+        const productDoc = await newProductDoc.save();
 
-        return true;
+        return productDoc ? new Product({
+            id: productDoc._id,
+            title: productDoc.title,
+            description: productDoc.description,
+            price: productDoc.price,
+            thumbnails: productDoc.thumbnails ?? null,
+            category: productDoc.category,
+            code: productDoc.code,
+            status: productDoc.status,
+            stock: productDoc.stock
+        }) : null;
     }
 
     async update(data) {
@@ -53,7 +63,7 @@ class ProductMongooseRepository {
 
         const productDoc = await ProductModel.findByIdAndUpdate(pid, update, {new: true});
 
-        return (!productDoc) ? null : new Product({
+        return productDoc ? new Product({
             id: productDoc._id,
             title: productDoc.title,
             description: productDoc.description,
@@ -63,13 +73,13 @@ class ProductMongooseRepository {
             code: productDoc.code,
             status: productDoc.status,
             stock: productDoc.stock
-        });
+        }) : null;
     }
 
     async delete(id) {
         const productDoc = await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
 
-        return (!productDoc) ? null : true;
+        return productDoc ? true : null ;
     }
 }
 

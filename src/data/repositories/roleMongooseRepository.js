@@ -5,34 +5,38 @@ class RoleMongooseRepository {
     async find() {
         const rolesDocs = await RoleModel.find();
 
-        return (!rolesDocs > 0) ? null : rolesDocs.map((doc) => new Role({
+        return rolesDocs > 0 ? rolesDocs.map((doc) => new Role({
             id: doc._id,
             name: doc.name,
             permissions: doc.permissions,
-        }));
+        })) : null;
     }
 
     async findOne(id) {
         const roleDoc = await RoleModel.findById(id);
 
-        return (!roleDoc) ? null : new Role({
+        return roleDoc ? new Role({
             id: roleDoc._id,
             name: roleDoc.name,
             permissions: roleDoc.permissions,
-        });
+        }) : null;
     }
 
     async insertOne(data) {
         const newRoleDoc = new RoleModel(data);
-        await newRoleDoc.save();
+        const roleDoc = await newRoleDoc.save();
 
-        return true;
+        return roleDoc ? new Role({
+            id: roleDoc._id,
+            name: roleDoc.name,
+            permissions: roleDoc.permissions,
+        }) : null;
     }
 
     async delete(id) {
         const roleDoc = await RoleModel.findByIdAndDelete(id);
 
-        return (!roleDoc) ? null : true;
+        return roleDoc ? true : null;
     }
 }
 
