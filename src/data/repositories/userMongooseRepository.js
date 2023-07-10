@@ -6,53 +6,62 @@ class UserMongooseRepository {
     async find() {
         const userDocs = await UserModel.find();
 
-        return !(userDocs) ? null : userDocs.map((doc) => new User({
+        return userDocs ? userDocs.map((doc) => new User({
             id: doc._id,
             firstName: doc.firstName,
             lastName: doc.lastName,
             email: doc.email,
             age: doc.age,
-            role: new Role(doc.role),
+            role: doc.role ? new Role(doc.role) : null,
             isAdmin: doc.isAdmin,
             password: doc.password,
-        }));
+        })) : null;
     }
 
     async findOne(id) {
         const userDoc = await UserModel.findById(id);
 
-        return (!userDoc) ? null : new User({
+        return userDoc ? new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: new Role(userDoc.role),
+            role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        });
+        }) : null;
     }
 
     async findByEmail(data) {
         const userDoc = await UserModel.findOne({ email: data });
 
-        return (!userDoc) ? null :new User({
+        return userDoc ? new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: new Role(userDoc.role),
+            role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        });
+        }) : null;
     }
 
     async insertOne(data) {
         const newUserDoc = new UserModel(data);
-        await newUserDoc.save();
+        const userDoc = await newUserDoc.save();
 
-        return true;
+        return userDoc ? new User({
+            id: userDoc._id,
+            firstName: userDoc.firstName,
+            lastName: userDoc.lastName,
+            email: userDoc.email,
+            age: userDoc.age,
+            role: userDoc.role ? new Role(userDoc.role) : null,
+            isAdmin: userDoc.isAdmin,
+            password: userDoc.password,
+        }) : null;
     }
 
     async update(data) {
@@ -60,22 +69,22 @@ class UserMongooseRepository {
 
         const userDoc = await UserModel.findByIdAndUpdate(uid, update, {new: true});
 
-        return (!userDoc) ? null : new User({
+        return userDoc ? new User({
             id: userDoc._id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
             age: userDoc.age,
-            role: new Role(userDoc.role),
+            role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
-        });
+        }) : null;
     }
 
     async delete(id) {
         const userDoc = await UserModel.findByIdAndRemove(id);
 
-        return (!userDoc) ? null : true;
+        return userDoc ? true : null;
     }
 }
 

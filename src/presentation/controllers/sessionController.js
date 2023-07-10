@@ -7,7 +7,7 @@ class SessionController {
         try {
             const manager = new SessionManager();
             await manager.create(req.body);
-            res.status(200).send({status: 'success', message: 'You have successfully registered'})
+            res.status(201).send({status: 'success', message: 'You have successfully registered'})
         } catch(err) {
             next(err);
         }

@@ -6,12 +6,12 @@ import DbFactory from "../data/factories/dbFactory.js";
 
 const initServer = async () => {
     const db = DbFactory.create(process.env.DB_ADAPTER);
+    
     db.init(process.env.DB_URI);
 
     const app = AppFactory.create(process.env.NODE_APPLICATION);
     app.init();
     app.build();
-    app.listen();
 
     return {
         app,

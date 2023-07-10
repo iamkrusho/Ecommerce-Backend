@@ -23,8 +23,8 @@ const UserSchema = new Schema({
     role: {
         type: Schema.Types.ObjectId,
         ref: "roles",
-        required: [true, "Role ID is required"],
         index: true,
+        default: null
     },
     isAdmin: {
         type: Schema.Types.Boolean,
