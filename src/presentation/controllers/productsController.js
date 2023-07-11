@@ -26,7 +26,7 @@ class ProductsController {
         try {
             const manager = new ProductManager();
             await manager.addOne(req.body);
-            res.status(200).send({status: 'success', message: 'Product has been created successfully'})
+            res.status(201).send({status: 'success', message: 'Product has been created successfully'})
         } catch(err) {
             next(err);
         }

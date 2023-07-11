@@ -3,13 +3,12 @@ import { faker } from "@faker-js/faker";
 import supertest from "supertest";
 
 describe("Testing Session Endpoints", () => {
-    let requester, app, db, jwt, payload = {};
+    let requester, db, jwt = "", payload = {};
 
     beforeAll(async () => {
         const server = await initServer();
         const application = server.app.callback();
         requester = supertest.agent(application);
-        app = server.app;
         db = server.db;
         payload = {
             firstName: faker.person.firstName(),
