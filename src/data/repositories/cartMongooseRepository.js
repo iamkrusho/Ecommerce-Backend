@@ -24,11 +24,7 @@ class CartMongooseRepository {
 
         return cartDoc ? new Cart({
             id: cartDoc._id,
-            products: cartDoc.products.map(doc => new ProductCart({
-                id: doc._id,
-                product: doc.product ? new Product(doc.product) : null,
-                quantity: doc.quantity                
-            }))
+            products: cartDoc.products
         }) : null;
     }
 
@@ -46,10 +42,10 @@ class CartMongooseRepository {
         const newCartDoc = await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
 
         return newCartDoc ? new Cart({
-            id: cartDoc._id,
-            products: cartDoc.products.map(doc => new ProductCart({
+            id: newCartDoc._id,
+            products: newCartDoc.products.map(doc => new ProductCart({
                 id: doc._id,
-                product: doc.product ? new Product(doc.product) : null,
+                product: doc.product,
                 quantity: doc.quantity                
             }))
         }) : null;
