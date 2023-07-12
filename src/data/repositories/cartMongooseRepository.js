@@ -70,12 +70,15 @@ class CartMongooseRepository {
         const productInCart = cartDoc.products.find(item => item.product.id === pid);
         productInCart.quantity = update;
 
-        await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
+        const newCartDoc = await CartModel.findByIdAndUpdate(cid, cartDoc, {new: true});
 
-        return cartDoc ? new ProductCart({
-            id: productInCart._id,
-            product: doc.product ? new Product(doc.product) : null,
-            quantity: productInCart.quantity
+        return newCartDoc ? new Cart({
+            id: newCartDoc._id,
+            products: newCartDoc.products.map(doc => new ProductCart({
+                id: doc._id,
+                product: doc.product,
+                quantity: doc.quantity                
+            }))
         }) : null;
     }
 

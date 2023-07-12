@@ -16,7 +16,7 @@ class CartsController {
         try {
             const manager = new CartManager();
             const result = await manager.addOne();
-            res.status(200).send({status: "success", message: "Cart has been created successfully", data: result});
+            res.status(201).send({status: "success", message: "Cart has been created successfully", data: result});
         } catch (err) {
             next(err);
         }
