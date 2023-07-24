@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import container from "../../container.js";
+import EmailManager from "./emailManager.js";
 
 import { createHash, generateResetToken, isValidPassword, transport } from "../../shared/index.js";
 
@@ -45,16 +46,13 @@ class SessionManager {
 
         const token = generateResetToken(user); 
 
-        await transport.sendMail({
-            from: process.env.SMTP_EMAIL,
-            to: email,
-            subject: "Cambio de contraseña",
-            html: 
-            `<div>
-                <h1>Has solicitado un cambio de contraseña</h1>
-                <br>
-                <p>Por favor ingresa al siguiente enlace: <a href="http://localhost:${process.env.NODE_PORT}/api/session/resetPassword?token=${token}">Link</a></p>
-            </div>`
+        await EmailManager.send({
+            templateFile: "forgotPasswordTemplate.hbs",
+            payload: {
+                email,
+                subject: "Cambio de contraseña",
+                token
+            }
         });
 
         return true;

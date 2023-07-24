@@ -7,6 +7,7 @@ import idSchema from "../validations/shared/idValidation.js";
 import cartAddOneSchema from "../validations/carts/cartAddOneValidation.js";
 import cartUpdateSchema from "../validations/carts/cartUpdateValidation.js";
 import cartUpdateOneSchema from "../validations/carts/cartUpdateOneValidation.js";
+import EmailManager from "./emailManager.js";
 
 class CartManager {
     #CartRepository = container.resolve("CartRepository");
@@ -65,21 +66,15 @@ class CartManager {
         }
 
         const code = nanoid(13);
-        
-        await transport.sendMail({
-            from: process.env.SMTP_EMAIL,
-            to: user,
-            subject: "Ticket de compra",
-            html: 
-            `<div>
-                <h1>¡Gracias por su compra!</h1>
-                <br>
-                <h3>Ticket:</h3>
-                <div>
-                    <p>code: ${code}</p>
-                    <p>total: $${total}</p>
-                </div>
-            </div>`
+
+        await EmailManager.send({
+            templateFile: "ticketBuyerTemplate.hbs",
+            payload: {
+                email: user,
+                subject: "Ticket de compra",
+                code,
+                total
+            }
         });
 
         return await this.#TicketRepository.save({
