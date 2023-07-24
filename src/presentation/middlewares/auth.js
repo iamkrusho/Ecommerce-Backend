@@ -8,7 +8,7 @@ function auth(req, res, next) {
 
     const token = authHeader.split(" ")[1];
 
-    jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, credentials) => {
+    jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, credentials) => {
         if (err) return res.status(403).send({status: "error", error: "Authentication error"});
 
         req.user = credentials.user;
