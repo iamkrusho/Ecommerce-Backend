@@ -1,8 +1,10 @@
 import { z } from "zod";
 
+import emailSchema from "../shared/emailValidation.js";
+
 const userLoginSchema = z.object({
-    email: z.string().email().toLowerCase().trim(),
-    password: z.string().trim()
+    email: emailSchema,
+    password: z.string().nonempty().trim()
 });
 
 export default userLoginSchema;

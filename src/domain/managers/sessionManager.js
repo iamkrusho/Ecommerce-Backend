@@ -4,8 +4,10 @@ import container from "../../container.js";
 
 import { createHash, generateResetToken, isValidPassword, transport } from "../../shared/index.js";
 
+import emailSchema from "../validations/shared/emailValidation.js";
 import userCreateSchema from "../validations/users/userCreateValidation.js";
 import userLoginSchema from "../validations/users/userLoginValidation..js";
+import userResetPasswordSchema from "../validations/users/userResetPasswordValidation.js";
 
 class SessionManager {
     #UserRepository = container.resolve("UserRepository");
@@ -35,7 +37,7 @@ class SessionManager {
     }
 
     async forgotPassword(data) {
-        const { email } = data;
+        const email = await emailSchema.parseAsync(data);
 
         const user = await this.#UserRepository.findByEmail(email);
 
@@ -59,7 +61,7 @@ class SessionManager {
     }
 
     async resetPassword(data) {
-        const { token, newPassword, confirmNewPassword } = data;
+        const { token, newPassword } = await userResetPasswordSchema.parseAsync(data);
 
         let uid;
 
@@ -68,8 +70,6 @@ class SessionManager {
     
             uid = credentials.user.id;
         });
-
-        if (newPassword !== confirmNewPassword) throw new Error("Passwords don't match");
 
         const userUpdated = await this.#UserRepository.update({ uid, update: { password: await createHash(newPassword) }});
         

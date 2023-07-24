@@ -29,8 +29,9 @@ class SessionController {
 
     static forgotPassword = async (req, res, next) => {
         try {
+            const { email } = req.body;
             const manager = new SessionManager();
-            await manager.forgotPassword(req.body);
+            await manager.forgotPassword(email);
             res.status(200).send({status: "success", message: "We have sent you a mail for reset your password"})
         } catch (err) {
             next(err);
