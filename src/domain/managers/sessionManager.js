@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import container from "../../container.js";
 import EmailManager from "./emailManager.js";
 
-import { createHash, generateResetToken, isValidPassword, transport } from "../../shared/index.js";
+import { createHash, generateResetToken, isValidPassword } from "../../shared/index.js";
 
 import emailSchema from "../validations/shared/emailValidation.js";
 import userCreateSchema from "../validations/users/userCreateValidation.js";
@@ -51,7 +51,8 @@ class SessionManager {
             payload: {
                 email,
                 subject: "Cambio de contraseña",
-                token
+                token,
+                serverPort: process.env.NODE_PORT
             }
         });
 

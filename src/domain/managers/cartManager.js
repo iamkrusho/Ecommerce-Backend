@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 
 import container from "../../container.js";
-import { transport } from "../../shared/index.js";
 
 import idSchema from "../validations/shared/idValidation.js";
 import cartAddOneSchema from "../validations/carts/cartAddOneValidation.js";

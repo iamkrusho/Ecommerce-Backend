@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import fs from "fs";
 import { resolve } from "path";
 
-import { smtp_config } from "../../config";
+import { smtp_config } from "../../config/index.js";
 
 class EmailManager {
     static async send(data) {

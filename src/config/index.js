@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 export const smtp_config = {
     service: "gmail",
     port: 587,
