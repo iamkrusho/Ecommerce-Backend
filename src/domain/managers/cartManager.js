@@ -76,6 +76,8 @@ class CartManager {
             }
         });
 
+        await this.#CartRepository.remove(cart.id);
+
         return await this.#TicketRepository.save({
             code,
             date: new Date(),
