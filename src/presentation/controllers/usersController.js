@@ -26,7 +26,7 @@ class UsersController {
         try {
             const manager = new UserManager();
             await manager.addOne(req.body);
-            res.status(200).send({status: 'success', message: 'User has been created successfully'})
+            res.status(201).send({status: 'success', message: 'User has been created successfully'})
         } catch(err) {
             next(err);
         }

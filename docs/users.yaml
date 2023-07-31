@@ -1,0 +1,69 @@
+paths:
+  /api/users/:
+    get: 
+      summary: Lista todos los usuarios
+      tags: 
+        - Users
+      responses: 
+        "200": 
+          description: Se obtienen los usuarios correctamente
+        "500": 
+          description: Error en el servidor
+    post:
+      summary: Crea un nuevo usuario
+      tags:
+        - Users
+      responses:
+        "201":
+          description: Usuario creado exitosamente
+        "401": 
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
+        "500":
+          description: Error en el servidor
+  /api/users/{uid}: 
+    get: 
+      summary: Obtiene un usuario por ID
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          type: string
+      tags: 
+        - Users
+      responses: 
+        "200":
+          description: Se obtiene el usuario correctamente
+        "404": 
+          description: No se pudo encontrar al usuario
+        "500": 
+          description: Error en el servidor
+    put:
+      summary: Actualiza un usuario existente por ID
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          type: string
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Usuario actualizado exitosamente
+        "500":
+          description: Error en el servidor
+    delete:
+      summary: Elimina un usuario por ID
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Usuario eliminado exitosamente
+        "500":
+          description: Error en el servidor
