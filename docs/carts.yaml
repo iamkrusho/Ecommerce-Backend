@@ -1,0 +1,134 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Lista todos los carritos de compra
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Se obtienen los carritos de compra correctamente
+        "500":
+          description: Error en el servidor
+    post:
+      summary: Crea un nuevo carrito de compra
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito de compra creado exitosamente
+        "500":
+          description: Error en el servidor
+  /api/carts/{cid}:
+    get:
+      summary: Obtiene un carrito de compra por ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Carrito de compra encontrado exitosamente
+        "500":
+          description: Error en el servidor
+    put:
+      summary: Actualiza un carrito de compra existente
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Carrito de compra actualizado exitosamente
+        "500":
+          description: Error en el servidor
+    delete:
+      summary: Elimina un carrito de compra por ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Carrito de compra eliminado exitosamente
+        "500":
+          description: Error en el servidor
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Agrega un producto a un carrito de compra
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto agregado al carrito exitosamente
+        "500":
+          description: Error en el servidor
+    put:
+      summary: Actualiza un producto dentro de un carrito de compra
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto dentro del carrito actualizado exitosamente
+        "500":
+          description: Error en el servidor
+    delete:
+      summary: Elimina un producto de un carrito de compra
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto dentro del carrito eliminado exitosamente
+        "500":
+          description: Error en el servidor
+  /api/carts/{cid}/checkout:
+    post:
+      summary: Realiza el proceso de pago para el carrito de compra
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Proceso de pago completado exitosamente
+        "500":
+          description: Error en el servidor
+          

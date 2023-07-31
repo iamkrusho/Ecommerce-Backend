@@ -1,0 +1,87 @@
+paths:
+  /api/products/:
+    get:
+      summary: Lista todos los productos
+      tags:
+        - Products
+      parameters:
+        - name: page
+          in: query
+          description: Número de página para la paginación
+          required: false
+          type: integer
+          format: int32
+        - name: limit
+          in: query
+          description: Cantidad máxima de resultados por página
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: quer
+          description: Formato de ordenamiento para resultados
+          required: false
+          type: string
+        - name: sort
+          in: query
+          description: Formato de búsqueda por types
+          required: false
+          type: object
+      responses:
+        "200":
+          description: Se obtienen los productos correctamente
+        "500":
+          description: Error en el servidor
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Products
+      responses:
+        "201":
+          description: Producto creado exitosamente
+        "500":
+          description: Error en el servidor
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto encontrado exitosamente
+        "500":
+          description: Error en el servidor
+    put:
+      summary: Actualiza un producto existente por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto actualizado exitosamente
+        "500":
+          description: Error en el servidor
+    delete:
+      summary: Elimina un producto por ID
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Producto eliminado exitosamente
+        "500":
+          description: Error en el servidor
+          
