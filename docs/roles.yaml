@@ -1,0 +1,51 @@
+paths:
+  /api/roles/:
+    get:
+      summary: Lista todos los roles
+      tags:
+        - Roles
+      responses:
+        "200":
+          description: Se obtienen los roles correctamente
+        "500":
+          description: Error en el servidor
+    post:
+      summary: Crea un nuevo rol
+      tags:
+        - Roles
+      security:
+        - BearerAuth: []
+      responses:
+        "201":
+          description: Rol creado exitosamente
+        "500":
+          description: Error en el servidor
+  /api/roles/{rid}:
+    get:
+      summary: Obtiene un rol por ID
+      tags:
+        - Roles
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Rol encontrado exitosamente
+        "500":
+          description: Error en el servidor
+    delete:
+      summary: Elimina un rol por ID
+      tags:
+        - Roles
+      parameters:
+        - name: rid
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Rol eliminado exitosamente
+        "500":
+          description: Error en el servidor
