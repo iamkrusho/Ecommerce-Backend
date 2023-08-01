@@ -1,4 +1,35 @@
 components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string 
+          description: ID del producto
+        title:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto
+        code:
+          type: string
+          description: Código del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Booleano que revela si el producto está disponible
+        stock:
+          type: number
+          description: Cantidad disponible del producto
+        category:
+          type: string
+          description: Categorýa del producto
+        thumbnails:
+          type: string
+          description: Imagen del producto
   securitySchemes:
     bearerAuth:
       type: http
