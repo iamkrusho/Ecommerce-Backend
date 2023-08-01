@@ -1,6 +1,6 @@
 components:
   schemas:
-    Cart: 
+    Cart:
       type: object
       properties:
         id:
@@ -9,7 +9,7 @@ components:
         products:
           type: array
           items:
-            $ref: '#/components/schemas/ProductInCart'
+            $ref: "#/components/schemas/ProductInCart"
           description:
     ProductInCart:
       type: object
@@ -158,4 +158,3 @@ paths:
           description: Proceso de pago completado exitosamente
         "500":
           description: Error en el servidor
-          

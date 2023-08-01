@@ -4,7 +4,7 @@ components:
       type: object
       properties:
         id:
-          type: string 
+          type: string
           description: ID del producto
         title:
           type: string
@@ -121,4 +121,3 @@ paths:
           description: Producto eliminado exitosamente
         "500":
           description: Error en el servidor
-          

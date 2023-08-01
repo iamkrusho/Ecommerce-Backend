@@ -5,7 +5,7 @@ components:
       properties:
         id:
           type: string
-          description: ID del rol 
+          description: ID del rol
         name:
           type: string
           description: Nombre del rol
@@ -19,26 +19,54 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  requestBodies:
+    rolBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nombre del rol
+        permissions:
+          type: array
+          items:
+            type: string
+          description: Permisos disponibles del rol
 paths:
   /api/roles/:
     get:
       summary: Lista todos los roles
       tags:
         - Roles
+      security:
+        - BearerAuth: []
       responses:
         "200":
           description: Se obtienen los roles correctamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     post:
       summary: Crea un nuevo rol
-      tags:
-        - Roles
       security:
         - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/rolBody"
+      tags:
+        - Roles
       responses:
         "201":
           description: Rol creado exitosamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
   /api/roles/{rid}:
@@ -46,27 +74,41 @@ paths:
       summary: Obtiene un rol por ID
       tags:
         - Roles
+      security:
+        - BearerAuth: []
       parameters:
         - name: rid
           in: path
           required: true
           type: string
+          description: ID del rol
       responses:
         "200":
           description: Rol encontrado exitosamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     delete:
       summary: Elimina un rol por ID
       tags:
         - Roles
+      security:
+        - BearerAuth: []
       parameters:
         - name: rid
           in: path
           required: true
           type: string
+          description: ID del rol
       responses:
         "200":
           description: Rol eliminado exitosamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
