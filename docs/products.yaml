@@ -1,3 +1,9 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   /api/products/:
     get:
@@ -18,11 +24,11 @@ paths:
           type: integer
           format: int32
         - name: sort
-          in: quer
+          in: query
           description: Formato de ordenamiento para resultados
           required: false
           type: string
-        - name: sort
+        - name: query
           in: query
           description: Formato de búsqueda por types
           required: false
