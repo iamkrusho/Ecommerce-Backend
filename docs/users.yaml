@@ -20,18 +20,43 @@ components:
           description: Edad del usuario
         role:
           type: string
-          description: Rol del usuario
+          description: ID del rol del usuario
         isAdmin:
           type: boolean
           description: Booleano que revela si el usuario es administrador
         password:
           type: string
-          description: Contraseña hasheada del usuario
+          description: Contraseña del usuario
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  requestBodies:
+    userBody:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Nombre del usuario
+        lastName:
+          type: string
+          description: Apellido del usuario
+        email:
+          type: string
+          description: Correo del usuario
+        age:
+          type: number
+          description: Edad del usuario
+        role:
+          type: string
+          description: ID del rol del usuario
+        isAdmin:
+          type: boolean
+          description: Booleano que revela si el usuario es administrador
+        password:
+          type: string
+          description: Contraseña del usuario
 paths:
   /api/users/:
     get:
@@ -43,12 +68,22 @@ paths:
       responses:
         "200":
           description: Se obtienen los usuarios correctamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     post:
       summary: Crea un nuevo usuario
       security:
         - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/userBody"
       tags:
         - Users
       responses:
@@ -78,6 +113,10 @@ paths:
           description: Se obtiene el usuario correctamente
         "404":
           description: No se pudo encontrar al usuario
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     put:
@@ -90,11 +129,21 @@ paths:
           required: true
           type: string
           description: ID del usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/userBody"
       tags:
         - Users
       responses:
         "200":
           description: Usuario actualizado exitosamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     delete:
@@ -112,5 +161,9 @@ paths:
       responses:
         "200":
           description: Usuario eliminado exitosamente
+        "401":
+          description: Sin autorización
+        "403":
+          description: Error de autenticación
         "500":
           description: Error en el servidor
