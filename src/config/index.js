@@ -1,5 +1,7 @@
-import { resolve } from "path";
+import pino from "pino";
 import dotenv from "dotenv";
+import { resolve } from "path";
+
 dotenv.config();
 
 export const smtp_config = {
@@ -21,3 +23,9 @@ export const swagger_config = {
     },
     apis: [resolve("docs/*.yaml")]
 } 
+
+export const logger_config = pino({
+    transport: {
+        target: 'pino-pretty'
+    }
+});

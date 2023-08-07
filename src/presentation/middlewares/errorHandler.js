@@ -1,5 +1,4 @@
 const errorHandler = (err, req, res, next) => {
-
     if (err?.message.includes("not found")) {
         return res.status(404).send({status: "error", error: err.message });
     } 
@@ -16,7 +15,9 @@ const errorHandler = (err, req, res, next) => {
         return res.status(400).send({status: "error", error: err.issues });
     }
 
-    res.status(500).send({status: "error", error: err?.message ?? "Error. Something went wrong"});
+    req.logger.error(err);
+
+    res.status(500).send({status: "error", error: "Error. Something went wrong"});
 }
 
 export default errorHandler;

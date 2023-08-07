@@ -10,6 +10,7 @@ import rolesRouter from "../routes/rolesRouter.js";
 import sessionRouter from "../routes/sessionRouter.js"
 
 import errorHandler from "../middlewares/errorHandler.js";
+import logger from "../middlewares/logger.js";
 import { swagger_config } from "../../config/index.js";
 
 class AppExpress {
@@ -18,8 +19,9 @@ class AppExpress {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(cookieParser());
+        this.app.use(logger);
     }
-
+    
     build() {
         this.app.use("/api/products", productsRouter);
         this.app.use("/api/carts", cartRouter);
