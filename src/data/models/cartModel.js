@@ -9,23 +9,23 @@ const CartSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: "products",
                 required: [true, "Product ID is required"],
-                index: true,
+                index: true
             },
             quantity: {
                 type: Schema.Types.Number,
                 required: [true, "Product quantity is required"]
-            },
+            }
         }],
-        default: [],
+        default: []
     }
 });
 
-CartSchema.pre("find", function () {
-    this.populate("products.product");
-});
-  
-CartSchema.pre("findOne", function () {
+CartSchema.pre("find", function() {
     this.populate("products.product");
 });
 
-export default model(cartsCollection, CartSchema);;
+CartSchema.pre("findOne", function() {
+    this.populate("products.product");
+});
+
+export default model(cartsCollection, CartSchema);

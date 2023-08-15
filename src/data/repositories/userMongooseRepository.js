@@ -14,7 +14,7 @@ class UserMongooseRepository {
             age: doc.age,
             role: doc.role ? new Role(doc.role) : null,
             isAdmin: doc.isAdmin,
-            password: doc.password,
+            password: doc.password
         })) : null;
     }
 
@@ -29,7 +29,7 @@ class UserMongooseRepository {
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password,
+            password: userDoc.password
         }) : null;
     }
 
@@ -44,7 +44,7 @@ class UserMongooseRepository {
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password,
+            password: userDoc.password
         }) : null;
     }
 
@@ -60,14 +60,14 @@ class UserMongooseRepository {
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password,
+            password: userDoc.password
         }) : null;
     }
 
     async update(data) {
         const { uid, update } = data;
 
-        const userDoc = await UserModel.findByIdAndUpdate(uid, update, {new: true});
+        const userDoc = await UserModel.findByIdAndUpdate(uid, update, { new: true });
 
         return userDoc ? new User({
             id: userDoc._id,
@@ -77,7 +77,7 @@ class UserMongooseRepository {
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password,
+            password: userDoc.password
         }) : null;
     }
 

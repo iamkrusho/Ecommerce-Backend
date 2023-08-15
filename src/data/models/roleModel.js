@@ -5,7 +5,7 @@ const rolesCollection = "roles";
 const RoleSchema = new Schema({
     name: {
         type: Schema.Types.String,
-        required: [true, "Role name is required"] 
+        required: [true, "Role name is required"]
     },
     permissions: [
         {

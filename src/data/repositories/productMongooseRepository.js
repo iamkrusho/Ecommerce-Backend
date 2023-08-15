@@ -3,9 +3,9 @@ import Product from "../../domain/entities/product.js";
 
 class ProductMongooseRepository {
     async find(data) {
-        const {query, page, limit, sort} = data;
+        const { query, page, limit, sort } = data;
 
-        const productsDocs = await ProductModel.paginate({$and: [{status: true}, query]}, {page, sort: {price: sort}, limit});
+        const productsDocs = await ProductModel.paginate({ $and: [{ status: true }, query] }, { page, sort: { price: sort }, limit });
 
         const { docs, ...rest } = productsDocs;
 
@@ -38,7 +38,7 @@ class ProductMongooseRepository {
             code: productDoc.code,
             status: productDoc.status,
             stock: productDoc.stock
-        }): null;
+        }) : null;
     }
 
     async insertOne(data) {
@@ -61,7 +61,7 @@ class ProductMongooseRepository {
     async update(data) {
         const { pid, update } = data;
 
-        const productDoc = await ProductModel.findByIdAndUpdate(pid, update, {new: true});
+        const productDoc = await ProductModel.findByIdAndUpdate(pid, update, { new: true });
 
         return productDoc ? new Product({
             id: productDoc._id,
@@ -77,9 +77,9 @@ class ProductMongooseRepository {
     }
 
     async delete(id) {
-        const productDoc = await ProductModel.findByIdAndUpdate(id, {status: false}, {new: true});
+        const productDoc = await ProductModel.findByIdAndUpdate(id, { status: false }, { new: true });
 
-        return productDoc ? true : null ;
+        return productDoc ? true : null;
     }
 }
 

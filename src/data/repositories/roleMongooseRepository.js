@@ -8,7 +8,7 @@ class RoleMongooseRepository {
         return rolesDocs > 0 ? rolesDocs.map((doc) => new Role({
             id: doc._id,
             name: doc.name,
-            permissions: doc.permissions,
+            permissions: doc.permissions
         })) : null;
     }
 
@@ -18,7 +18,7 @@ class RoleMongooseRepository {
         return roleDoc ? new Role({
             id: roleDoc._id,
             name: roleDoc.name,
-            permissions: roleDoc.permissions,
+            permissions: roleDoc.permissions
         }) : null;
     }
 
@@ -29,7 +29,7 @@ class RoleMongooseRepository {
         return roleDoc ? new Role({
             id: roleDoc._id,
             name: roleDoc.name,
-            permissions: roleDoc.permissions,
+            permissions: roleDoc.permissions
         }) : null;
     }
 

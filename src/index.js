@@ -4,7 +4,7 @@ dotenv.config();
 import AppFactory from "./presentation/factories/appFactory.js";
 import DbFactory from "./data/factories/dbFactory.js";
 
-void (async () => {
+void (async() => {
     const db = DbFactory.create(process.env.DB_ADAPTER);
     db.init(process.env.DB_URI);
 

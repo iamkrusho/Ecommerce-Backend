@@ -6,20 +6,20 @@ const productsCollection = "products";
 const ProductSchema = new Schema({
     title: {
         type: Schema.Types.String,
-        required: [true, 'Title is required']
+        required: [true, "Title is required"]
     },
     description: {
         type: Schema.Types.String,
-        required: [true, 'Description is required']
+        required: [true, "Description is required"]
     },
     code: {
         type: Schema.Types.String,
-        required: [true, 'Product code is required'],
-        unique: true,
+        required: [true, "Product code is required"],
+        unique: true
     },
     price: {
         type: Schema.Types.Number,
-        required: [true, 'Price is required']
+        required: [true, "Price is required"]
     },
     status: {
         type: Schema.Types.Boolean,
@@ -31,7 +31,7 @@ const ProductSchema = new Schema({
     },
     category: {
         type: Schema.Types.String,
-        required: [true, 'Category is required']
+        required: [true, "Category is required"]
     },
     thumbnails: {
         type: Schema.Types.String

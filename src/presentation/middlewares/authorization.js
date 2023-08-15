@@ -4,11 +4,11 @@ function authorization(permission) {
         const hasPermission = user.role?.permissions.includes(permission);
 
         if (!(user.isAdmin && hasPermission)) {
-            return res.status(401).send({ status: "error", message: "Not authorization" })
+            return res.status(401).send({ status: "error", message: "Not authorization" });
         }
 
         next();
-      }
+      };
 }
 
 export default authorization;

@@ -4,10 +4,10 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
 
 import productsRouter from "../routes/productsRouter.js";
-import cartRouter from "../routes/cartsRouter.js"
-import usersRouter from "../routes/usersRouter.js"
+import cartRouter from "../routes/cartsRouter.js";
+import usersRouter from "../routes/usersRouter.js";
 import rolesRouter from "../routes/rolesRouter.js";
-import sessionRouter from "../routes/sessionRouter.js"
+import sessionRouter from "../routes/sessionRouter.js";
 
 import errorHandler from "../middlewares/errorHandler.js";
 import logger from "../middlewares/logger.js";
@@ -21,7 +21,7 @@ class AppExpress {
         this.app.use(cookieParser());
         this.app.use(logger);
     }
-    
+
     build() {
         this.app.use("/api/products", productsRouter);
         this.app.use("/api/carts", cartRouter);

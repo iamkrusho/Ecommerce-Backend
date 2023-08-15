@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 describe("Testing Cart Endpoints", () => {
     let requester, db, cart, product;
 
-    beforeAll(async () => {
+    beforeAll(async() => {
         const server = await initServer();
         const application = server.app.callback();
         requester = supertest.agent(application);
@@ -13,12 +13,12 @@ describe("Testing Cart Endpoints", () => {
         product = (await requester.get("/api/products/?limit=1")).body.data.payload[0].id;
     });
 
-    afterAll(async () => {
+    afterAll(async() => {
         await db.close();
     });
 
     describe("Testing Cart Endpoints Success", () => {
-        test("Create cart /api/carts/", async () => {
+        test("Create cart /api/carts/", async() => {
             const result = await requester.post("/api/carts/").expect(201);
 
             const { _body: body } = result;
@@ -28,7 +28,7 @@ describe("Testing Cart Endpoints", () => {
             cart = body.data;
         });
 
-        test("Get cart /api/carts/:cid", async () => {
+        test("Get cart /api/carts/:cid", async() => {
             const result = await requester.get(`/api/carts/${cart.id}`).expect(200);
 
             const { _body: body } = result;
@@ -36,7 +36,7 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.id).toBe(cart.id);
         });
 
-        test("Add one product in cart /api/carts/:cid/product/:pid", async () => {
+        test("Add one product in cart /api/carts/:cid/product/:pid", async() => {
             const result = await requester.post(`/api/carts/${cart.id}/product/${product}`).expect(200);
 
             const { _body: body } = result;
@@ -45,7 +45,7 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products[0].quantity).toBe(1);
         });
 
-        test("Add same product in cart again /api/carts/:cid/product/:pid", async () => {
+        test("Add same product in cart again /api/carts/:cid/product/:pid", async() => {
             const result = await requester.post(`/api/carts/${cart.id}/product/${product}`).expect(200);
 
             const { _body: body } = result;
@@ -54,10 +54,10 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products[0].quantity).toBe(2);
         });
 
-        test("Update product in cart /api/carts/:cid/product/:pid", async () => {
+        test("Update product in cart /api/carts/:cid/product/:pid", async() => {
             const payload = {
                 quantity: 20
-            }
+            };
 
             const result = await requester.put(`/api/carts/${cart.id}/product/${product}`).send(payload).expect(200);
 
@@ -67,7 +67,7 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products[0].quantity).toBe(payload.quantity);
         });
 
-        test("Delete product in cart /api/carts/:cid/product/:pid", async () => {
+        test("Delete product in cart /api/carts/:cid/product/:pid", async() => {
             const result = await requester.delete(`/api/carts/${cart.id}/product/${product}`).expect(200);
 
             const { _body: body } = result;
@@ -76,7 +76,7 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products.length).toBe(0);
         });
 
-        test("Delete product in cart /api/carts/:cid/product/:pid", async () => {
+        test("Delete product in cart /api/carts/:cid/product/:pid", async() => {
             const result = await requester.delete(`/api/carts/${cart.id}/product/${product}`).expect(200);
 
             const { _body: body } = result;
@@ -85,15 +85,15 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products.length).toBe(0);
         });
 
-        test("Update cart /api/carts/:cid/", async () => {
+        test("Update cart /api/carts/:cid/", async() => {
             const payload = {
                 products: [
                     {
-                        product: product,
+                        product,
                         quantity: 50
                     }
                 ]
-            }
+            };
 
             const result = await requester.put(`/api/carts/${cart.id}`).send(payload).expect(200);
 
@@ -103,17 +103,17 @@ describe("Testing Cart Endpoints", () => {
             expect(body.data.products[0].quantity).toBe(50);
         });
 
-        test("Delete cart /api/carts/:cid/", async () => {
+        test("Delete cart /api/carts/:cid/", async() => {
             const result = await requester.delete(`/api/carts/${cart.id}`).expect(200);
 
             const { _body: body } = result;
 
             expect(body.message).toBe("Cart has been deleted successfully");
-        }); 
+        });
     });
 
     describe("Testing Cart Endpoints Fails", () => {
-        test("Trying to get nonexistent cart", async () => {
+        test("Trying to get nonexistent cart", async() => {
             const result = await requester.get(`/api/carts/${cart.id}`).expect(404);
 
             const { _body: body } = result;
@@ -123,7 +123,7 @@ describe("Testing Cart Endpoints", () => {
             cart = (await requester.post("/api/carts/")).body.data;
         });
 
-        test("Trying to add nonexistent product into the cart", async () => {
+        test("Trying to add nonexistent product into the cart", async() => {
             const result = await requester.post(`/api/carts/${cart.id}/product/${faker.string.numeric(24)}`).expect(404);
 
             const { _body: body } = result;
@@ -131,10 +131,10 @@ describe("Testing Cart Endpoints", () => {
             expect(body.error).toBe("Product not found");
         });
 
-        test("Trying to update nonexistent product inside the cart", async () => {
+        test("Trying to update nonexistent product inside the cart", async() => {
             const payload = {
                 quantity: 20
-            }
+            };
 
             const result = await requester.put(`/api/carts/${cart.id}/product/${faker.string.numeric(24)}`).send(payload).expect(404);
 
@@ -143,11 +143,11 @@ describe("Testing Cart Endpoints", () => {
             expect(body.error).toBe("Product not found");
         });
 
-        test("Trying to update product without valid params", async () => {
+        test("Trying to update product without valid params", async() => {
             await requester.put(`/api/carts/${cart.id}/product/${product}`).send({}).expect(400);
         });
 
-        test("Trying to delete nonexistent product inside the car", async () => {
+        test("Trying to delete nonexistent product inside the car", async() => {
             const result = await requester.delete(`/api/carts/${cart.id}/product/${faker.string.numeric(24)}`).expect(404);
 
             const { _body: body } = result;
@@ -155,7 +155,7 @@ describe("Testing Cart Endpoints", () => {
             expect(body.error).toBe("Product not found");
         });
 
-        test("Trying to delete nonexistent cart", async () => {
+        test("Trying to delete nonexistent cart", async() => {
             await requester.delete(`/api/carts/${cart.id}`);
 
             const result = await requester.delete(`/api/carts/${cart.id}`).expect(404);

@@ -6,7 +6,7 @@ const userResetPasswordSchema = z.object({
     confirmNewPassword: z.string().nonempty().trim()
 }).refine((data) => data.newPassword === data.confirmNewPassword, {
     message: "Passwords don't match",
-    path: ["confirmNewPassword"],
+    path: ["confirmNewPassword"]
 });
 
 export default userResetPasswordSchema;

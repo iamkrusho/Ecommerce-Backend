@@ -6,6 +6,6 @@ const logger = (req, res, next) => {
     req.logger.info(`${req.method} in ${req.url} - ${new Date().toLocaleTimeString()}`);
 
     next();
-}
+};
 
 export default logger;

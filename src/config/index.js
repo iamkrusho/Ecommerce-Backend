@@ -22,10 +22,10 @@ export const swagger_config = {
         }
     },
     apis: [resolve("docs/*.yaml")]
-} 
+};
 
 export const logger_config = pino({
     transport: {
-        target: 'pino-pretty'
+        target: "pino-pretty"
     }
 });
