@@ -25,7 +25,7 @@ class ProductsController {
     static post = async(req, res, next) => {
         try {
             const manager = new ProductManager();
-            await manager.addOne(req.body);
+            await manager.addOne({ product: req.body, user: req.user });
             res.status(201).send({ status: "success", message: "Product has been created successfully" });
         } catch (err) {
             next(err);
@@ -46,7 +46,7 @@ class ProductsController {
         try {
             const { pid } = req.params;
             const manager = new ProductManager();
-            await manager.deleteOne(pid);
+            await manager.deleteOne({ id: pid, user: req.user });
             res.status(200).send({ status: "success", message: "Product has been deleted successfully" });
         } catch (err) {
             next(err);

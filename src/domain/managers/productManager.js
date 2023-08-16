@@ -31,9 +31,10 @@ class ProductManager {
     }
 
     async addOne(data) {
-        const product = await productCreateSchema.parseAsync(data);
+        const { user } = data;
+        const product = await productCreateSchema.parseAsync(data.product);
 
-        return await this.#ProductRepository.insertOne({ ...product, code: nanoid(13) });
+        return await this.#ProductRepository.insertOne({ ...product, code: nanoid(13), owner: user.isAdmin ? "admin" : user.email });
     }
 
     async updateOne(data) {
@@ -46,12 +47,17 @@ class ProductManager {
         return result;
     }
 
-    async deleteOne(id) {
-        const pid = await idSchema.parseAsync(id);
+    async deleteOne(data) {
+        const { user } = data;
+        const pid = await idSchema.parseAsync(data.id);
+
+        const product = await this.#ProductRepository.findOne(pid);
+
+        if (!product) throw new Error("Product not found");
+
+        if (product.owner !== "admin" && user.email !== product.owner) throw new Error("Product owner and user credentials don't match");
 
         const result = await this.#ProductRepository.delete(pid);
-
-        if (!result) throw new Error("Product not found");
 
         return result;
     }

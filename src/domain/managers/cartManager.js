@@ -55,6 +55,8 @@ class CartManager {
         let total = 0;
 
         for (const productInCart of cart.products) {
+            if (productInCart.product.owner === user) throw new Error(`You can't add your own product: ${productInCart.product.title} - ${productInCart.product.code}`);
+
             const newStock = productInCart.product.stock - productInCart.quantity;
 
             if (newStock < 0) throw new Error(`The product ${productInCart.product.title} - ${productInCart.product.code} doesn't have stock`);
