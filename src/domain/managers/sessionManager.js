@@ -20,7 +20,7 @@ class SessionManager {
 
         if (exits) throw new Error("User already exist");
 
-        return await this.#UserRepository.insertOne({...user, password: await createHash(user.password)});
+        return await this.#UserRepository.insertOne({ ...user, password: await createHash(user.password) });
     }
 
     async validate(data) {
@@ -31,8 +31,8 @@ class SessionManager {
         if (!user) throw new Error("Incorrect user");
 
         const validation = await isValidPassword(user, password);
-        
-        if (!validation) throw new Error("Incorrect password"); 
+
+        if (!validation) throw new Error("Incorrect password");
 
         return user;
     }
@@ -44,7 +44,7 @@ class SessionManager {
 
         if (!user) throw new Error("User not found");
 
-        const token = generateResetToken(user); 
+        const token = generateResetToken(user);
 
         await EmailManager.send({
             templateFile: "forgotPasswordTemplate.hbs",
@@ -66,16 +66,16 @@ class SessionManager {
 
         jwt.verify(token, process.env.JWT_RESET_KEY, (err, credentials) => {
             if (err) throw new Error("Your token has expired");
-    
+
             uid = credentials.user.id;
         });
 
-        const userUpdated = await this.#UserRepository.update({ uid, update: { password: await createHash(newPassword) }});
-        
+        const userUpdated = await this.#UserRepository.update({ uid, update: { password: await createHash(newPassword) } });
+
         if (!userUpdated) throw new Error("User not found");
 
         return true;
-    } 
+    }
 }
 
 export default SessionManager;

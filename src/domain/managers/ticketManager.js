@@ -14,7 +14,7 @@ class TicketManager {
     }
 
     async create(data) {
-        return await this.#TicketRepository.save({...data, code: nanoid(13)})
+        return await this.#TicketRepository.save({ ...data, code: nanoid(13) });
     }
 
     async deleteOne(id) {

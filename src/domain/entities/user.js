@@ -6,6 +6,7 @@ class User {
         this.email = props.email;
         this.age = props.age;
         this.role = props.role;
+        this.isPremium = props.isPremium;
         this.isAdmin = props.isAdmin;
         this.password = props.password;
     }

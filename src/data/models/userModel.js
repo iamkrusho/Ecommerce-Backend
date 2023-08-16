@@ -26,6 +26,10 @@ const UserSchema = new Schema({
         index: true,
         default: null
     },
+    isPremium: {
+        type: Schema.Types.Boolean,
+        default: false
+    },
     isAdmin: {
         type: Schema.Types.Boolean,
         default: false

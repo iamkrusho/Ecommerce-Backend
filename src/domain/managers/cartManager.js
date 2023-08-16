@@ -16,7 +16,7 @@ class CartManager {
     async getOne(id) {
         const cid = await idSchema.parseAsync(id);
 
-        const result = await this.#CartRepository.findOne(cid)
+        const result = await this.#CartRepository.findOne(cid);
 
         if (!result) throw new Error("Cart not found");
 
@@ -42,7 +42,7 @@ class CartManager {
     }
 
     async createCheckout(data) {
-        const { id , user} = data;
+        const { id, user } = data;
 
         const cid = await idSchema.parseAsync(id);
 
@@ -53,14 +53,14 @@ class CartManager {
         if (!(cart.products.length > 0)) throw new Error("Cart is empty");
 
         let total = 0;
-        
+
         for (const productInCart of cart.products) {
             const newStock = productInCart.product.stock - productInCart.quantity;
-            
+
             if (newStock < 0) throw new Error(`The product ${productInCart.product.title} - ${productInCart.product.code} doesn't have stock`);
-            
+
             total += productInCart.product.price * productInCart.quantity;
-            
+
             await this.#ProductRepository.update(productInCart.product.id, { stock: newStock, status: newStock > 0 ? true : false });
         }
 
@@ -87,7 +87,7 @@ class CartManager {
     }
 
     async updateOne(data) {
-        const { cid, products: update} = await cartUpdateSchema.parseAsync(data);
+        const { cid, products: update } = await cartUpdateSchema.parseAsync(data);
 
         const result = await this.#CartRepository.update({ cid, update });
 

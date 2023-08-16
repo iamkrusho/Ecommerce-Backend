@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import supertest from "supertest";
 
 describe("Testing Session Endpoints", () => {
-    let requester, db, jwt = "", payload = {};
+    let requester; let db; let jwt = ""; let payload = {};
 
     beforeAll(async() => {
         const server = await initServer();

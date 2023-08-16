@@ -13,6 +13,7 @@ class UserMongooseRepository {
             email: doc.email,
             age: doc.age,
             role: doc.role ? new Role(doc.role) : null,
+            isPremium: doc.isPremium,
             isAdmin: doc.isAdmin,
             password: doc.password
         })) : null;
@@ -28,6 +29,7 @@ class UserMongooseRepository {
             email: userDoc.email,
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
+            isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password
         }) : null;
@@ -43,6 +45,7 @@ class UserMongooseRepository {
             email: userDoc.email,
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
+            isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password
         }) : null;
@@ -59,6 +62,7 @@ class UserMongooseRepository {
             email: userDoc.email,
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
+            isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password
         }) : null;
@@ -76,6 +80,7 @@ class UserMongooseRepository {
             email: userDoc.email,
             age: userDoc.age,
             role: userDoc.role ? new Role(userDoc.role) : null,
+            isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password
         }) : null;

@@ -33,6 +33,10 @@ const ProductSchema = new Schema({
         type: Schema.Types.String,
         required: [true, "Category is required"]
     },
+    owner: {
+        type: Schema.Types.String,
+        default: "admin"
+    },
     thumbnails: {
         type: Schema.Types.String
     }

@@ -33,14 +33,24 @@ class UserManager {
         return result;
     }
 
+    async changePremium(id) {
+        const user = await this.#UserRepository.findOne(id);
+
+        if (!user) throw new Error("User not found");
+
+        const result = await this.#UserRepository.update({ uid: id, update: { isPremium: !user.isPremium } });
+
+        return true;
+    }
+
     async addOne(data) {
         const user = await userCreateSchema.parseAsync(data);
-        
+
         return await this.#UserRepository.insertOne(user);
     }
-    
+
     async updateOne(data) {
-        const { uid, ...update} = await userUpdateSchema.parseAsync(data);
+        const { uid, ...update } = await userUpdateSchema.parseAsync(data);
 
         return await this.#UserRepository.update({ uid, update });
     }

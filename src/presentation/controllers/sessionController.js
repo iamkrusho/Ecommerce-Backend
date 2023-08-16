@@ -3,58 +3,58 @@ import SessionManager from "../../domain/managers/sessionManager.js";
 import { generateAccessToken } from "../../shared/index.js";
 
 class SessionController {
-    static signup = async (req, res, next) => {
+    static signup = async(req, res, next) => {
         try {
             const manager = new SessionManager();
             await manager.create(req.body);
-            res.status(201).send({status: 'success', message: "You have successfully registered"});
-        } catch(err) {
+            res.status(201).send({ status: "success", message: "You have successfully registered" });
+        } catch (err) {
             next(err);
         }
-    }
+    };
 
-    static login = async (req, res, next) => {
+    static login = async(req, res, next) => {
         try {
             const manager = new SessionManager();
             const user = await manager.validate(req.body);
             const token = generateAccessToken(user);
-            res.cookie('accessToken', token, {
-                maxAge: 60*60*1000,
+            res.cookie("accessToken", token, {
+                maxAge: 60 * 60 * 1000,
                 httpOnly: true
-            }).send({status: "success", message: "You have successfully logged in", token});
-        } catch(err) {
+            }).send({ status: "success", message: "You have successfully logged in", token });
+        } catch (err) {
             next(err);
         }
-    }
+    };
 
-    static forgotPassword = async (req, res, next) => {
+    static forgotPassword = async(req, res, next) => {
         try {
             const { email } = req.body;
             const manager = new SessionManager();
             await manager.forgotPassword(email);
-            res.status(200).send({status: "success", message: "We have sent you a mail for reset your password"})
+            res.status(200).send({ status: "success", message: "We have sent you a mail for reset your password" });
         } catch (err) {
             next(err);
         }
-    }
+    };
 
-    static resetPassword = async (req, res, next) => {
+    static resetPassword = async(req, res, next) => {
         try {
             const manager = new SessionManager();
-            await manager.resetPassword({...req.query, ...req.body });
-            res.status(200).send({ status: "success", message: "Your password has been modified successfully"});
+            await manager.resetPassword({ ...req.query, ...req.body });
+            res.status(200).send({ status: "success", message: "Your password has been modified successfully" });
         } catch (err) {
             next(err);
         }
-    }
+    };
 
-    static current = async (req, res, next) => {
+    static current = async(req, res, next) => {
         try {
-            res.status(200).send({status: "success", data: req.user});
+            res.status(200).send({ status: "success", data: req.user });
         } catch (err) {
             next(err);
         }
-    }
+    };
 }
 
 export default SessionController;

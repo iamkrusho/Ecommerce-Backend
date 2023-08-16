@@ -17,7 +17,7 @@ class ProductManager {
 
         if (!result) throw new Error("Products not found");
 
-        return result; 
+        return result;
     }
 
     async getOne(id) {
@@ -33,11 +33,11 @@ class ProductManager {
     async addOne(data) {
         const product = await productCreateSchema.parseAsync(data);
 
-        return await this.#ProductRepository.insertOne({...product, code: nanoid(13)});
+        return await this.#ProductRepository.insertOne({ ...product, code: nanoid(13) });
     }
 
     async updateOne(data) {
-        const { pid, ...update} = await productUpdateSchema.parseAsync(data);
+        const { pid, ...update } = await productUpdateSchema.parseAsync(data);
 
         const result = await this.#ProductRepository.update({ pid, update });
 
