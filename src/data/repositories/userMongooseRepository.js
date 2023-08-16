@@ -15,7 +15,8 @@ class UserMongooseRepository {
             role: doc.role ? new Role(doc.role) : null,
             isPremium: doc.isPremium,
             isAdmin: doc.isAdmin,
-            password: doc.password
+            password: doc.password,
+            last_connection: doc.last_connection
         })) : null;
     }
 
@@ -31,7 +32,8 @@ class UserMongooseRepository {
             role: userDoc.role ? new Role(userDoc.role) : null,
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password
+            password: userDoc.password,
+            last_connection: userDoc.last_connection
         }) : null;
     }
 
@@ -47,7 +49,8 @@ class UserMongooseRepository {
             role: userDoc.role ? new Role(userDoc.role) : null,
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password
+            password: userDoc.password,
+            last_connection: userDoc.last_connection
         }) : null;
     }
 
@@ -64,7 +67,8 @@ class UserMongooseRepository {
             role: userDoc.role ? new Role(userDoc.role) : null,
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password
+            password: userDoc.password,
+            last_connection: userDoc.last_connection
         }) : null;
     }
 
@@ -82,7 +86,8 @@ class UserMongooseRepository {
             role: userDoc.role ? new Role(userDoc.role) : null,
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
-            password: userDoc.password
+            password: userDoc.password,
+            last_connection: userDoc.last_connection
         }) : null;
     }
 

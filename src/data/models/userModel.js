@@ -37,6 +37,11 @@ const UserSchema = new Schema({
     password: {
         type: Schema.Types.String,
         required: [true, "Password is required"]
+    },
+    last_connection: {
+        type: Schema.Types.Date,
+        required: [true, "Last connection is required"],
+        default: Date.now()
     }
 });
 

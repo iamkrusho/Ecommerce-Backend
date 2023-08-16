@@ -76,6 +76,18 @@ class SessionManager {
 
         return true;
     }
+
+    async changeLastConnection(data) {
+        const email = await emailSchema.parseAsync(data);
+
+        const user = await this.#UserRepository.findByEmail(email);
+
+        if (!user) throw new Error("Incorrect user");
+
+        await this.#UserRepository.update({ uid: user.id, update: { last_connection: Date.now() } });
+
+        return true;
+    }
 }
 
 export default SessionManager;

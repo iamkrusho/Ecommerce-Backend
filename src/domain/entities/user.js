@@ -9,6 +9,7 @@ class User {
         this.isPremium = props.isPremium;
         this.isAdmin = props.isAdmin;
         this.password = props.password;
+        this.last_connection = props.last_connection;
     }
 }
 
