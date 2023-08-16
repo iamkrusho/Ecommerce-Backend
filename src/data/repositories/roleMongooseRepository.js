@@ -22,6 +22,16 @@ class RoleMongooseRepository {
         }) : null;
     }
 
+    async findOneByName(data) {
+        const roleDoc = await RoleModel.findOne({ name: data });
+
+        return roleDoc ? new Role({
+            id: roleDoc._id,
+            name: roleDoc.name,
+            permissions: roleDoc.permissions
+        }) : null;
+    }
+
     async insertOne(data) {
         const newRoleDoc = new RoleModel(data);
         const roleDoc = await newRoleDoc.save();

@@ -24,6 +24,14 @@ class RoleManager {
         return result;
     }
 
+    async getOneByName(data) {
+        const result = await this.#RoleRepository.findOneByName(data);
+
+        if (!result) throw new Error("Role not found");
+
+        return result;
+    }
+
     async addOne(data) {
         const role = await roleCreateSchema.parseAsync(data);
 

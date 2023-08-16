@@ -6,6 +6,7 @@ import userUpdateSchema from "../validations/users/userUpdateValidation.js";
 
 class UserManager {
     #UserRepository = container.resolve("UserRepository");
+    #RoleRepository = container.resolve("RoleRepository");
 
     async getAll() {
         const result = await this.#UserRepository.find();
@@ -38,7 +39,11 @@ class UserManager {
 
         if (!user) throw new Error("User not found");
 
-        const result = await this.#UserRepository.update({ uid: id, update: { isPremium: !user.isPremium } });
+        const role = this.#RoleRepository.findOneByName("Premium");
+
+        if (!role) throw new Error("Role not found");
+
+        const result = await this.#UserRepository.update({ uid: id, update: { role: role.id, isPremium: !user.isPremium } });
 
         return true;
     }
