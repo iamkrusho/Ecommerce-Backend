@@ -38,6 +38,17 @@ const UserSchema = new Schema({
         type: Schema.Types.String,
         required: [true, "Password is required"]
     },
+    documents: {
+        type: [{
+            name: {
+                type: Schema.Types.String
+            },
+            reference: {
+                type: Schema.Types.String
+            }
+        }],
+        default: null
+    },
     last_connection: {
         type: Schema.Types.Date,
         required: [true, "Last connection is required"],
