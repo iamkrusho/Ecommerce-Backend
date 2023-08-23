@@ -48,6 +48,23 @@ class UserManager {
         return true;
     }
 
+    async addDocuments(data) {
+        const { id, files } = data;
+
+        if (!files) throw new Error("The files wasn't provided");
+
+        const user = await this.#UserRepository.update(
+            {
+                uid: id,
+                update: { documents: files.map((file) => ({ name: file.filename, reference: `public/images/${file.fieldname}` })) }
+            }
+        );
+
+        if (!user) throw new Error("User not found");
+
+        return true;
+    }
+
     async addOne(data) {
         const user = await userCreateSchema.parseAsync(data);
 

@@ -33,6 +33,17 @@ class UsersController {
         }
     };
 
+    static insertDocuments = async(req, res, next) => {
+        try {
+            const { uid } = req.params;
+            const manager = new UserManager();
+            await manager.addDocuments({ id: uid, files: req.files });
+            res.status(200).send({ status: "success", message: "The documents has been added successfully" });
+        } catch (err) {
+            next(err);
+        }
+    };
+
     static post = async(req, res, next) => {
         try {
             const manager = new UserManager();
