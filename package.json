@@ -12,7 +12,7 @@
     "lint": "eslint -c .eslintrc ./src"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ignacio Kruchowski",
   "license": "ISC",
   "dependencies": {
     "awilix": "^8.0.1",
