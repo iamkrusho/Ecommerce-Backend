@@ -30,13 +30,21 @@ class CartManager {
     async addProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        const productExist = await this.#ProductRepository.findOne(pid);
+        const product = await this.#ProductRepository.findOne(pid);
 
-        if (!productExist) throw new Error("Product not found");
+        if (!product) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.insertOne({ cid, pid });
+        const cart = await this.#CartRepository.findOne(cid);
 
-        if (!result) throw new Error("Cart not found");
+        if (!cart) throw new Error("Cart not found");
+
+        const productInCart = cart.products.find((item) => item.product.id === pid);
+
+        productInCart ? productInCart.quantity += 1 : cart.products = [...cart.products, { product: pid, quantity: 1 }];
+
+        const newCart = cart.products.map(item => ({ product: item.product.id ?? item.product, quantity: item.quantity }));
+
+        const result = await this.#CartRepository.update({ cid, update: { products: newCart } });
 
         return result;
     }
@@ -99,15 +107,25 @@ class CartManager {
     }
 
     async updateProduct(data) {
-        const { cid, pid, quantity: update } = await cartUpdateOneSchema.parseAsync(data);
+        const { cid, pid, quantity: newQuantity } = await cartUpdateOneSchema.parseAsync(data);
 
-        const productExist = await this.#ProductRepository.findOne(pid);
+        const product = await this.#ProductRepository.findOne(pid);
 
-        if (!productExist) throw new Error("Product not found");
+        if (!product) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.updateOne({ cid, pid, update });
+        const cart = await this.#CartRepository.findOne(cid);
 
-        if (!result) throw new Error("Cart not found");
+        if (!cart) throw new Error("Cart not found");
+
+        const productInCart = cart.products.find((item) => item.product.id === pid);
+
+        if (!productInCart) throw new Error("Product not found in cart");
+
+        productInCart.quantity = newQuantity;
+
+        const newCart = cart.products.map(item => ({ product: item.product.id ?? item.product, quantity: item.quantity }));
+
+        const result = await this.#CartRepository.update({ cid, update: { products: newCart } });
 
         return result;
     }
