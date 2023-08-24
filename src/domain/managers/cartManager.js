@@ -143,13 +143,21 @@ class CartManager {
     async deleteProduct(data) {
         const { cid, pid } = await cartAddOneSchema.parseAsync(data);
 
-        const productExist = await this.#ProductRepository.findOne(pid);
+        const product = await this.#ProductRepository.findOne(pid);
 
-        if (!productExist) throw new Error("Product not found");
+        if (!product) throw new Error("Product not found");
 
-        const result = await this.#CartRepository.removeOne({ cid, pid });
+        const cart = await this.#CartRepository.findOne(cid);
 
-        if (!result) throw new Error("Cart not found");
+        if (!cart) throw new Error("Cart not found");
+
+        const filter = cart.products.filter(item => item.product.id !== pid);
+
+        cart.products = filter;
+
+        const newCart = cart.products.map(item => ({ product: item.product.id ?? item.product, quantity: item.quantity }));
+
+        const result = await this.#CartRepository.update({ cid, update: { products: newCart } });
 
         return result;
     }

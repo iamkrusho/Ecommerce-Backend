@@ -44,28 +44,6 @@ class CartMongooseRepository {
 
         return cartDoc ? true : null;
     }
-
-    async removeOne(data) {
-        const { cid, pid } = data;
-
-        const cartDoc = await CartModel.findById(cid);
-
-        if (!cartDoc) return null;
-
-        const filter = cartDoc.products.filter(item => item.product.id !== pid);
-        cartDoc.products = filter;
-
-        const newCartDoc = await CartModel.findByIdAndUpdate(cid, cartDoc, { new: true });
-
-        return newCartDoc ? new Cart({
-            id: cartDoc._id,
-            products: cartDoc.products.map(doc => new ProductCart({
-                id: doc._id,
-                product: doc.product ? new Product(doc.product) : null,
-                quantity: doc.quantity
-            }))
-        }) : null;
-    }
 }
 
 export default CartMongooseRepository;
