@@ -4,7 +4,7 @@ class SessionController {
     static signup = async(req, res, next) => {
         try {
             const manager = new SessionManager();
-            await manager.create(req.body);
+            await manager.signup(req.body);
             res.status(201).send({ status: "success", message: "You have successfully registered" });
         } catch (err) {
             next(err);
