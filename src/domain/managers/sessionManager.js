@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import container from "../../container.js";
 import EmailManager from "./emailManager.js";
 
-import { createHash, generateResetToken, isValidPassword } from "../../shared/index.js";
+import { createHash, generateResetToken, isValidPassword, generateAccessToken, generateLogoutToken } from "../../shared/index.js";
 
 import emailSchema from "../validations/shared/emailValidation.js";
 import userCreateSchema from "../validations/users/userCreateValidation.js";
@@ -13,7 +13,7 @@ import userResetPasswordSchema from "../validations/users/userResetPasswordValid
 class SessionManager {
     #UserRepository = container.resolve("UserRepository");
 
-    async create(data) {
+    async signup(data) {
         const user = await userCreateSchema.parseAsync(data);
 
         const exits = await this.#UserRepository.findByEmail(user.email);
@@ -23,7 +23,7 @@ class SessionManager {
         return await this.#UserRepository.insertOne({ ...user, password: await createHash(user.password) });
     }
 
-    async validate(data) {
+    async login(data) {
         const { email, password } = await userLoginSchema.parseAsync(data);
 
         const user = await this.#UserRepository.findByEmail(email);
@@ -34,7 +34,9 @@ class SessionManager {
 
         if (!validation) throw new Error("Incorrect password");
 
-        return user;
+        await this.#UserRepository.update({ uid: user.id, update: { last_connection: Date.now() } });
+
+        return generateAccessToken(user);
     }
 
     async forgotPassword(data) {
@@ -77,7 +79,7 @@ class SessionManager {
         return true;
     }
 
-    async changeLastConnection(data) {
+    async logout(data) {
         const email = await emailSchema.parseAsync(data);
 
         const user = await this.#UserRepository.findByEmail(email);
@@ -86,7 +88,7 @@ class SessionManager {
 
         await this.#UserRepository.update({ uid: user.id, update: { last_connection: Date.now() } });
 
-        return true;
+        return generateLogoutToken();
     }
 }
 

@@ -1,7 +1,5 @@
 import SessionManager from "../../domain/managers/sessionManager.js";
 
-import { generateAccessToken, generateLogoutToken } from "../../shared/index.js";
-
 class SessionController {
     static signup = async(req, res, next) => {
         try {
@@ -16,13 +14,11 @@ class SessionController {
     static login = async(req, res, next) => {
         try {
             const manager = new SessionManager();
-            const user = await manager.validate(req.body);
-            await manager.changeLastConnection(user.email);
-            const token = generateAccessToken(user);
-            res.cookie("accessToken", token, {
+            const accessToken = await manager.login(req.body);
+            res.cookie("accessToken", accessToken, {
                 maxAge: 60 * 60 * 1000,
                 httpOnly: true
-            }).send({ status: "success", message: "You have successfully logged in", token });
+            }).send({ status: "success", message: "You have successfully logged in", accessToken });
         } catch (err) {
             next(err);
         }
@@ -31,13 +27,12 @@ class SessionController {
     static logout = async(req, res, next) => {
         try {
             const manager = new SessionManager();
-            await manager.changeLastConnection(req.user.email);
+            const logoutToken = await manager.logout(req.user.email);
             req.user = undefined;
-            const token = generateLogoutToken();
             res.clearCookie("accessToken", {
                 maxAge: 60 * 60 * 1000,
                 httpOnly: true
-            }).send({ status: "success", message: "You have successfully logged out", token });
+            }).send({ status: "success", message: "You have successfully logged out", logoutToken });
         } catch (err) {
             next(err);
         }
