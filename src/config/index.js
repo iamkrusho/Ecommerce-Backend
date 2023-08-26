@@ -21,11 +21,12 @@ export const swagger_config = {
             description: "This is the documentation of the API created for one ecommerce"
         }
     },
-    apis: [resolve("docs/*.yaml")]
+    apis: [resolve("docs/*/*.yaml")]
 };
 
 export const logger_config = pino({
     transport: {
+        level: "debug",
         target: "pino-pretty"
     }
 });

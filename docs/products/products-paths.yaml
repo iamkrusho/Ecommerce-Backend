@@ -1,40 +1,3 @@
-components:
-  schemas:
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID del producto
-        title:
-          type: string
-          description: Nombre del producto
-        description:
-          type: string
-          description: Descripción del producto
-        code:
-          type: string
-          description: Código del producto
-        price:
-          type: number
-          description: Precio del producto
-        status:
-          type: boolean
-          description: Booleano que revela si el producto está disponible
-        stock:
-          type: number
-          description: Cantidad disponible del producto
-        category:
-          type: string
-          description: Categorýa del producto
-        thumbnails:
-          type: string
-          description: Imagen del producto
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
 paths:
   /api/products/:
     get:
@@ -46,19 +9,18 @@ paths:
           in: query
           description: Número de página para la paginación
           required: false
-          type: integer
-          format: int32
+          type: number
         - name: limit
           in: query
           description: Cantidad máxima de resultados por página
           required: false
-          type: integer
-          format: int32
+          type: number
         - name: sort
           in: query
           description: Formato de ordenamiento para resultados
           required: false
           type: string
+          enum: [asc, desc]
         - name: query
           in: query
           description: Formato de búsqueda por types
@@ -71,6 +33,8 @@ paths:
           description: Error en el servidor
     post:
       summary: Crea un nuevo producto
+      security:
+        - bearerAuth: []
       tags:
         - Products
       responses:
@@ -95,6 +59,8 @@ paths:
           description: Error en el servidor
     put:
       summary: Actualiza un producto existente por ID
+      security:
+        - bearerAuth: []
       tags:
         - Products
       parameters:
@@ -109,6 +75,8 @@ paths:
           description: Error en el servidor
     delete:
       summary: Elimina un producto por ID
+      security:
+        - bearerAuth: []
       tags:
         - Products
       parameters:

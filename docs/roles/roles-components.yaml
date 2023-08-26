@@ -1,0 +1,33 @@
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del rol
+        name:
+          type: string
+          description: Nombre del rol
+        permissions:
+          type: array
+          items:
+            type: string
+          description: Permisos disponibles del rol
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  requestBodies:
+    rolBody:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nombre del rol
+        permissions:
+          type: array
+          items:
+            type: string
+          description: Permisos disponibles del rol

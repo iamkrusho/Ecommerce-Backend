@@ -1,30 +1,3 @@
-components:
-  schemas:
-    Cart:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID del carrito
-        products:
-          type: array
-          items:
-            $ref: "#/components/schemas/ProductInCart"
-          description:
-    ProductInCart:
-      type: object
-      properties:
-        product:
-          type: string
-          description: ID del producto
-        quantity:
-          type: number
-          description: Cantidad seleccionada del producto
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
 paths:
   /api/carts/:
     get:
@@ -146,6 +119,8 @@ paths:
   /api/carts/{cid}/checkout:
     post:
       summary: Realiza el proceso de pago para el carrito de compra
+      security:
+        - bearerAuth: []
       tags:
         - Carts
       parameters:
