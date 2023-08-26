@@ -17,7 +17,7 @@ const errorHandler = (err, req, res, next) => {
 
     req.logger.error(err);
 
-    res.status(500).send({ status: "error", error: "Error. Something went wrong" });
+    res.status(500).send({ status: "error", error: err.message ?? "Error. Something went wrong" });
 };
 
 export default errorHandler;

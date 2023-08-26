@@ -3,8 +3,11 @@ import { Router } from "express";
 import CartsController from "../controllers/cartsController.js";
 
 import auth from "../middlewares/auth.js";
+import authorization from "../middlewares/authorization.js";
 
 const cartRouter = Router();
+
+cartRouter.get("/", auth, authorization("cart:list"), CartsController.get);
 
 cartRouter.get("/:cid", CartsController.getOne);
 

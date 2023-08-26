@@ -13,6 +13,14 @@ class CartManager {
     #ProductRepository = container.resolve("ProductRepository");
     #TicketRepository = container.resolve("TicketRepository");
 
+    async getAll() {
+        const result = await this.#CartRepository.find();
+
+        if (!result) throw new Error("Carts not found");
+
+        return result;
+    }
+
     async getOne(id) {
         const cid = await idSchema.parseAsync(id);
 

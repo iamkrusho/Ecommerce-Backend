@@ -1,6 +1,16 @@
 import CartManager from "../../domain/managers/cartManager.js";
 
 class CartsController {
+    static get = async(req, res, next) => {
+        try {
+            const manager = new CartManager();
+            const result = await manager.getAll();
+            res.status(200).send({ status: "success", data: result });
+        } catch (err) {
+            next(err);
+        }
+    };
+
     static getOne = async(req, res, next) => {
         try {
             const { cid } = req.params;

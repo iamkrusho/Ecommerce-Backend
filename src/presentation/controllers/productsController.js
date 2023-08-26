@@ -16,7 +16,7 @@ class ProductsController {
             const { pid } = req.params;
             const manager = new ProductManager();
             const result = await manager.getOne(pid);
-            res.status(200).send({ data: result });
+            res.status(200).send({ status: "success", data: result });
         } catch (err) {
             next(err);
         }

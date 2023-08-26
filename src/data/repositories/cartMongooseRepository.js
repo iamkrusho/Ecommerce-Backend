@@ -5,6 +5,19 @@ import ProductCart from "../../domain/entities/productCart.js";
 import Product from "../../domain/entities/product.js";
 
 class CartMongooseRepository {
+    async find() {
+        const cartDocs = await CartModel.find();
+
+        return cartDocs.lenght > 0 ? cartDocs.map((cartDoc) => new Cart({
+            id: cartDoc._id,
+            products: cartDoc.products.map((doc) => new ProductCart({
+                id: doc._id,
+                product: doc.product ? new Product(doc.product) : null,
+                quantity: doc.quantity
+            }))
+        })) : null;
+    }
+
     async findOne(id) {
         const cartDoc = await CartModel.findById(id);
 

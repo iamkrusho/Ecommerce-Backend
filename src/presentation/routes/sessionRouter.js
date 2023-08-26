@@ -10,7 +10,7 @@ sessionRouter.post("/login", SessionController.login);
 
 sessionRouter.post("/signup", SessionController.signup);
 
-sessionRouter.get("/logout", SessionController.logout);
+sessionRouter.get("/logout", auth, SessionController.logout);
 
 sessionRouter.post("/forgotPassword", SessionController.forgotPassword);
 
