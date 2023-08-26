@@ -1,4 +1,5 @@
 import TicketModel from "../models/ticketModel.js";
+
 import Ticket from "../../domain/entities/ticket.js";
 
 class TicketMongooseRepository {

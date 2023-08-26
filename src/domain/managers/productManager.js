@@ -48,8 +48,8 @@ class ProductManager {
     }
 
     async deleteOne(data) {
-        const { user } = data;
-        const pid = await idSchema.parseAsync(data.id);
+        const { id, user } = data;
+        const pid = await idSchema.parseAsync(id);
 
         const product = await this.#ProductRepository.findOne(pid);
 

@@ -71,7 +71,7 @@ class CartManager {
 
             total += productInCart.product.price * productInCart.quantity;
 
-            await this.#ProductRepository.update(productInCart.product.id, { stock: newStock, status: newStock > 0 ? true : false });
+            await this.#ProductRepository.update({ pid: productInCart.product.id, update: { stock: newStock, status: newStock > 0 ? true : false } });
         }
 
         const code = nanoid(13);

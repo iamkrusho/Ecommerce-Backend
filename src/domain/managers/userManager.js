@@ -43,7 +43,15 @@ class UserManager {
 
         if (!role) throw new Error("Role not found");
 
-        const result = await this.#UserRepository.update({ uid: id, update: { role: role.id, isPremium: !user.isPremium } });
+        const requiredDocs = ["dni", "address", "account"];
+
+        const docsFilter = requiredDocs.map((requiredDoc) => user.documents.some((doc) => doc.name.includes(requiredDoc)));
+
+        const userHasRequiredDocs = docsFilter.every((value) => value);
+
+        if (!userHasRequiredDocs) throw new Error("It haven't been possible to assign premium. User must to have all required documents.");
+
+        await this.#UserRepository.update({ uid: id, update: { role: role.id, isPremium: true } });
 
         return true;
     }
