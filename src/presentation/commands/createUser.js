@@ -3,6 +3,8 @@ import { Command } from "commander";
 import UserManager from  "../../domain/managers/userManager.js";
 import RoleManager from "../../domain/managers/roleManager.js";
 
+import { createHash } from "../../shared/index.js";
+
 const CreateUserCommand = new Command("createUser");
 
 CreateUserCommand
@@ -25,7 +27,8 @@ CreateUserCommand
             role: adminRole.id.toString(),
             last_connection: Date.now(),
             isAdmin: true,
-            age: +env.age
+            age: +env.age,
+            password: await createHash(env.password)
         };
 
         const user = await userManager.addOne(payload);

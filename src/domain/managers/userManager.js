@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 import container from "../../container.js";
 
 import idSchema from "../validations/shared/idValidation.js";
@@ -71,6 +73,29 @@ class UserManager {
         if (!user) throw new Error("User not found");
 
         return true;
+    }
+
+    async removeInactives() {
+        const users = await this.#UserRepository.find();
+
+        if (!users) throw new Error("Users not found");
+
+        const dateNow = dayjs(Date.now());
+
+        let deletedUsers = 0;
+
+        for (const user of users) {
+            const dateLastConnection = dayjs(user.last_connection);
+
+            const inactiveDays = dateNow.diff(dateLastConnection, "day");
+
+            if (inactiveDays >= 30) {
+                await this.#UserRepository.delete(user.id);
+                deletedUsers++;
+            }
+        }
+
+        return deletedUsers;
     }
 
     async addOne(data) {
