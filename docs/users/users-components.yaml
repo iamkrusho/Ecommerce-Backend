@@ -40,7 +40,7 @@ components:
                 type: string
               reference:
                 type: string
-        lastConnection:
+        last_connection:
           type: string
           description: Fecha de la última conexión del usuario
   securitySchemes:
