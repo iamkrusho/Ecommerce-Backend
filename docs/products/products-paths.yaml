@@ -50,10 +50,12 @@ paths:
       responses:
         "201":
           description: Producto creado exitosamente
-        "401":
-          description: Error de autenticación
         "400":
           description: Error en la solicitud
+        "401":
+          description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
   /api/products/{pid}:
@@ -69,6 +71,8 @@ paths:
       responses:
         "200":
           description: Producto encontrado exitosamente
+        "400":
+          description: Error en la solicitud
         "404":
           description: Producto no encontrado
         "500":
@@ -93,6 +97,12 @@ paths:
       responses:
         "200":
           description: Producto actualizado exitosamente
+        "400":
+          description: Error en la solicitud
+        "401":
+          description: Error de autenticación
+        "403":
+          description: Error de autorización
         "404":
           description: Producto no encontrado
         "500":
@@ -111,6 +121,12 @@ paths:
       responses:
         "200":
           description: Producto eliminado exitosamente
+        "400":
+          description: Error en la solicitud
+        "401":
+          description: Error de autenticación
+        "403":
+          description: Error de autorización
         "404":
           description: Producto no encontrado
         "500":

@@ -10,9 +10,11 @@ paths:
         "200":
           description: Se obtienen los roles correctamente
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
+        "404":
+          description: Roles no encontrados
         "500":
           description: Error en el servidor
     post:
@@ -30,10 +32,12 @@ paths:
       responses:
         "201":
           description: Rol creado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
   /api/roles/{rid}:
@@ -52,10 +56,14 @@ paths:
       responses:
         "200":
           description: Rol encontrado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
+        "404":
+          description: Rol no encontrado
         "500":
           description: Error en el servidor
     delete:
@@ -73,9 +81,13 @@ paths:
       responses:
         "200":
           description: Rol eliminado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
+        "404":
+          description: Rol no encontrado
         "500":
           description: Error en el servidor
