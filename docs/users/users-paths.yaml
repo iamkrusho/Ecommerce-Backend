@@ -116,9 +116,11 @@ paths:
           description: Error de autorización
         "500":
           description: Error en el servidor
-  /api/users/{uid}/documents:
+  /api/users/documents:
     post:
       summary: Se envían documentos del usuario
+      security:
+        - bearerAuth: []
       tags: 
         - Users
       parameters:
@@ -138,7 +140,7 @@ paths:
           description: Error de autorización
         "500":
           description: Error en el servidor
-  /api/users/premium/{uid}:
+  /api/users/premium/:
     get:
       summary: Se actualiza un usuario a premium
       security:

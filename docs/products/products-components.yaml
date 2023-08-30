@@ -20,7 +20,7 @@ components:
           description: Precio del producto
         status:
           type: boolean
-          description: Booleano que indica si el producto está disponible
+          description: Indicador si el producto está disponible
         stock:
           type: number
           description: Cantidad disponible del producto
@@ -56,7 +56,7 @@ components:
           description: Precio del producto
         status:
           type: boolean
-          description: Booleano que indica si el producto está disponible
+          description: Indicador si el producto está disponible
         stock:
           type: number
           description: Cantidad disponible del producto

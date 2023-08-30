@@ -1,7 +1,7 @@
 paths:
   /api/sessions/login:
     post:
-      summary: Se inicia sesión con los datos del usuario
+      summary: Iniciar sesión con datos de usuario
       requestBody:
         required: true
         content:
@@ -12,16 +12,16 @@ paths:
         - Session
       responses:
         "200":
-          description: Se inicia sesión exitosamente
+          description: Sesión iniciada correctamente
         "400":
           description: Error en la solicitud
         "401":
-          description: Usuario o contraseña incorrectos
+          description: Error en los campos
         "500":
           description: Error en el servidor
   /api/sessions/signup:
     post:
-      summary: Se registra un nuevo usuario
+      summary: Registrar un nuevo usuario
       requestBody:
         required: true
         content:
@@ -32,42 +32,42 @@ paths:
         - Session
       responses:
         "201":
-          description: Usuario registrado exitosamente
+          description: Usuario registrado correctamente
         "400":
           description: Error en la solicitud
         "500":
           description: Error en el servidor
   /api/sessions/logout:
     get:
-      summary: Se termina la sesión activa
+      summary: Finalizar sesión activa
       security:
         - BearerAuth: []
       tags:
         - Session
       responses:
         "200":
-          description: Se finaliza la sesión exitosamente
+          description: Sesión activa finalizada correctamente
         "401":
           description: Error en la autenticación
         "500":
           description: Error en el servidor
   /api/sessions/current:
     get:
-      summary: Se devuelve información sobre la sesión activa 
+      summary: Obtener información de la sesión
       security:
         - BearerAuth: []
       tags:
         - Session
       responses:
         "200":
-          description: Se devuelve el usuario de la sesión exitosamente
+          description: Información dse sesión obtenida correctamente
         "401":
           description: Error en la autenticación
         "500":
           description: Error en el servidor
   /api/sessions/forgotPassword: 
     post:
-      summary: Se solicita cambio de contraseña olvidada
+      summary: Solicitar cambio de contraseña olvidada
       tags:
         - Session
       requestBody:
@@ -78,14 +78,14 @@ paths:
               $ref: "#/components/requestBodies/forgotPasswordBody"
       responses:
         "200":
-          description: La solicitud de cambio se envió exitosamente
+          description: Solicitud enviada correctamente
         "404":
           description: Usuario no encontrado
         "500":
           description: Error en el servidor
   /api/sessions/resetPassword: 
     post:
-      summary: Se restablece la contraseña del usuario
+      summary: Restablecer contraseña del usuario
       tags:
         - Session
       requestBody:
@@ -96,7 +96,7 @@ paths:
               $ref: "#/components/requestBodies/resetPasswordBody"
       responses:
         "200":
-          description: El cambio de contraseña se realizó exitosamente
+          description: Contraseña restablecida correctamente
         "400":
           description: Error en la solicitud
         "404":

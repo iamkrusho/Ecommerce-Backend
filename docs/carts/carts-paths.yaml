@@ -1,28 +1,28 @@
 paths:
   /api/carts/:
     get:
-      summary: Lista todos los carritos de compra
+      summary: Listar carritos de compra
       tags:
         - Carts
       responses:
         "200":
-          description: Se obtienen los carritos de compra correctamente
+          description: Carritos de compra obtenidos correctamente
         "401": 
           description: Error de autenticación
         "500":
           description: Error en el servidor
     post:
-      summary: Crea un nuevo carrito de compra
+      summary: Crear un nuevo carrito de compra
       tags:
         - Carts
       responses:
         "201":
-          description: Carrito de compra creado exitosamente
+          description: Carrito de compra creado correctamente
         "500":
           description: Error en el servidor
   /api/carts/{cid}:
     get:
-      summary: Obtiene un carrito de compra por ID
+      summary: Obtener carrito de compra por ID
       tags:
         - Carts
       parameters:
@@ -32,7 +32,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Carrito de compra encontrado exitosamente
+          description: Carrito de compra obtenido correctamente
         "400": 
           description: Error en la solicitud
         "404":
@@ -40,7 +40,7 @@ paths:
         "500":
           description: Error en el servidor
     put:
-      summary: Actualiza un carrito de compra existente
+      summary: Actualizar carrito de compra
       tags:
         - Carts
       parameters:
@@ -56,7 +56,7 @@ paths:
               $ref: "#/components/requestBodies/cartBody"
       responses:
         "200":
-          description: Carrito de compra actualizado exitosamente
+          description: Carrito de compra actualizado correctamente
         "400": 
           description: Error en la solicitud
         "404":
@@ -64,7 +64,7 @@ paths:
         "500":
           description: Error en el servidor
     delete:
-      summary: Elimina un carrito de compra por ID
+      summary: Eliminar carrito de compra por ID
       tags:
         - Carts
       parameters:
@@ -74,7 +74,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Carrito de compra eliminado exitosamente
+          description: Carrito de compra eliminado correctamente
         "400":
           description: Error en la solicitud
         "404":
@@ -83,7 +83,7 @@ paths:
           description: Error en el servidor
   /api/carts/{cid}/product/{pid}:
     post:
-      summary: Agrega un producto a un carrito de compra
+      summary: Agregar producto a carrito de compra
       tags:
         - Carts
       parameters:
@@ -97,7 +97,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Producto agregado al carrito exitosamente
+          description: Producto agregado al carrito correctamente
         "400":
           description: Error en la solicitud
         "404 (1)":
@@ -107,7 +107,7 @@ paths:
         "500":
           description: Error en el servidor
     put:
-      summary: Actualiza un producto dentro de un carrito de compra
+      summary: Actualizar producto en carrito de compra
       tags:
         - Carts
       parameters:
@@ -127,7 +127,7 @@ paths:
               $ref: "#/components/requestBodies/cartProductBody"
       responses:
         "200":
-          description: Producto dentro del carrito actualizado exitosamente
+          description: Producto actualizado correctamente
         "400":
           description: Error en la solicitud
         "404 (1)":
@@ -137,7 +137,7 @@ paths:
         "500":
           description: Error en el servidor
     delete:
-      summary: Elimina un producto de un carrito de compra
+      summary: Eliminar producto de carrito de compra
       tags:
         - Carts
       parameters:
@@ -151,7 +151,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Producto dentro del carrito eliminado exitosamente
+          description: Producto eliminado correctamente
         "400":
           description: Error en la solicitud
         "404 (1)":
@@ -162,7 +162,7 @@ paths:
           description: Error en el servidor
   /api/carts/{cid}/checkout:
     post:
-      summary: Realiza el proceso de pago para el carrito de compra
+      summary: Finalizar proceso de compra
       security:
         - bearerAuth: []
       tags:
@@ -174,7 +174,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Proceso de pago completado exitosamente
+          description: Proceso de compra finalizado correctamente
         "400":
           description: Error en la solicitud
         "404":

@@ -1,14 +1,14 @@
 paths:
   /api/roles/:
     get:
-      summary: Lista todos los roles
+      summary: Listar roles
       tags:
         - Roles
       security:
         - BearerAuth: []
       responses:
         "200":
-          description: Se obtienen los roles correctamente
+          description: Roles obtenidos correctamente
         "401":
           description: Error de autenticación
         "403":
@@ -18,7 +18,7 @@ paths:
         "500":
           description: Error en el servidor
     post:
-      summary: Crea un nuevo rol
+      summary: Crear un nuevo rol
       security:
         - BearerAuth: []
       requestBody:
@@ -31,7 +31,7 @@ paths:
         - Roles
       responses:
         "201":
-          description: Rol creado exitosamente
+          description: Rol creado correctamente
         "400":
           description: Error en la solicitud
         "401":
@@ -42,7 +42,7 @@ paths:
           description: Error en el servidor
   /api/roles/{rid}:
     get:
-      summary: Obtiene un rol por ID
+      summary: Obtener rol por ID
       tags:
         - Roles
       security:
@@ -55,7 +55,7 @@ paths:
           description: ID del rol
       responses:
         "200":
-          description: Rol encontrado exitosamente
+          description: Rol obtenido correctamente
         "400":
           description: Error en la solicitud
         "401":
@@ -67,7 +67,7 @@ paths:
         "500":
           description: Error en el servidor
     delete:
-      summary: Elimina un rol por ID
+      summary: Eliminar rol por ID
       tags:
         - Roles
       security:
@@ -80,7 +80,7 @@ paths:
           description: ID del rol
       responses:
         "200":
-          description: Rol eliminado exitosamente
+          description: Rol eliminado correctamente
         "400":
           description: Error en la solicitud
         "401":

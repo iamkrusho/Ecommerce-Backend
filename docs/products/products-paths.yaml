@@ -1,34 +1,34 @@
 paths:
   /api/products/:
     get:
-      summary: Lista todos los productos
+      summary: Listar productos
       tags:
         - Products
       parameters:
         - name: page
           in: query
-          description: Número de página para la paginación
+          description: Número de página de resultados
           required: false
           type: number
         - name: limit
           in: query
-          description: Cantidad máxima de resultados por página
+          description: Cantidad máxima de resultados
           required: false
           type: number
         - name: sort
           in: query
-          description: Formato de ordenamiento para resultados
+          description: Ordenamiento de resultados
           required: false
           type: string
           enum: [asc, desc]
         - name: query
           in: query
-          description: Formato de búsqueda por types
+          description: Búsqueda por types de resultados
           required: false
           type: object
       responses:
         "200":
-          description: Se obtienen los productos correctamente
+          description: Productos obtenidos correctamente
         "400":
           description: Error en la solicitud
         "404":
@@ -36,7 +36,7 @@ paths:
         "500":
           description: Error en el servidor
     post:
-      summary: Crea un nuevo producto
+      summary: Crear un nuevo producto
       security:
         - bearerAuth: []
       tags:
@@ -49,7 +49,7 @@ paths:
               $ref: "#/components/requestBodies/productBody"
       responses:
         "201":
-          description: Producto creado exitosamente
+          description: Producto creado correctamente
         "400":
           description: Error en la solicitud
         "401":
@@ -60,7 +60,7 @@ paths:
           description: Error en el servidor
   /api/products/{pid}:
     get:
-      summary: Obtiene un producto por ID
+      summary: Obtener producto por ID
       tags:
         - Products
       parameters:
@@ -70,7 +70,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Producto encontrado exitosamente
+          description: Producto obtenido correctamente
         "400":
           description: Error en la solicitud
         "404":
@@ -78,7 +78,7 @@ paths:
         "500":
           description: Error en el servidor
     put:
-      summary: Actualiza un producto existente por ID
+      summary: Actualizar producto por ID
       security:
         - bearerAuth: []
       tags:
@@ -96,7 +96,7 @@ paths:
               $ref: "#/components/requestBodies/productBody"
       responses:
         "200":
-          description: Producto actualizado exitosamente
+          description: Producto actualizado correctamente
         "400":
           description: Error en la solicitud
         "401":
@@ -108,7 +108,7 @@ paths:
         "500":
           description: Error en el servidor
     delete:
-      summary: Elimina un producto por ID
+      summary: Eliminar producto por ID
       security:
         - bearerAuth: []
       tags:
@@ -120,7 +120,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Producto eliminado exitosamente
+          description: Producto eliminado correctamente
         "400":
           description: Error en la solicitud
         "401":

@@ -46,8 +46,8 @@ components:
       properties:
         newPassword:
           type: string
-          description: Nueva contraseña
+          description: Nueva contraseña del usuario
         confirmNewPassword:
           type: string
-          description: Confirmación de nueva contraseña
+          description: Confirmación de nueva contraseña del usuario
 

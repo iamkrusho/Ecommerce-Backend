@@ -23,10 +23,10 @@ components:
           description: ID del rol del usuario
         isPremium:
           type: string
-          description: Booleano que indica si el usuario es premium
+          description: Indicador si el usuario es premium
         isAdmin:
           type: boolean
-          description: Booleano que indica si el usuario es administrador
+          description: Indicador si el usuario es administrador
         password:
           type: string
           description: Contraseña del usuario
@@ -42,7 +42,7 @@ components:
                 type: string
         last_connection:
           type: string
-          description: Fecha de la última conexión del usuario
+          description: Última conexión del usuario
   securitySchemes:
     bearerAuth:
       type: http
@@ -69,7 +69,10 @@ components:
           description: ID del rol del usuario
         isAdmin:
           type: boolean
-          description: Booleano que indica si el usuario es administrador
+          description: Indicador si el usuario es administrador
+        isPremium:
+          type: boolean
+          description: Indicador si el usuario es premium
         password:
           type: string
           description: Contraseña del usuario
