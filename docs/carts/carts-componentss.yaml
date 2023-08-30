@@ -10,7 +10,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ProductInCart"
-          description:
+          description: Productos del carrito
     ProductInCart:
       type: object
       properties:
@@ -25,3 +25,16 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  requestBodies: 
+    cartBody: 
+      type: object
+      properties: 
+        products: 
+          type: array
+          items: 
+            $ref: "#/components/schemas/ProductInCart"
+    cartProductBody:
+      type: object
+      properties: 
+        quantity: 
+          type: number

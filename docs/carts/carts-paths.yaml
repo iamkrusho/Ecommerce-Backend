@@ -7,6 +7,8 @@ paths:
       responses:
         "200":
           description: Se obtienen los carritos de compra correctamente
+        "401": 
+          description: Error de autenticación
         "500":
           description: Error en el servidor
     post:
@@ -31,6 +33,10 @@ paths:
       responses:
         "200":
           description: Carrito de compra encontrado exitosamente
+        "400": 
+          description: Error en la solicitud
+        "404":
+          description: Carrito de compra no encontrado
         "500":
           description: Error en el servidor
     put:
@@ -42,9 +48,19 @@ paths:
           in: path
           required: true
           type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/cartBody"
       responses:
         "200":
           description: Carrito de compra actualizado exitosamente
+        "400": 
+          description: Error en la solicitud
+        "404":
+          description: Carrito de compra no encontrado
         "500":
           description: Error en el servidor
     delete:
@@ -59,6 +75,10 @@ paths:
       responses:
         "200":
           description: Carrito de compra eliminado exitosamente
+        "400":
+          description: Error en la solicitud
+        "404":
+          description: Carrito de compra no encontrado
         "500":
           description: Error en el servidor
   /api/carts/{cid}/product/{pid}:
@@ -78,6 +98,12 @@ paths:
       responses:
         "200":
           description: Producto agregado al carrito exitosamente
+        "400":
+          description: Error en la solicitud
+        "404 (1)":
+          description: Carrito de compra no encontrado
+        "404 (2)":
+          description: Producto no encontrado
         "500":
           description: Error en el servidor
     put:
@@ -93,9 +119,21 @@ paths:
           in: path
           required: true
           type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/cartProductBody"
       responses:
         "200":
           description: Producto dentro del carrito actualizado exitosamente
+        "400":
+          description: Error en la solicitud
+        "404 (1)":
+          description: Carrito de compra no encontrado
+        "404 (2)":
+          description: Producto no encontrado
         "500":
           description: Error en el servidor
     delete:
@@ -114,6 +152,12 @@ paths:
       responses:
         "200":
           description: Producto dentro del carrito eliminado exitosamente
+        "400":
+          description: Error en la solicitud
+        "404 (1)":
+          description: Carrito de compra no encontrado
+        "404 (2)":
+          description: Producto no encontrado
         "500":
           description: Error en el servidor
   /api/carts/{cid}/checkout:
@@ -131,5 +175,9 @@ paths:
       responses:
         "200":
           description: Proceso de pago completado exitosamente
+        "400":
+          description: Error en la solicitud
+        "404":
+          description: Carrito de compra no encontrado
         "500":
           description: Error en el servidor

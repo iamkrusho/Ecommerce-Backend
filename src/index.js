@@ -17,6 +17,5 @@ void (async() => {
     app.listen();
 
     const cron = new CronJob("0 0 */5 * *", RemoveInactiveUsersCron);
-
     cron.start();
 })();
