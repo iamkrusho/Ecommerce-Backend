@@ -10,9 +10,9 @@ paths:
         "200":
           description: Se obtienen los usuarios correctamente
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
     post:
@@ -30,10 +30,12 @@ paths:
       responses:
         "201":
           description: Usuario creado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
   /api/users/{uid}:
@@ -52,12 +54,14 @@ paths:
       responses:
         "200":
           description: Se obtiene el usuario correctamente
+        "400":
+          description: Error en la solicitud
         "404":
-          description: No se pudo encontrar al usuario
+          description: Usuario no encontrado
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
     put:
@@ -81,10 +85,12 @@ paths:
       responses:
         "200":
           description: Usuario actualizado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
     delete:
@@ -102,9 +108,58 @@ paths:
       responses:
         "200":
           description: Usuario eliminado exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
-          description: Sin autorización
-        "403":
           description: Error de autenticación
+        "403":
+          description: Error de autorización
         "500":
           description: Error en el servidor
+  /api/users/{uid}/documents:
+    post:
+      summary: Se envían documentos del usuario
+      tags: 
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          type: string
+          description: ID del usuario
+      responses:
+        "200":
+          description: Usuario actualizado a premium exitosamente
+        "400":
+          description: Error en la solicitud
+        "401":
+          description: Error de autenticación
+        "403":
+          description: Error de autorización
+        "500":
+          description: Error en el servidor
+  /api/users/premium/{uid}:
+    get:
+      summary: Se actualiza un usuario a premium
+      security:
+        - bearerAuth: []
+      tags: 
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          type: string
+          description: ID del usuario
+      responses:
+        "200":
+          description: Usuario actualizado a premium exitosamente
+        "400":
+          description: Error en la solicitud
+        "401":
+          description: Error de autenticación
+        "403":
+          description: Error de autorización
+        "500":
+          description: Error en el servidor
+      
