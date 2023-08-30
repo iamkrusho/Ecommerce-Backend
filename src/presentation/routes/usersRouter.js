@@ -15,9 +15,9 @@ usersRouter.get("/", authorization("user:list"), UserController.get);
 
 usersRouter.get("/:uid", authorization("user:get"), UserController.getOne);
 
-usersRouter.get("/premium/:uid", UserController.changePremium);
+usersRouter.get("/premium", UserController.changePremium);
 
-usersRouter.post("/:uid/documents", uploader.array("documents", 4), UserController.insertDocuments);
+usersRouter.post("/documents", uploader.array("documents", 4), UserController.insertDocuments);
 
 usersRouter.post("/", authorization("user:create"), UserController.post);
 

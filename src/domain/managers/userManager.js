@@ -36,10 +36,12 @@ class UserManager {
         return result;
     }
 
-    async changePremium(id) {
-        const user = await this.#UserRepository.findOne(id);
+    async changePremium(data) {
+        const user = await this.#UserRepository.findOne(data.id);
 
         if (!user) throw new Error("User not found");
+
+        if (user.isPremium) throw new Error("User is already premium");
 
         const role = this.#RoleRepository.findOneByName("Premium");
 
@@ -51,9 +53,9 @@ class UserManager {
 
         const userHasRequiredDocs = docsFilter.every((value) => value);
 
-        if (!userHasRequiredDocs) throw new Error("It haven't been possible to assign premium. User must to have all required documents.");
+        if (!userHasRequiredDocs) throw new Error("User documents are required.");
 
-        await this.#UserRepository.update({ uid: id, update: { role: role.id, isPremium: true } });
+        await this.#UserRepository.update({ uid: user.id, update: { role: role.id, isPremium: true } });
 
         return true;
     }
@@ -61,16 +63,18 @@ class UserManager {
     async addDocuments(data) {
         const { id, files } = data;
 
-        if (!files) throw new Error("The files wasn't provided");
+        if (!files) throw new Error("The files are required");
 
-        const user = await this.#UserRepository.update(
+        const user = await this.#UserRepository.findOne(id);
+
+        if (!user) throw new Error("User not found");
+
+        await this.#UserRepository.update(
             {
-                uid: id,
+                uid: user.id,
                 update: { documents: files.map((file) => ({ name: file.filename, reference: `public/images/${file.fieldname}` })) }
             }
         );
-
-        if (!user) throw new Error("User not found");
 
         return true;
     }

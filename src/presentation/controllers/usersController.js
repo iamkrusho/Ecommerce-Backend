@@ -24,9 +24,8 @@ class UsersController {
 
     static changePremium = async(req, res, next) => {
         try {
-            const { uid } = req.params;
             const manager = new UserManager();
-            await manager.changePremium(uid);
+            await manager.changePremium({ id: req.user.id });
             res.status(200).send({ status: "success", message: "User has been updated to Premium" });
         } catch (err) {
             next(err);
@@ -35,9 +34,8 @@ class UsersController {
 
     static insertDocuments = async(req, res, next) => {
         try {
-            const { uid } = req.params;
             const manager = new UserManager();
-            await manager.addDocuments({ id: uid, files: req.files });
+            await manager.addDocuments({ id: req.user.id, files: req.files });
             res.status(200).send({ status: "success", message: "The documents has been added successfully" });
         } catch (err) {
             next(err);
