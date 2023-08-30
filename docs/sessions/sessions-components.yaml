@@ -5,7 +5,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
   requestBodies:
-    login:
+    loginBody:
       type: object
       properties:
         email:
@@ -14,7 +14,7 @@ components:
         password:
           type: string
           description: Contraseña del usuario
-    signup: 
+    signupBody: 
       type: object
       properties: 
         firstName:
@@ -35,3 +35,19 @@ components:
         password:
           type: string
           description: Contraseña del usuario
+    forgotPasswordBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Correo del usuario
+    resetPasswordBody:
+      type: object
+      properties:
+        newPassword:
+          type: string
+          description: Nueva contraseña
+        confirmNewPassword:
+          type: string
+          description: Confirmación de nueva contraseña
+

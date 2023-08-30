@@ -1,5 +1,5 @@
 paths:
-  /api/session/login:
+  /api/sessions/login:
     post:
       summary: Se inicia sesión con los datos del usuario
       requestBody:
@@ -7,17 +7,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/requestBodies/login"
+              $ref: "#/components/requestBodies/loginBody"
       tags:
         - Session
       responses:
         "200":
           description: Se inicia sesión exitosamente
+        "400":
+          description: Error en la solicitud
         "401":
           description: Usuario o contraseña incorrectos
         "500":
           description: Error en el servidor
-  /api/session/signup:
+  /api/sessions/signup:
     post:
       summary: Se registra un nuevo usuario
       requestBody:
@@ -25,15 +27,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/requestBodies/signup"
+              $ref: "#/components/requestBodies/signupBody"
       tags:
         - Session
       responses:
         "201":
           description: Usuario registrado exitosamente
+        "400":
+          description: Error en la solicitud
         "500":
           description: Error en el servidor
-  /api/session/logout:
+  /api/sessions/logout:
     get:
       summary: Se termina la sesión activa
       security:
@@ -42,42 +46,60 @@ paths:
         - Session
       responses:
         "200":
-          description: Se termina la sesión exitosamente
+          description: Se finaliza la sesión exitosamente
+        "401":
+          description: Error en la autenticación
         "500":
           description: Error en el servidor
-  /api/session/current:
+  /api/sessions/current:
     get:
       summary: Se devuelve información sobre la sesión activa 
+      security:
+        - BearerAuth: []
       tags:
         - Session
       responses:
         "200":
           description: Se devuelve el usuario de la sesión exitosamente
-        "403":
-          description: Error de autenticación
+        "401":
+          description: Error en la autenticación
         "500":
           description: Error en el servidor
-  /api/session/forgotPassword: 
+  /api/sessions/forgotPassword: 
     post:
       summary: Se solicita cambio de contraseña olvidada
       tags:
         - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/forgotPasswordBody"
       responses:
         "200":
           description: La solicitud de cambio se envió exitosamente
         "404":
-          description: El usuario no existe
+          description: Usuario no encontrado
         "500":
           description: Error en el servidor
-  /api/session/resetPassword: 
+  /api/sessions/resetPassword: 
     post:
       summary: Se restablece la contraseña del usuario
       tags:
         - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/resetPasswordBody"
       responses:
         "200":
           description: El cambio de contraseña se realizó exitosamente
+        "400":
+          description: Error en la solicitud
         "404":
-          description: El usuario no existe
+          description: Usuario no encontrado
         "500":
           description: Error en el servidor

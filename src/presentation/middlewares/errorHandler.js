@@ -7,8 +7,8 @@ const errorHandler = (err, req, res, next) => {
         return res.status(401).send({ status: "error", error: err.message });
     }
 
-    else if (err?.message.includes("already exist")) {
-        return res.status(409).send({ status: "error", error: err.message });
+    else if (err?.message.includes("already exist" || "expired" || "don't match")) {
+        return res.status(400).send({ status: "error", error: err.message });
     }
 
     else if (err?.name.includes("ZodError")) {
