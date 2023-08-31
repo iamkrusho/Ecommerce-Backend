@@ -43,7 +43,7 @@ class UserManager {
 
         if (user.isPremium) throw new Error("User is already premium");
 
-        const role = this.#RoleRepository.findOneByName("Premium");
+        const role = await this.#RoleRepository.findOneByName("Premium");
 
         if (!role) throw new Error("Role not found");
 

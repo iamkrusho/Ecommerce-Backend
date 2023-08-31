@@ -48,7 +48,7 @@ class CartsController {
             const { email } = req.user;
             const manager = new CartManager();
             const result = await manager.createCheckout({ id: cid, user: email });
-            res.status(200).send({ status: "success", data: result });
+            res.status(200).send({ status: "success", message: "Your purchase has been processed successfully", data: result });
         } catch (err) {
             next(err);
         }

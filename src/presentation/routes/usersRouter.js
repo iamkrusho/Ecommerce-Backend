@@ -11,13 +11,13 @@ const usersRouter = Router();
 
 usersRouter.use(auth);
 
-usersRouter.get("/", authorization("user:list"), UserController.get);
-
-usersRouter.get("/:uid", authorization("user:get"), UserController.getOne);
-
 usersRouter.get("/premium", UserController.changePremium);
 
 usersRouter.post("/documents", uploader.array("documents", 4), UserController.insertDocuments);
+
+usersRouter.get("/", authorization("user:list"), UserController.get);
+
+usersRouter.get("/:uid", authorization("user:get"), UserController.getOne);
 
 usersRouter.post("/", authorization("user:create"), UserController.post);
 

@@ -301,6 +301,23 @@ paths:
       responses:
         "200":
           description: Proceso de compra finalizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Your purchase has been processed successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
         "400": 
           $ref: "#/components/responses/requestError"
         "404":

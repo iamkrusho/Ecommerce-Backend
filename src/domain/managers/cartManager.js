@@ -40,7 +40,7 @@ class CartManager {
 
         const product = await this.#ProductRepository.findOne(pid);
 
-        if (!product) throw new Error("Product not found");
+        if (!product || !product.status) throw new Error("Product not found");
 
         const cart = await this.#CartRepository.findOne(cid);
 

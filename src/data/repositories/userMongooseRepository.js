@@ -17,6 +17,7 @@ class UserMongooseRepository {
             isPremium: doc.isPremium,
             isAdmin: doc.isAdmin,
             password: doc.password,
+            documents: doc.documents,
             last_connection: doc.last_connection
         })) : null;
     }
@@ -34,6 +35,7 @@ class UserMongooseRepository {
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
+            documents: userDoc.documents,
             last_connection: userDoc.last_connection
         }) : null;
     }
@@ -51,6 +53,7 @@ class UserMongooseRepository {
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
+            documents: userDoc.documents,
             last_connection: userDoc.last_connection
         }) : null;
     }
@@ -69,6 +72,7 @@ class UserMongooseRepository {
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
+            documents: userDoc.documents,
             last_connection: userDoc.last_connection
         }) : null;
     }
@@ -88,6 +92,7 @@ class UserMongooseRepository {
             isPremium: userDoc.isPremium,
             isAdmin: userDoc.isAdmin,
             password: userDoc.password,
+            documents: userDoc.documents,
             last_connection: userDoc.last_connection
         }) : null;
     }

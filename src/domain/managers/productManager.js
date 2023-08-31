@@ -53,9 +53,9 @@ class ProductManager {
 
         const product = await this.#ProductRepository.findOne(pid);
 
-        if (!product) throw new Error("Product not found");
+        if (!product || !product.status) throw new Error("Product not found");
 
-        if (product.owner !== "admin" && user.email !== product.owner) throw new Error("Product owner and user credentials don't match");
+        if (!(user.isAdmin) && user.email !== product.owner) throw new Error("Product owner and user credentials don't match");
 
         const result = await this.#ProductRepository.delete(pid);
 

@@ -20,7 +20,9 @@ class SessionManager {
 
         if (userExists) throw new Error("User already exist");
 
-        return await this.#UserRepository.insertOne({ ...user, password: await createHash(user.password) });
+        return await this.#UserRepository.insertOne(
+            { ...user, role: null, isAdmin: false, isPremium: false, password: await createHash(user.password) }
+        );
     }
 
     async login(data) {
