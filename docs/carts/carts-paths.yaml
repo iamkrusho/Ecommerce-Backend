@@ -2,6 +2,8 @@ paths:
   /api/carts/:
     get:
       summary: Listar carritos de compra
+      security:
+        - BearerAuth: []
       tags:
         - Carts
       responses:
@@ -21,6 +23,10 @@ paths:
                 required:
                   - status
                   - data
+        "401":
+          $ref: "#/components/responses/notAuthenticated"
+        "403":
+          $ref: "#/components/responses/notAuthorizated"
         "404":
           $ref: "#/components/responses/notFound"
         "500":

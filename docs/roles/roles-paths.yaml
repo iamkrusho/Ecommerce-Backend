@@ -9,6 +9,20 @@ paths:
       responses:
         "200":
           description: Roles obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    example: []
+                required:
+                  - status
+                  - data
         "401":
           $ref: "#/components/responses/notAuthenticated"
         "403":
@@ -32,6 +46,20 @@ paths:
       responses:
         "201":
           description: Rol creado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Role has been created successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -56,6 +84,20 @@ paths:
       responses:
         "200":
           description: Rol obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -81,6 +123,20 @@ paths:
       responses:
         "200":
           description: Rol eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Role has been deleted successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":

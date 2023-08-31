@@ -16,7 +16,7 @@ class UsersController {
             const { uid } = req.params;
             const manager = new UserManager();
             const result = await manager.getOne(uid);
-            res.status(200).send({ data: result });
+            res.status(200).send({ status: "success", data: result });
         } catch (err) {
             next(err);
         }

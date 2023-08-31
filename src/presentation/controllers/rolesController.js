@@ -16,7 +16,7 @@ class RolesController {
             const { rid } = req.params;
             const manager = new RoleManager();
             const result = await manager.getOne(rid);
-            res.status(200).send({ data: result });
+            res.status(200).send({ status: "success", data: result });
         } catch (err) {
             next(err);
         }

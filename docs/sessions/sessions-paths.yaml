@@ -13,6 +13,24 @@ paths:
       responses:
         "200":
           description: Sesión iniciada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: You have successfully logged in
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1N...
+                required:
+                  - status
+                  - message
+                  - accessToken
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -33,6 +51,20 @@ paths:
       responses:
         "201":
           description: Usuario registrado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: You have successfully registered
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "500":
@@ -47,6 +79,24 @@ paths:
       responses:
         "200":
           description: Sesión activa finalizada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: You have successfully logged out
+                  logoutToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1N...
+                required:
+                  - status
+                  - message
+                  - logoutToken
         "401":
           $ref: "#/components/responses/notAuthenticated"
         "500":
@@ -61,8 +111,22 @@ paths:
       responses:
         "200":
           description: Información dse sesión obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - data
         "401":
-          $ref: "#/components/responses/notAuthenticated"n
+          $ref: "#/components/responses/notAuthenticated"
         "500":
           $ref: "#/components/responses/serverError"
   /api/sessions/forgotPassword: 
@@ -79,6 +143,20 @@ paths:
       responses:
         "200":
           description: Solicitud enviada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: We have sent you a mail for reset your password
+                required:
+                  - status
+                  - message
         "404":
           $ref: "#/components/responses/notFound"
         "500":
@@ -97,6 +175,20 @@ paths:
       responses:
         "200":
           description: Contraseña restablecida correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Your password has been modified successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "404":

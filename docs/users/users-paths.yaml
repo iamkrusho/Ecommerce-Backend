@@ -9,6 +9,20 @@ paths:
       responses:
         "200":
           description: Usuarios obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    example: []
+                required:
+                  - status
+                  - data
         "401":
           $ref: "#/components/responses/notAuthenticated"
         "403":
@@ -30,6 +44,20 @@ paths:
       responses:
         "201":
           description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: User has been created successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -54,6 +82,20 @@ paths:
       responses:
         "200":
           description: Usuario obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -85,6 +127,24 @@ paths:
       responses:
         "200":
           description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: User has been updated successfully
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - message
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -108,6 +168,20 @@ paths:
       responses:
         "200":
           description: Usuario eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: User has been deleted successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -137,6 +211,20 @@ paths:
       responses:
         "200":
           description: Documentos insertados correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: The documents has been added successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -161,6 +249,20 @@ paths:
       responses:
         "200":
           description: Usuario actualizado a premium correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: User has been updated to Premium
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":

@@ -29,6 +29,20 @@ paths:
       responses:
         "200":
           description: Productos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "404":
@@ -50,6 +64,20 @@ paths:
       responses:
         "201":
           description: Producto creado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product has been created successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -71,6 +99,20 @@ paths:
       responses:
         "200":
           description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "404":
@@ -97,6 +139,24 @@ paths:
       responses:
         "200":
           description: Producto actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product has been updated successfully
+                  data:
+                    type: object
+                    example: {}
+                required:
+                  - status
+                  - message
+                  - data
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -121,6 +181,20 @@ paths:
       responses:
         "200":
           description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product has been deleted successfully
+                required:
+                  - status
+                  - message
         "400":
           $ref: "#/components/responses/requestError"
         "401":
@@ -130,4 +204,4 @@ paths:
         "404":
           $ref: "#/components/responses/notFound"
         "500":
-          $ref: "#/components/responses/serverError
+          $ref: "#/components/responses/serverError"
