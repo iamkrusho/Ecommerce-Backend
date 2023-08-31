@@ -6,10 +6,11 @@ import productsRouter from "../routes/productsRouter.js";
 import cartRouter from "../routes/cartsRouter.js";
 import usersRouter from "../routes/usersRouter.js";
 import rolesRouter from "../routes/rolesRouter.js";
-import sessionRouter from "../routes/sessionRouter.js";
+import sessionsRouter from "../routes/sessionsRouter.js";
 
 import errorHandler from "../middlewares/errorHandler.js";
 import logger from "../middlewares/logger.js";
+
 import { swaggerTheme, specs } from "../../swagger.js";
 
 class AppExpress {
@@ -26,7 +27,7 @@ class AppExpress {
         this.app.use("/api/carts", cartRouter);
         this.app.use("/api/users", usersRouter);
         this.app.use("/api/roles", rolesRouter);
-        this.app.use("/api/sessions", sessionRouter);
+        this.app.use("/api/sessions", sessionsRouter);
         this.app.use("/docs/", swaggerUiExpress.serve, swaggerUiExpress.setup(specs, swaggerTheme));
         this.app.use(errorHandler);
     }
