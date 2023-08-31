@@ -105,6 +105,10 @@ class UserManager {
     async addOne(data) {
         const user = await userCreateSchema.parseAsync(data);
 
+        const userExists = await this.#UserRepository.findOneByEmail(user.email);
+
+        if (userExists) throw new Error("User already exist");
+
         return await this.#UserRepository.insertOne(user);
     }
 

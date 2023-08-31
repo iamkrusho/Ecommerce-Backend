@@ -16,9 +16,9 @@ class SessionManager {
     async signup(data) {
         const user = await userCreateSchema.parseAsync(data);
 
-        const exits = await this.#UserRepository.findByEmail(user.email);
+        const userExists = await this.#UserRepository.findByEmail(user.email);
 
-        if (exits) throw new Error("User already exist");
+        if (userExists) throw new Error("User already exist");
 
         return await this.#UserRepository.insertOne({ ...user, password: await createHash(user.password) });
     }

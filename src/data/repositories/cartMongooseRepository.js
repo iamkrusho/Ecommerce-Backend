@@ -8,7 +8,7 @@ class CartMongooseRepository {
     async find() {
         const cartDocs = await CartModel.find();
 
-        return cartDocs.lenght > 0 ? cartDocs.map((cartDoc) => new Cart({
+        return cartDocs.length > 0 ? cartDocs.map((cartDoc) => new Cart({
             id: cartDoc._id,
             products: cartDoc.products.map((doc) => new ProductCart({
                 id: doc._id,

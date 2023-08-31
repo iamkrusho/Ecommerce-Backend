@@ -105,9 +105,9 @@ class CartManager {
     }
 
     async updateOne(data) {
-        const { cid, products: update } = await cartUpdateSchema.parseAsync(data);
+        const { cid, products } = await cartUpdateSchema.parseAsync(data);
 
-        const result = await this.#CartRepository.update({ cid, update });
+        const result = await this.#CartRepository.update({ cid, update: { products } });
 
         if (!result) throw new Error("Cart not found");
 
