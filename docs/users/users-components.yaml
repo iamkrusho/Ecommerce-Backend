@@ -76,3 +76,11 @@ components:
         password:
           type: string
           description: Contraseña del usuario
+    userDocumentsBody:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            type: string
+            format: binary

@@ -12,7 +12,7 @@ const options = {
             description: "Esta es la documentación de la API"
         }
     },
-    apis: [resolve("docs/*/*.yaml")]
+    apis: [resolve("docs/**/*.yaml")]
 };
 
 export const specs = swaggerJSDoc(options);

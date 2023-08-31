@@ -38,3 +38,4 @@ components:
       properties: 
         quantity: 
           type: number
+

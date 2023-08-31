@@ -10,13 +10,13 @@ paths:
         "200":
           description: Roles obtenidos correctamente
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "404":
-          description: Roles no encontrados
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     post:
       summary: Crear un nuevo rol
       security:
@@ -33,13 +33,13 @@ paths:
         "201":
           description: Rol creado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/roles/{rid}:
     get:
       summary: Obtener rol por ID
@@ -57,15 +57,15 @@ paths:
         "200":
           description: Rol obtenido correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "404":
-          description: Rol no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     delete:
       summary: Eliminar rol por ID
       tags:
@@ -82,12 +82,12 @@ paths:
         "200":
           description: Rol eliminado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "404":
-          description: Rol no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"

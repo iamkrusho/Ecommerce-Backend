@@ -7,10 +7,24 @@ paths:
       responses:
         "200":
           description: Carritos de compra obtenidos correctamente
-        "401": 
-          description: Error de autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    example: []
+                required:
+                  - status
+                  - data
+        "404":
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     post:
       summary: Crear un nuevo carrito de compra
       tags:
@@ -18,8 +32,25 @@ paths:
       responses:
         "201":
           description: Carrito de compra creado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Cart has been created successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/carts/{cid}:
     get:
       summary: Obtener carrito de compra por ID
@@ -33,12 +64,25 @@ paths:
       responses:
         "200":
           description: Carrito de compra obtenido correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                required:
+                  - status
+                  - data
         "400": 
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Carrito de compra no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     put:
       summary: Actualizar carrito de compra
       tags:
@@ -57,12 +101,29 @@ paths:
       responses:
         "200":
           description: Carrito de compra actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Cart has been updated successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
         "400": 
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Carrito de compra no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     delete:
       summary: Eliminar carrito de compra por ID
       tags:
@@ -75,12 +136,26 @@ paths:
       responses:
         "200":
           description: Carrito de compra eliminado correctamente
-        "400":
-          description: Error en la solicitud
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Cart has been deleted successfully
+                required:
+                  - status
+                  - message
+        "400": 
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Carrito de compra no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/carts/{cid}/product/{pid}:
     post:
       summary: Agregar producto a carrito de compra
@@ -98,14 +173,29 @@ paths:
       responses:
         "200":
           description: Producto agregado al carrito correctamente
-        "400":
-          description: Error en la solicitud
-        "404 (1)":
-          description: Carrito de compra no encontrado
-        "404 (2)":
-          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product has been added to the cart successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
+        "400": 
+          $ref: "#/components/responses/requestError"
+        "404":
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     put:
       summary: Actualizar producto en carrito de compra
       tags:
@@ -128,14 +218,29 @@ paths:
       responses:
         "200":
           description: Producto actualizado correctamente
-        "400":
-          description: Error en la solicitud
-        "404 (1)":
-          description: Carrito de compra no encontrado
-        "404 (2)":
-          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product inside the cart has been updated successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
+        "400": 
+          $ref: "#/components/responses/requestError"
+        "404":
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     delete:
       summary: Eliminar producto de carrito de compra
       tags:
@@ -152,14 +257,29 @@ paths:
       responses:
         "200":
           description: Producto eliminado correctamente
-        "400":
-          description: Error en la solicitud
-        "404 (1)":
-          description: Carrito de compra no encontrado
-        "404 (2)":
-          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: Product inside the cart has been deleted successfully
+                  data:
+                    type: object
+                required:
+                  - status
+                  - message
+                  - data
+        "400": 
+          $ref: "#/components/responses/requestError"
+        "404":
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/carts/{cid}/checkout:
     post:
       summary: Finalizar proceso de compra
@@ -175,9 +295,9 @@ paths:
       responses:
         "200":
           description: Proceso de compra finalizado correctamente
-        "400":
-          description: Error en la solicitud
+        "400": 
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Carrito de compra no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"

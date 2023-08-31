@@ -1,22 +1,22 @@
 paths:
   /api/users/:
     get:
-      summary: Lista todos los usuarios
+      summary: Listar usuarios
       security:
         - bearerAuth: []
       tags:
         - Users
       responses:
         "200":
-          description: Se obtienen los usuarios correctamente
+          description: Usuarios obtenidos correctamente
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     post:
-      summary: Crea un nuevo usuario
+      summary: Crear un nuevo usuario
       security:
         - bearerAuth: []
       requestBody:
@@ -29,18 +29,18 @@ paths:
         - Users
       responses:
         "201":
-          description: Usuario creado exitosamente
+          description: Usuario creado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/users/{uid}:
     get:
-      summary: Obtiene un usuario por ID
+      summary: Obtener usuario por ID
       security:
         - bearerAuth: []
       parameters:
@@ -53,19 +53,19 @@ paths:
         - Users
       responses:
         "200":
-          description: Se obtiene el usuario correctamente
+          description: Usuario obtenido correctamente
         "400":
-          description: Error en la solicitud
-        "404":
-          description: Usuario no encontrado
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
+        "404":
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     put:
-      summary: Actualiza un usuario existente por ID
+      summary: Actualizar usuario por ID
       security:
         - bearerAuth: []
       parameters:
@@ -84,17 +84,17 @@ paths:
         - Users
       responses:
         "200":
-          description: Usuario actualizado exitosamente
+          description: Usuario actualizado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     delete:
-      summary: Elimina un usuario por ID
+      summary: Eliminar usuario por ID
       security:
         - bearerAuth: []
       tags:
@@ -107,18 +107,18 @@ paths:
           description: ID del usuario
       responses:
         "200":
-          description: Usuario eliminado exitosamente
+          description: Usuario eliminado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/users/documents:
     post:
-      summary: Se envían documentos del usuario
+      summary: Insertar documentos al usuario
       security:
         - bearerAuth: []
       tags: 
@@ -129,20 +129,25 @@ paths:
           required: true
           type: string
           description: ID del usuario
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/requestBodies/userDocumentsBody"
       responses:
         "200":
-          description: Usuario actualizado a premium exitosamente
+          description: Documentos insertados correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/users/premium/:
     get:
-      summary: Se actualiza un usuario a premium
+      summary: Actualizar usuario a premium
       security:
         - bearerAuth: []
       tags: 
@@ -155,13 +160,12 @@ paths:
           description: ID del usuario
       responses:
         "200":
-          description: Usuario actualizado a premium exitosamente
+          description: Usuario actualizado a premium correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
-      
+          $ref: "#/components/responses/serverError"

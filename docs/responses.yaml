@@ -1,0 +1,82 @@
+components:
+  responses:
+    requestError:
+      description: Error en la solicitud
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Bad request
+            required:
+              - status
+              - error
+    notFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Resource not found
+            required:
+              - status
+              - error
+    notAuthenticated:
+      description: Error de autenticación
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Authentication error
+            required:
+              - status
+              - error
+    notAuthorizated:
+      description: Error de autorización
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Unauthorized
+            required:
+              - status
+              - error
+    serverError:
+      description: Error de servidor
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: error
+              error:
+                type: string
+                example: Error. Something went wrong
+            required:
+              - status
+              - error

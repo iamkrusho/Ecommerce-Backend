@@ -30,11 +30,11 @@ paths:
         "200":
           description: Productos obtenidos correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Productos no encontrados
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     post:
       summary: Crear un nuevo producto
       security:
@@ -51,13 +51,13 @@ paths:
         "201":
           description: Producto creado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/products/{pid}:
     get:
       summary: Obtener producto por ID
@@ -72,11 +72,11 @@ paths:
         "200":
           description: Producto obtenido correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Producto no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     put:
       summary: Actualizar producto por ID
       security:
@@ -98,15 +98,15 @@ paths:
         "200":
           description: Producto actualizado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "404":
-          description: Producto no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
     delete:
       summary: Eliminar producto por ID
       security:
@@ -122,12 +122,12 @@ paths:
         "200":
           description: Producto eliminado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error de autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "403":
-          description: Error de autorización
+          $ref: "#/components/responses/notAuthorizated"
         "404":
-          description: Producto no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError

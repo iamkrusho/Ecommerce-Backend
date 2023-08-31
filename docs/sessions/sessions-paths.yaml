@@ -14,11 +14,11 @@ paths:
         "200":
           description: Sesión iniciada correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "401":
-          description: Error en los campos
+          $ref: "#/components/responses/notAuthenticated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/sessions/signup:
     post:
       summary: Registrar un nuevo usuario
@@ -34,9 +34,9 @@ paths:
         "201":
           description: Usuario registrado correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/sessions/logout:
     get:
       summary: Finalizar sesión activa
@@ -48,9 +48,9 @@ paths:
         "200":
           description: Sesión activa finalizada correctamente
         "401":
-          description: Error en la autenticación
+          $ref: "#/components/responses/notAuthenticated"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/sessions/current:
     get:
       summary: Obtener información de la sesión
@@ -62,9 +62,9 @@ paths:
         "200":
           description: Información dse sesión obtenida correctamente
         "401":
-          description: Error en la autenticación
+          $ref: "#/components/responses/notAuthenticated"n
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/sessions/forgotPassword: 
     post:
       summary: Solicitar cambio de contraseña olvidada
@@ -80,9 +80,9 @@ paths:
         "200":
           description: Solicitud enviada correctamente
         "404":
-          description: Usuario no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
   /api/sessions/resetPassword: 
     post:
       summary: Restablecer contraseña del usuario
@@ -98,8 +98,8 @@ paths:
         "200":
           description: Contraseña restablecida correctamente
         "400":
-          description: Error en la solicitud
+          $ref: "#/components/responses/requestError"
         "404":
-          description: Usuario no encontrado
+          $ref: "#/components/responses/notFound"
         "500":
-          description: Error en el servidor
+          $ref: "#/components/responses/serverError"
