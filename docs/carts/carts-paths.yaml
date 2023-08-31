@@ -3,7 +3,7 @@ paths:
     get:
       summary: Listar carritos de compra
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       tags:
         - Carts
       responses:

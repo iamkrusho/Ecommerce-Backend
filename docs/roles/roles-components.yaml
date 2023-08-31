@@ -14,11 +14,6 @@ components:
           items:
             type: string
           description: Permisos disponibles del rol
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   requestBodies:
     rolBody:
       type: object

@@ -33,11 +33,6 @@ components:
         thumbnails:
           type: string
           description: Imagen del producto
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   requestBodies:
     productBody:
       type: object

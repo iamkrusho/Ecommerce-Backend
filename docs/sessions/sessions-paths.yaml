@@ -73,7 +73,7 @@ paths:
     get:
       summary: Finalizar sesión activa
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       tags:
         - Session
       responses:
@@ -105,7 +105,7 @@ paths:
     get:
       summary: Obtener información de la sesión
       security:
-        - BearerAuth: []
+        - bearerAuth: []
       tags:
         - Session
       responses:

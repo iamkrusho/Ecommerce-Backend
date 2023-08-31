@@ -26,7 +26,7 @@ class AppExpress {
         this.app.use("/api/carts", cartRouter);
         this.app.use("/api/users", usersRouter);
         this.app.use("/api/roles", rolesRouter);
-        this.app.use("/api/session", sessionRouter);
+        this.app.use("/api/sessions", sessionRouter);
         this.app.use("/docs/", swaggerUiExpress.serve, swaggerUiExpress.setup(specs, swaggerTheme));
         this.app.use(errorHandler);
     }

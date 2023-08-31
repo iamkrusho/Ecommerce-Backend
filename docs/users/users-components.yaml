@@ -43,11 +43,6 @@ components:
         last_connection:
           type: string
           description: Última conexión del usuario
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   requestBodies:
     userBody:
       type: object

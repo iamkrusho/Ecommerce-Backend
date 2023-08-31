@@ -20,11 +20,6 @@ components:
         quantity:
           type: number
           description: Cantidad seleccionada del producto
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
   requestBodies: 
     cartBody: 
       type: object
