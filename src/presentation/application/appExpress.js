@@ -1,6 +1,5 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
 
 import productsRouter from "../routes/productsRouter.js";
@@ -11,7 +10,7 @@ import sessionRouter from "../routes/sessionRouter.js";
 
 import errorHandler from "../middlewares/errorHandler.js";
 import logger from "../middlewares/logger.js";
-import { swagger_config } from "../../config/index.js";
+import { swaggerTheme, specs } from "../../swagger.js";
 
 class AppExpress {
     init() {
@@ -28,7 +27,7 @@ class AppExpress {
         this.app.use("/api/users", usersRouter);
         this.app.use("/api/roles", rolesRouter);
         this.app.use("/api/session", sessionRouter);
-        this.app.use("/docs/", swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerJSDoc(swagger_config)));
+        this.app.use("/docs/", swaggerUiExpress.serve, swaggerUiExpress.setup(specs, swaggerTheme));
         this.app.use(errorHandler);
     }
 
